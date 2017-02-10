@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Create New Accessory Item</title>
+</head>
+<body>
+	
+		<h2>Create New Accessory Item</h2>
+		<br/>
+
+		<form class="form-horizontal" th:object="${itemAccessory}" th:action="@{/itemAccessory/save}" method="post">
+			<input type="hidden" th:field="*{itemAccessoryId}" />
+			<input type="hidden" th:field="*{accessoryInventory.accessoryInventoryId}"/>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('productId')}? 'has-error'">
+				<label class="col-sm-2 control-label">productId <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" th:field="*{productId}"/>
+					<span th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}" th:class="help-block">Product Id Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('productName')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">productName <span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{productName}" />
+		    		<span th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}" th:class="help-block">Product Name Errors</span>
+		    	</div>
+		  	</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('purchasePrice')}? 'has-error'">
+				<label class="col-sm-2 control-label">Purchase Price <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="*{purchasePrice}" />
+					<span th:if="${#fields.hasErrors('purchasePrice')}" th:errors="*{purchasePrice}" th:class="help-block">Purchase Price Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('salesPrice')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Sales Price <span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{salesPrice}" />
+		    		<span th:if="${#fields.hasErrors('salesPrice')}" th:errors="*{salesPrice}" th:class="help-block">Sales Price Errors</span>
+		    	</div>
+		  	</div>
+		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('accLength')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Length<span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{accLength}" />
+		    		<span th:if="${#fields.hasErrors('accLength')}" th:errors="*{accLength}" th:class="help-block">Length Errors</span>
+		    	</div>
+		  	</div>
+		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('accHeight')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Height Price<span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{accHeight}" />
+		    		<span th:if="${#fields.hasErrors('accHeight')}" th:errors="*{accHeight}" th:class="help-block">Height Errors</span>
+		    	</div>
+		  	</div>
+		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('accWidth')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Width Price<span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{accWidth}" />
+		    		<span th:if="${#fields.hasErrors('accWidth')}" th:errors="*{accWidth}" th:class="help-block">Width Errors</span>
+		    	</div>
+		  	</div>
+		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('accWeight')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Weight Price<span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{accWeight}" />
+		    		<span th:if="${#fields.hasErrors('accWeight')}" th:errors="*{accWeight}" th:class="help-block">Weight Errors</span>
+		    	</div>
+		  	</div>
+		  	<a href="/"><button type="button">Home</button></a>
+			<button type="submit" class="btn btn-primary pull-right">Submit</button>
+		</form>
+		
+		<br/><br/><br/>
+		</body>
+</html>

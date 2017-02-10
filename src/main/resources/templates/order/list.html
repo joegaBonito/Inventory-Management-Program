@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>OBS</title>
+	<link href="../static/css/order/list.css" th:href="@{/css/order/list.css}"  rel='stylesheet' type='text/css'/>	
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<td>Order Number</td>
+				<td>Order Received</td>
+				<td>Items</td>
+				<td>Edit</td>
+				<td>Delete</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tbody>
+				<tr th:each="orderEntity : ${orderEntities}">
+					<td th:text="${orderEntity.orderNum}">Order Number</td>
+					<td th:text="${orderEntity.orderReceived}">Order Received</td>
+					<td th:text="${orderEntity.itemAccessory}">Item</td>
+					<td><a href="#" th:href="@{/order/edit/} + ${orderEntity.orderId}">Edit</a></td>
+					<td><a href="#" th:href="@{/order/delete/} + ${orderEntity.orderId}">Delete</a></td>
+				</tr>
+			</tbody>
+		</tbody>
+	</table>
+	<br/>
+	<a href="/"><button type="button">Home</button></a>
+	<a href="/order/create"><button th:href="@{/order/create}" type="button">Add another order</button></a>
+</body>
+</html>

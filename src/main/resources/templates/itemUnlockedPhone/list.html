@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>OBS</title>
+	<link href="../static/css/item/list.css" th:href="@{/css/item/list.css}"  rel='stylesheet' type='text/css'/>	
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<td>Product ID</td>
+				<td>Product Name</td>
+				<td>Purchase Price</td>
+				<td>Sales Price</td>
+				<td>Length</td>
+				<td>Height</td>
+				<td>Width</td>
+				<td>Weight</td>
+				<td>Edit</td>
+				<td>Delete</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tbody>
+				<tr th:each="itemUnlockedPhone : ${itemUnlockedPhones}">
+					<td th:text="${itemUnlockedPhone.productId}">Product ID</td>
+					<td th:text="${itemUnlockedPhone.productName}">Product Name</td>
+					<td th:text="${itemUnlockedPhone.purchasePrice}">Purchase Price</td>
+					<td th:text="${itemUnlockedPhone.salesPrice}">Sales Price</td>
+					<td th:text="${itemUnlockedPhone.upLength}">Length</td>
+					<td th:text="${itemUnlockedPhone.upHeight}">Height</td>
+					<td th:text="${itemUnlockedPhone.upWidth}">Width</td>
+					<td th:text="${itemUnlockedPhone.upWeight}">Weight</td>
+					<td><a href="#" th:href="@{/itemUnlockedPhone/edit/} + ${itemUnlockedPhone.itemUnlockedPhoneId}">Edit</a></td>
+					<td><a href="#" th:href="@{/itemUnlockedPhone/delete/} + ${itemUnlockedPhone.itemUnlockedPhoneId}">Delete</a></td>
+				</tr>
+			</tbody>
+		</tbody>
+	</table>
+	<br/>
+	<a href="/"><button type="button">Home</button></a>
+	<a href="/itemUnlockedPhone/create"><button th:href="@{/itemUnlockedPhone/create}" type="button">Add another item</button></a>
+</body>
+</html>

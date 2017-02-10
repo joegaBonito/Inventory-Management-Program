@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Input Received Unlocked Phones</title>
+</head>
+<body>
+	
+		<h2>Input Received Unlocked Phones</h2>
+		<br/>
+		<form class="form-horizontal" th:object="${itemUnlockedPhone}" th:action="@{/inventorySave}" method="post">
+			<input type="hidden" th:field="${itemUnlockedPhone.itemUnlockedPhoneId}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.productId}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.productName}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.purchasePrice}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.unlockedPhonesInventory.salesQuantity}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.unlockedPhonesInventory.salesAmount}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.salesPrice}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.upLength}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.upHeight}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.upWidth}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.upWeight}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.unlockedPhonesInventory.unlockedPhoneInventoryId}" th:value="${itemUnlockedPhone.itemUnlockedPhoneId}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.unlockedPhonesInventory.totalPurchasedAmount}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.unlockedPhonesInventory.totalPurchasedQuantity}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.unlockedPhonesInventory.currentInventoryAmount}" />
+			<input type="hidden" th:field="${itemUnlockedPhone.unlockedPhonesInventory.currentInventory}" />
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('unlockedPhonesInventory.purchasedQuantity')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Input Purchased Quantity <span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="${itemUnlockedPhone.unlockedPhonesInventory.purchasedQuantity}" />
+		    		<span th:if="${#fields.hasErrors('unlockedPhonesInventory.purchasedQuantity')}" th:errors="${itemUnlockedPhone.unlockedPhonesInventory.purchasedQuantity}" th:class="help-block">Purchased Quantity Errors</span>
+		    	</div>
+		  	</div>
+		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('unlockedPhonesInventory.receivedDate')}? 'has-error'">
+				<label class="col-sm-2 control-label">Received Date <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" th:field="*{unlockedPhonesInventory.receivedDate}" />
+					<span th:if="${#fields.hasErrors('unlockedPhonesInventory.receivedDate')}" th:errors="*{unlockedPhonesInventory.receivedDate}" th:class="help-block">Received Date Errors</span>
+				</div>
+			</div>
+		  	<a href="/"><button type="button">Home</button></a>
+			<button type="submit" class="btn btn-primary pull-right">Submit</button>
+		</form>
+		
+		<br/><br/><br/>
+		</body>
+</html>

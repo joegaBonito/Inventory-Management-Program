@@ -1,0 +1,16 @@
+body {
+	background-color:#asdfad;
+}
+
+td {
+	padding-right:5rem;
+}
+
+tr {
+	font-size:1rem;
+	font-weight:bold;
+}
+
+table, th, td {
+    border: 1px solid black;
+}

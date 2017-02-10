@@ -1,0 +1,163 @@
+package com.obs.domain;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="ItemUnlockedPhone")
+public class ItemUnlockedPhone implements Serializable {
+
+	@Id
+	@GeneratedValue
+	@Column(name="item_unlocked_phone_id")
+	private Long itemUnlockedPhoneId;
+	
+	@Column(name="product_id")
+	private String productId;
+	
+	@Column(name="product_name")
+	private String productName;
+	
+	@Column(name="purchase_price")
+	private double purchasePrice;
+	
+	@Column(name="sales_price") 
+	private double salesPrice;
+	
+	@Column(name="up_length")
+	private double upLength;
+	
+	@Column(name="up_height")
+	private double upHeight;
+	
+	@Column(name="up_width")
+	private double upWidth;
+	
+	@Column(name="up_weight")
+	private double upWeight;
+	
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="unlocked_phone_inventory_id")
+	private UnlockedPhonesInventory unlockedPhonesInventory;
+
+	@OneToMany(cascade={CascadeType.ALL},mappedBy="itemUnlockedPhone")
+	private List<ReceivedQuantity> receivedQuantity;
+	
+	public ItemUnlockedPhone(Long itemUnlockedPhoneId, String productId, String productName, double purchasePrice,
+			double salesPrice, double upLength, double upHeight, double upWidth, double upWeight,
+			UnlockedPhonesInventory unlockedPhonesInventory, List<ReceivedQuantity> receivedQuantity) {
+		super();
+		this.itemUnlockedPhoneId = itemUnlockedPhoneId;
+		this.productId = productId;
+		this.productName = productName;
+		this.purchasePrice = purchasePrice;
+		this.salesPrice = salesPrice;
+		this.upLength = upLength;
+		this.upHeight = upHeight;
+		this.upWidth = upWidth;
+		this.upWeight = upWeight;
+		this.unlockedPhonesInventory = unlockedPhonesInventory;
+		this.receivedQuantity = receivedQuantity;
+	}
+
+	public ItemUnlockedPhone() {
+	}
+
+	public Long getItemUnlockedPhoneId() {
+		return itemUnlockedPhoneId;
+	}
+
+	public void setItemUnlockedPhoneId(Long itemUnlockedPhoneId) {
+		this.itemUnlockedPhoneId = itemUnlockedPhoneId;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public double getPurchasePrice() {
+		return purchasePrice;
+	}
+
+	public void setPurchasePrice(double purchasePrice) {
+		this.purchasePrice = purchasePrice;
+	}
+
+	public double getSalesPrice() {
+		return salesPrice;
+	}
+
+	public void setSalesPrice(double salesPrice) {
+		this.salesPrice = salesPrice;
+	}
+
+	public double getUpLength() {
+		return upLength;
+	}
+
+	public void setUpLength(double upLength) {
+		this.upLength = upLength;
+	}
+
+	public double getUpHeight() {
+		return upHeight;
+	}
+
+	public void setUpHeight(double upHeight) {
+		this.upHeight = upHeight;
+	}
+
+	public double getUpWidth() {
+		return upWidth;
+	}
+
+	public void setUpWidth(double upWidth) {
+		this.upWidth = upWidth;
+	}
+
+	public double getUpWeight() {
+		return upWeight;
+	}
+
+	public void setUpWeight(double upWeight) {
+		this.upWeight = upWeight;
+	}
+
+	public UnlockedPhonesInventory getUnlockedPhonesInventory() {
+		return unlockedPhonesInventory;
+	}
+
+	public void setUnlockedPhonesInventory(UnlockedPhonesInventory unlockedPhonesInventory) {
+		this.unlockedPhonesInventory = unlockedPhonesInventory;
+	}
+
+	public List<ReceivedQuantity> getReceivedQuantity() {
+		return receivedQuantity;
+	}
+
+	public void setReceivedQuantity(List<ReceivedQuantity> receivedQuantity) {
+		this.receivedQuantity = receivedQuantity;
+	}
+}

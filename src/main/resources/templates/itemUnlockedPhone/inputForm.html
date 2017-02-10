@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Create New Unlocked Phones Item</title>
+</head>
+<body>
+	
+		<h2>Create New ew Unlocked Phones Item</h2>
+		<br/>
+
+		<form class="form-horizontal" th:object="${itemUnlockedPhone}" th:action="@{/itemUnlockedPhone/save}" method="post">
+			<input type="hidden" th:field="*{itemUnlockedPhoneId}" />
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('productId')}? 'has-error'">
+				<label class="col-sm-2 control-label">productId <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" th:field="*{productId}"/>
+					<span th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}" th:class="help-block">Product Id Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('productName')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">productName <span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{productName}" />
+		    		<span th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}" th:class="help-block">Product Name Errors</span>
+		    	</div>
+		  	</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('purchasePrice')}? 'has-error'">
+				<label class="col-sm-2 control-label">Purchase Price <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="*{purchasePrice}" />
+					<span th:if="${#fields.hasErrors('purchasePrice')}" th:errors="*{purchasePrice}" th:class="help-block">Purchase Price Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('salesPrice')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Sales Price <span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{salesPrice}" />
+		    		<span th:if="${#fields.hasErrors('salesPrice')}" th:errors="*{salesPrice}" th:class="help-block">Sales Price Errors</span>
+		    	</div>
+		  	</div>
+		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('upLength')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Length<span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{upLength}" />
+		    		<span th:if="${#fields.hasErrors('upLength')}" th:errors="*{upLength}" th:class="help-block">Length Errors</span>
+		    	</div>
+		  	</div>
+		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('upHeight')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Height Price<span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{upHeight}" />
+		    		<span th:if="${#fields.hasErrors('upHeight')}" th:errors="*{upHeight}" th:class="help-block">Height Errors</span>
+		    	</div>
+		  	</div>
+		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('upWidth')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Width Price<span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{upWidth}" />
+		    		<span th:if="${#fields.hasErrors('upWidth')}" th:errors="*{upWidth}" th:class="help-block">Width Errors</span>
+		    	</div>
+		  	</div>
+		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('upWeight')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Weight Price<span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{upWeight}" />
+		    		<span th:if="${#fields.hasErrors('upWeight')}" th:errors="*{upWeight}" th:class="help-block">Weight Errors</span>
+		    	</div>
+		  	</div>
+		  	<a href="/"><button type="button">Home</button></a>
+			<button type="submit" class="btn btn-primary pull-right">Submit</button>
+		</form>
+		
+		<br/><br/><br/>
+		</body>
+</html>

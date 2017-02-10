@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Input Received Accessory Item</title>
+</head>
+<body>
+	
+		<h2>Input Received Accessory Item</h2>
+		<br/>
+		<form class="form-horizontal" th:object="${itemAccessory}" th:action="@{/accessoryInventory/save/}" method="post">
+			<input type="hidden" th:field="*{itemAccessoryId}" />
+			<input type="hidden" th:field="*{productId}" />
+			<input type="hidden" th:field="*{productName}" />
+			<input type="hidden" th:field="*{purchasePrice}" />
+			<input type="hidden" th:field="*{accessoryInventory.salesQuantity}" />
+			<input type="hidden" th:field="*{accessoryInventory.salesAmount}" />
+			<input type="hidden" th:field="*{salesPrice}" />
+			<input type="hidden" th:field="*{accLength}" />
+			<input type="hidden" th:field="*{accHeight}" />
+			<input type="hidden" th:field="*{accWidth}" />
+			<input type="hidden" th:field="*{accWeight}" />
+			<input type="hidden" th:field="*{accessoryInventory.accessoryInventoryId}" th:value="*{itemAccessoryId}" />
+			<input type="hidden" th:field="*{accessoryInventory.totalPurchasedAmount}" />
+			<input type="hidden" th:field="*{accessoryInventory.totalPurchasedQuantity}" />
+			<input type="hidden" th:field="*{accessoryInventory.currentInventoryAmount}" />
+			<input type="hidden" th:field="*{accessoryInventory.currentInventory}" />
+			<input type="hidden" th:field="*{accessoryInventory.salesQuantity}" />
+			<input type="hidden" th:field="*{accessoryInventory.salesAmount}" />
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('accessoryInventory.purchasedQuantity')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Input Purchased Quantity <span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="*{accessoryInventory.purchasedQuantity}" />
+		    		<span th:if="${#fields.hasErrors('accessoryInventory.purchasedQuantity')}" th:errors="*{accessoryInventory.purchasedQuantity}" th:class="help-block">Purchased Quantity Errors</span>
+		    	</div>
+		  	</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('accessoryInventory.receivedDate')}? 'has-error'">
+				<label class="col-sm-2 control-label">Received Date <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" th:field="*{accessoryInventory.receivedDate}" />
+					<span th:if="${#fields.hasErrors('accessoryInventory.receivedDate')}" th:errors="*{accessoryInventory.receivedDate}" th:class="help-block">Received Date Errors</span>
+				</div>
+			</div>
+		  	<a href="/"><button type="button">Home</button></a>
+			<button type="submit" class="btn btn-primary pull-right">Submit</button>
+		</form>
+		
+		<br/><br/><br/>
+		</body>
+</html>

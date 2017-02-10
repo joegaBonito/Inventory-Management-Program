@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Create New Order</title>
+</head>
+<body>
+	
+		<h2>Create New Order</h2>
+		<br/>
+
+		<form class="form-horizontal" th:action="@{/order/save}" method="post">
+			<input type="hidden" th:value="${orderEntity.orderId}" />
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('orderEntity.orderNum')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Order Number <span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="${orderEntity.orderNum}" />
+		    		<span th:if="${#fields.hasErrors('orderEntity.orderNum')}" th:errors="${orderEntity.orderNum}" th:class="help-block">Order Number Errors</span>
+		    	</div>
+		  	</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('orderEntity.orderReceived')}? 'has-error'">
+				<label class="col-sm-2 control-label">Order Received Date <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="${orderEntity.orderReceived}" />
+					<span th:if="${#fields.hasErrors('orderEntity.orderReceived')}"  th:errors="${orderEntity.orderReceived}" th:class="help-block">Order Date Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('orderEntity.itemAccessory')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Accessory Items <span class="required">*</span></label>
+		    	<div class="col-md-10">
+					<select class="form-control" th:field="${orderEntity.itemAccessory}">
+						<option value="">Select Accessory</option>
+						<option th:each="item : ${itemAccessories}" th:value="${item.productName}" th:text="${item.productName}">Item Accessory</option>
+					</select>
+					<span th:if="${#fields.hasErrors('orderEntity.itemAccessory')}" th:errors="{orderEntity.itemAccessory}" th:class="help-block">Item Accessory Errors</span>
+		    	</div>
+		  	</div>
+		  	<a href="/"><button type="button">Home</button></a>
+			<button type="submit" class="btn btn-primary pull-right">Submit</button>
+		</form>
+		
+		<br/><br/><br/>
+		</body>
+</html>

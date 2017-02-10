@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Input Ups Orders</title>
+</head>
+<body>
+	
+		<h2>Create New Order</h2>
+		<br/>
+
+		<form class="form-horizontal" th:action="@{/ups/save}" method="post">
+			<input type="hidden" th:value="${upsOrder.systemId}" />
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.upsOrderId')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Order ID <span class="required">*</span></label>
+		    	<div class="col-md-10">
+		    		<input type="text" class="form-control" th:field="${upsOrder.upsOrderId}" />
+		    		<span th:if="${#fields.hasErrors('upsOrder.upsOrderId')}" th:errors="${upsOrder.upsOrderId}" th:class="help-block">Order Number Errors</span>
+		    	</div>
+		  	</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.upsOrderReceived')}? 'has-error'">
+				<label class="col-sm-2 control-label">Order Date Time <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="${upsOrder.upsOrderReceived}" />
+					<span th:if="${#fields.hasErrors('upsOrder.upsOrderReceived')}"  th:errors="${upsOrder.upsOrderReceived}" th:class="help-block">Order Date Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.upsProductId')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Accessory Items <span class="required">*</span></label>
+		    	<div class="col-md-10">
+					<select class="form-control" th:field="${upsOrder.upsProductId}">
+						<option value="">Select Accessory</option>
+						<option th:each="item : ${itemAccessories}" th:value="${item.productId}" th:text="${item.productId}">Item Accessory</option>
+					</select>
+					<span th:if="${#fields.hasErrors('upsOrder.upsProductId')}" th:errors="{upsOrder.upsProductId}" th:class="help-block">Item Accessory Errors</span>
+		    	</div>
+		  	</div>
+		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.upsQuantity')}? 'has-error'">
+				<label class="col-sm-2 control-label">Quantity <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="${upsOrder.upsQuantity}" />
+					<span th:if="${#fields.hasErrors('upsOrder.upsQuantity')}"  th:errors="${upsOrder.upsQuantity}" th:class="help-block">Order Date Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.service')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Shipping Method <span class="required">*</span></label>
+		    	<div class="col-md-10">
+					<select class="form-control" th:field="${upsOrder.service}">
+						<option value="">Service</option>
+						<option value="GND" >Ground</option>
+						<option value="1DP" >Next Day</option>
+					</select>
+					<span th:if="${#fields.hasErrors('upsOrder.service')}" th:errors="{upsOrder.service}" th:class="help-block">Service Errors</span>
+		    	</div>
+		  	</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.upsFname')}? 'has-error'">
+				<label class="col-sm-2 control-label">First Name<span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="${upsOrder.upsFname}" />
+					<span th:if="${#fields.hasErrors('upsOrder.upsFname')}"  th:errors="${upsOrder.upsFname}" th:class="help-block">First Name Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.upsLname')}? 'has-error'">
+				<label class="col-sm-2 control-label">Last Name<span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="${upsOrder.upsLname}" />
+					<span th:if="${#fields.hasErrors('upsOrder.upsLname')}"  th:errors="${upsOrder.upsLname}" th:class="help-block">Last Name Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.address1')}? 'has-error'">
+				<label class="col-sm-2 control-label">Address 1 <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="${upsOrder.address1}" />
+					<span th:if="${#fields.hasErrors('upsOrder.address1')}"  th:errors="${upsOrder.address1}" th:class="help-block">Address 1 Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.address2')}? 'has-error'">
+				<label class="col-sm-2 control-label">Address 2 <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="${upsOrder.address2}" />
+					<span th:if="${#fields.hasErrors('upsOrder.address2')}"  th:errors="${upsOrder.address2}" th:class="help-block">Address 2 Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.city')}? 'has-error'">
+				<label class="col-sm-2 control-label">City <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="${upsOrder.city}" />
+					<span th:if="${#fields.hasErrors('upsOrder.city')}"  th:errors="${upsOrder.city}" th:class="help-block">City Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.state')}? 'has-error'">
+				<label class="col-sm-2 control-label">State <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="${upsOrder.state}" />
+					<span th:if="${#fields.hasErrors('upsOrder.state')}"  th:errors="${upsOrder.state}" th:class="help-block">State Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.zip')}? 'has-error'">
+				<label class="col-sm-2 control-label">Zip <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="${upsOrder.zip}" />
+					<span th:if="${#fields.hasErrors('upsOrder.zip')}"  th:errors="${upsOrder.zip}" th:class="help-block">Zip Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.phone')}? 'has-error'">
+				<label class="col-sm-2 control-label">Phone <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="datetime" class="form-control" th:field="${upsOrder.phone}" />
+					<span th:if="${#fields.hasErrors('upsOrder.phone')}"  th:errors="${upsOrder.phone}" th:class="help-block">Phone Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('upsOrder.residential')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Residential <span class="required">*</span></label>
+		    	<div class="col-md-10">
+					<select class="form-control" th:field="${upsOrder.residential}">
+						<option value="1" >1</option>
+						<option value="2" >2</option>
+					</select>
+					<span th:if="${#fields.hasErrors('upsOrder.residential')}" th:errors="{upsOrder.residential}" th:class="help-block">Residential Errors</span>
+		    	</div>
+		  	</div>
+			<br/><br/>
+		  	<a href="/"><button type="button">Home</button></a>
+			<button type="submit" class="btn btn-primary pull-right">Submit</button>
+		</form>
+		
+		<br/><br/><br/>
+		</body>
+</html>

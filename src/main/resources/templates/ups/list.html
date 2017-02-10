@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>OBS</title>
+	<link href="../static/css/ups/list.css" th:href="@{/css/ups/list.css}"  rel='stylesheet' type='text/css'/>	
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+					<td>Order ID</td>
+					<td>Order Received</td>
+					<td>Product ID</td>
+					<td>Quantity</td>
+					<td>Product Name</td>
+					<td>Shipping Method</td>
+					<td>Name</td>
+					<td>Address 1</td>
+					<td>Address 2</td>
+					<td>City</td>
+					<td>State</td>
+					<td>Zip</td>
+					<td>Phone</td>
+					<td>Residential</td>
+					<td>Service</td>
+					<td>Package Type</td>
+					<td>Bill To</td>
+					<td>Length</td>
+					<td>Height</td>
+					<td>Width</td>
+					<td>Weight</td>
+					<td>Country</td>
+					<td>Customer Name</td>
+					<td>Edit</td>
+					<td>Delete</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tbody>
+				<tr th:each="upsOrder : ${upsOrders}">
+					<td th:text="${upsOrder.upsOrderId}">Order ID</td>
+					<td th:text="${upsOrder.upsOrderReceived}">Order Received</td>
+					<td th:text="${upsOrder.upsProductId}">Product ID</td>
+					<td th:text="${upsOrder.upsQuantity}">Quantity</td>
+					<td th:text="${upsOrder.upsProductName}">Product Name</td>
+					<td th:text="${upsOrder.upsShippingMethod}">Shipping Method</td>
+					<td th:text="${upsOrder.upsFname} + ${upsOrder.upsLname}">Name</td>
+					<td th:text="${upsOrder.address1}">Address 1</td>
+					<td th:text="${upsOrder.address2}">Address 2</td>
+					<td th:text="${upsOrder.city}">City</td>
+					<td th:text="${upsOrder.state}">State</td>
+					<td th:text="${upsOrder.zip}">Zip</td>
+					<td th:text="${upsOrder.phone}">Phone</td>
+					<td th:text="${upsOrder.residential}">Residential</td>
+					<td th:text="${upsOrder.service}">Service</td>
+					<td th:text="${upsOrder.packageType}">Package Type</td>
+					<td th:text="${upsOrder.billTo}">Bill To</td>
+					<td th:text="${upsOrder.upsLength}">Length</td>
+					<td th:text="${upsOrder.upsHeight}">Height</td>
+					<td th:text="${upsOrder.upsWidth}">Width</td>
+					<td th:text="${upsOrder.upsWeight}">Weight</td>
+					<td th:text="${upsOrder.country}">Country</td>
+					<td th:text="${upsOrder.customerName}">Customer Name</td>
+			
+					<td><a href="#" th:href="@{/ups/edit/} + ${upsOrder.systemId}">Edit</a></td>
+					<td><a href="#" th:href="@{/ups/delete/} + ${upsOrder.systemId}">Delete</a></td>
+				</tr>
+			</tbody>
+		</tbody>
+	</table>
+	<br/>
+	<label>(Upload File Name "MOBILE SALES TO DATE - Real Time Cust Trans Dtl.xls")</label>
+	<form th:field="${uploadedFile}" method="post" th:action="@{/submitFileUpload}" enctype="multipart/form-data">
+            <input name="file" type="file"/><br/>
+            <input type="submit" value="Upload"/>
+    </form>
+    <br/>
+	<a href="/"><button type="button">Home</button></a>
+	<a href="/ups/create"><button th:href="@{/ups/create}" type="button">Add another order</button></a>
+	<a href="/downloadExcel"><button th:href="@{/downloadExcel}">Download Excel File</button></a>
+	<a href="/ups/deleteAll"><button th:href="@{/ups/deleteAll}">Delete all rows</button></a>
+	
+</body>
+</html>
