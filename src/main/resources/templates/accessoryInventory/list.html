@@ -50,8 +50,8 @@
 			<tr th:each="itemAccessory : ${itemAccessories}">
 				<td th:text="${itemAccessory.productId}">Product ID</td>
 				<td th:each="day:${days}">
-					<th:block th:each="receivedQuantity:${receivedQuantities}" th:text="${#dates.format(receivedQuantity.receivedDate,'dd-MMM-yyyy') == #dates.format(day,'dd-MMM-yyyy') 
-				                  and itemAccessory.itemAccessoryId == receivedQuantity.itemAccessory.itemAccessoryId} ? ${receivedQuantity.purchasedQuantity} : ''">Calendar Dates</th:block>
+					<th:block th:each="accessoryReceivedQuantity:${accessoryReceivedQuantities}" th:text="${#dates.format(accessoryReceivedQuantity.receivedDate,'dd-MMM-yyyy') == #dates.format(day,'dd-MMM-yyyy') 
+				                  and itemAccessory.itemAccessoryId == accessoryReceivedQuantity.itemAccessory.itemAccessoryId} ? ${accessoryReceivedQuantity.purchasedQuantity} : ''">Calendar Dates</th:block>
 				</td>
 			</tr>
 		</tbody>

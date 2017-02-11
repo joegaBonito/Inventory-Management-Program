@@ -15,8 +15,8 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="ReceivedQuantity")
-public class ReceivedQuantity implements Serializable {
+@Table(name="AccessoryReceivedQuantity")
+public class AccessoryReceivedQuantity implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name="received_quantity_id")
@@ -32,21 +32,16 @@ public class ReceivedQuantity implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="item_accessory_id")
 	private ItemAccessory itemAccessory;
-	
-	@ManyToOne
-	@JoinColumn(name="item_unlocked_phone_id")
-	private ItemUnlockedPhone itemUnlockedPhone;
-	
-	public ReceivedQuantity() {}
 
-	public ReceivedQuantity(Long receivedQuantityId, Date receivedDate, int purchasedQuantity,
-			ItemAccessory itemAccessory, ItemUnlockedPhone itemUnlockedPhone) {
+	public AccessoryReceivedQuantity() {}
+	
+	public AccessoryReceivedQuantity(Long receivedQuantityId, Date receivedDate, int purchasedQuantity,
+			ItemAccessory itemAccessory) {
 		super();
 		this.receivedQuantityId = receivedQuantityId;
 		this.receivedDate = receivedDate;
 		this.purchasedQuantity = purchasedQuantity;
 		this.itemAccessory = itemAccessory;
-		this.itemUnlockedPhone = itemUnlockedPhone;
 	}
 
 	public Long getReceivedQuantityId() {
@@ -79,13 +74,5 @@ public class ReceivedQuantity implements Serializable {
 
 	public void setItemAccessory(ItemAccessory itemAccessory) {
 		this.itemAccessory = itemAccessory;
-	}
-
-	public ItemUnlockedPhone getItemUnlockedPhone() {
-		return itemUnlockedPhone;
-	}
-
-	public void setItemUnlockedPhone(ItemUnlockedPhone itemUnlockedPhone) {
-		this.itemUnlockedPhone = itemUnlockedPhone;
 	}
 }

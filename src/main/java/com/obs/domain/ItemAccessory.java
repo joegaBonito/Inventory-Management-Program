@@ -57,13 +57,13 @@ public class ItemAccessory implements Serializable {
 	private AccessoryInventory accessoryInventory;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="itemAccessory")
-	private Set<ReceivedQuantity> receivedQuantity;
+	private Set<AccessoryReceivedQuantity> accessoryReceivedQuantity;
 	
 	public ItemAccessory() {}
 
 	public ItemAccessory(Long itemAccessoryId, String productId, String productName, double purchasePrice,
 			double salesPrice, double accLength, double accHeight, double accWidth, double accWeight,
-			AccessoryInventory accessoryInventory, Set<ReceivedQuantity> receivedQuantity) {
+			AccessoryInventory accessoryInventory, Set<AccessoryReceivedQuantity> accessoryReceivedQuantity) {
 		super();
 		this.itemAccessoryId = itemAccessoryId;
 		this.productId = productId;
@@ -75,7 +75,7 @@ public class ItemAccessory implements Serializable {
 		this.accWidth = accWidth;
 		this.accWeight = accWeight;
 		this.accessoryInventory = accessoryInventory;
-		this.receivedQuantity = receivedQuantity;
+		this.accessoryReceivedQuantity = accessoryReceivedQuantity;
 	}
 
 	public Long getItemAccessoryId() {
@@ -158,12 +158,12 @@ public class ItemAccessory implements Serializable {
 		this.accessoryInventory = accessoryInventory;
 	}
 
-	public Set<ReceivedQuantity> getReceivedQuantity() {
-		return receivedQuantity;
+	public Set<AccessoryReceivedQuantity> getReceivedQuantity() {
+		return accessoryReceivedQuantity;
 	}
 
-	public void setReceivedQuantity(Set<ReceivedQuantity> receivedQuantity) {
-		this.receivedQuantity = receivedQuantity;
+	public void setReceivedQuantity(Set<AccessoryReceivedQuantity> accessoryReceivedQuantity) {
+		this.accessoryReceivedQuantity = accessoryReceivedQuantity;
 	}
 
 	public static long getSerialversionuid() {

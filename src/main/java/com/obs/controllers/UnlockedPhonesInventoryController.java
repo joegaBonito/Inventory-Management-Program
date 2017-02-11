@@ -16,7 +16,7 @@ import com.obs.domain.UnlockedPhonesInventory;
 import com.obs.services.CalendarService;
 import com.obs.services.ItemUnlockedPhonesService;
 import com.obs.services.PhoneInventoryService;
-import com.obs.services.ReceivedQuantityService;
+import com.obs.services.PhonesReceivedQuantityService;
 
 @Controller
 public class UnlockedPhonesInventoryController {
@@ -25,17 +25,17 @@ public class UnlockedPhonesInventoryController {
 	private PhoneInventoryService phoneInventoryService;
 	private ItemUnlockedPhonesService itemUnlockedPhonesService;
 	private CalendarService calendarService;
-	private ReceivedQuantityService receivedQuantityService;
+	private PhonesReceivedQuantityService phonesReceivedQuantityService;
 	
 	@Autowired
 	public UnlockedPhonesInventoryController(PhoneInventoryService phoneInventoryService, 
 											 ItemUnlockedPhonesService itemUnlockedPhonesService,
 											 CalendarService calendarService,
-											 ReceivedQuantityService receivedQuantityService) {
+											 PhonesReceivedQuantityService phonesReceivedQuantityService) {
 		this.phoneInventoryService = phoneInventoryService;
 		this.itemUnlockedPhonesService = itemUnlockedPhonesService;
 		this.calendarService = calendarService;
-		this.receivedQuantityService = receivedQuantityService;
+		this.phonesReceivedQuantityService = phonesReceivedQuantityService;
 	}
 	
 	@RequestMapping("/unlockedPhonesInventory/list")
@@ -44,7 +44,7 @@ public class UnlockedPhonesInventoryController {
 		phoneInventoryService.setSalesAmount();
 		List<Date> days = calendarService.getAllDays();
 		model.addAttribute("days",days);
-		model.addAttribute("receivedQuantities",receivedQuantityService.list());
+		model.addAttribute("phonesReceivedQuantities",phonesReceivedQuantityService.list());
 		model.addAttribute("itemUnlockedPhones", itemUnlockedPhonesService.list());
 		return "/unlockedPhonesInventory/list";
 	}

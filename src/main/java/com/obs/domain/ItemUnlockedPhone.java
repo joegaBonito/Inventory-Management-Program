@@ -51,11 +51,11 @@ public class ItemUnlockedPhone implements Serializable {
 	private UnlockedPhonesInventory unlockedPhonesInventory;
 
 	@OneToMany(cascade={CascadeType.ALL},mappedBy="itemUnlockedPhone")
-	private List<ReceivedQuantity> receivedQuantity;
+	private List<PhonesReceivedQuantity> phonesReceivedQuantity;
 	
 	public ItemUnlockedPhone(Long itemUnlockedPhoneId, String productId, String productName, double purchasePrice,
 			double salesPrice, double upLength, double upHeight, double upWidth, double upWeight,
-			UnlockedPhonesInventory unlockedPhonesInventory, List<ReceivedQuantity> receivedQuantity) {
+			UnlockedPhonesInventory unlockedPhonesInventory, List<PhonesReceivedQuantity> phonesReceivedQuantity) {
 		super();
 		this.itemUnlockedPhoneId = itemUnlockedPhoneId;
 		this.productId = productId;
@@ -67,7 +67,7 @@ public class ItemUnlockedPhone implements Serializable {
 		this.upWidth = upWidth;
 		this.upWeight = upWeight;
 		this.unlockedPhonesInventory = unlockedPhonesInventory;
-		this.receivedQuantity = receivedQuantity;
+		this.phonesReceivedQuantity = phonesReceivedQuantity;
 	}
 
 	public ItemUnlockedPhone() {
@@ -153,11 +153,12 @@ public class ItemUnlockedPhone implements Serializable {
 		this.unlockedPhonesInventory = unlockedPhonesInventory;
 	}
 
-	public List<ReceivedQuantity> getReceivedQuantity() {
-		return receivedQuantity;
+	public List<PhonesReceivedQuantity> getPhonesReceivedQuantity() {
+		return phonesReceivedQuantity;
 	}
 
-	public void setReceivedQuantity(List<ReceivedQuantity> receivedQuantity) {
-		this.receivedQuantity = receivedQuantity;
+	public void setPhonesReceivedQuantity(List<PhonesReceivedQuantity> phonesReceivedQuantity) {
+		this.phonesReceivedQuantity = phonesReceivedQuantity;
 	}
+
 }

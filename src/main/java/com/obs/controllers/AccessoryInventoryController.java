@@ -18,25 +18,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.obs.domain.AccessoryInventory;
 import com.obs.domain.ItemAccessory;
 import com.obs.services.AccessoryInventoryService;
+import com.obs.services.AccessoryReceivedQuantityService;
 import com.obs.services.CalendarService;
 import com.obs.services.ItemAccessoryService;
-import com.obs.services.ReceivedQuantityService;
 @Controller	
 public class AccessoryInventoryController {
 	
 	private AccessoryInventoryService accessoryInventoryService;
 	private ItemAccessoryService itemAccessoryService;
-	private ReceivedQuantityService receivedQuantityService;
+	private AccessoryReceivedQuantityService accessoryReceivedQuantityService;
 	private CalendarService calendarService;
 	
 	@Autowired
 	public AccessoryInventoryController(AccessoryInventoryService accessoryInventoryService, 
 										ItemAccessoryService itemAccessoryService,
-										ReceivedQuantityService receivedQuantityService,
+										AccessoryReceivedQuantityService accessoryReceivedQuantityService,
 										CalendarService calendarService) {
 		this.accessoryInventoryService = accessoryInventoryService;
 		this.itemAccessoryService = itemAccessoryService;
-		this.receivedQuantityService = receivedQuantityService;
+		this.accessoryReceivedQuantityService = accessoryReceivedQuantityService;
 		this.calendarService = calendarService;
 	}
 	
@@ -46,7 +46,7 @@ public class AccessoryInventoryController {
 		accessoryInventoryService.setSalesAmount();
 		List<Date> days = calendarService.getAllDays();
 		model.addAttribute("days",days);
-		model.addAttribute("receivedQuantities",receivedQuantityService.list());
+		model.addAttribute("accessoryReceivedQuantities",accessoryReceivedQuantityService.list());
 		model.addAttribute("itemAccessories", itemAccessoryService.productNameList());
 		return "/accessoryInventory/list";
 	}

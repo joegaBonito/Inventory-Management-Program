@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.obs.domain.ItemUnlockedPhone;
-import com.obs.domain.ReceivedQuantity;
+import com.obs.domain.PhonesReceivedQuantity;
+import com.obs.domain.AccessoryReceivedQuantity;
 import com.obs.domain.UnlockedPhonesInventory;
 import com.obs.domain.UpsOrder;
 
@@ -16,15 +17,15 @@ public class PhoneInventoryService {
 	
 	private ItemUnlockedPhonesService itemUnlockedPhonesService;
 	private UpsService upsService;
-	private ReceivedQuantityService receivedQuantityService;
+	private PhonesReceivedQuantityService phonesReceivedQuantityService;
 	
 	@Autowired
 	public PhoneInventoryService(ItemUnlockedPhonesService itemUnlockedPhonesService, 
 							     UpsService upsService,
-							     ReceivedQuantityService receivedQuantityService) {
+							     PhonesReceivedQuantityService phonesReceivedQuantityService) {
 		this.itemUnlockedPhonesService = itemUnlockedPhonesService;
 		this.upsService = upsService;
-		this.receivedQuantityService = receivedQuantityService;
+		this.phonesReceivedQuantityService = phonesReceivedQuantityService;
 	}
 	
 	public void setSalesQuantity() {
@@ -64,11 +65,11 @@ public class PhoneInventoryService {
 	public void setPurchasedQuantity(ItemUnlockedPhone itemUnlockedPhone) {
 		itemUnlockedPhone.getUnlockedPhonesInventory().setPurchasedQuantity(itemUnlockedPhone.getUnlockedPhonesInventory().getPurchasedQuantity());
 		itemUnlockedPhonesService.save(itemUnlockedPhone);
-		ReceivedQuantity receivedQuantity = new ReceivedQuantity();
-		receivedQuantity.setPurchasedQuantity(itemUnlockedPhone.getUnlockedPhonesInventory().getPurchasedQuantity());
-		receivedQuantity.setReceivedDate(itemUnlockedPhone.getUnlockedPhonesInventory().getReceivedDate());
-		receivedQuantity.setItemUnlockedPhone(itemUnlockedPhone);
-		receivedQuantityService.save(receivedQuantity);
+		PhonesReceivedQuantity phonesReceivedQuantity = new PhonesReceivedQuantity();
+		phonesReceivedQuantity.setPurchasedQuantity(itemUnlockedPhone.getUnlockedPhonesInventory().getPurchasedQuantity());
+		phonesReceivedQuantity.setReceivedDate(itemUnlockedPhone.getUnlockedPhonesInventory().getReceivedDate());
+		phonesReceivedQuantity.setItemUnlockedPhone(itemUnlockedPhone);
+		phonesReceivedQuantityService.save(phonesReceivedQuantity);
 	}
 	
 	public void setTotalPurchasedQuantity(ItemUnlockedPhone itemUnlockedPhone) {

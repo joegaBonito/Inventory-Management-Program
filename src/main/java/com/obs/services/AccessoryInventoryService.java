@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.obs.domain.AccessoryInventory;
 import com.obs.domain.ItemAccessory;
-import com.obs.domain.ReceivedQuantity;
+import com.obs.domain.AccessoryReceivedQuantity;
 import com.obs.domain.UpsOrder;
 
 @Service
@@ -22,15 +22,15 @@ public class AccessoryInventoryService {
 	
 	private UpsService upsService;
 	private ItemAccessoryService itemAccessoryService;
-	private ReceivedQuantityService receivedQuantityService;
+	private AccessoryReceivedQuantityService accessoryReceivedQuantityService;
 	
 	@Autowired
 	public AccessoryInventoryService(UpsService upsService,
 							ItemAccessoryService itemAccessoryService,
-							ReceivedQuantityService receivedQuantityService) {
+							AccessoryReceivedQuantityService accessoryReceivedQuantityService) {
 		this.upsService = upsService;
 		this.itemAccessoryService = itemAccessoryService;
-		this.receivedQuantityService = receivedQuantityService;
+		this.accessoryReceivedQuantityService = accessoryReceivedQuantityService;
 	}
 
 	public void setSalesQuantity() {
@@ -68,11 +68,11 @@ public class AccessoryInventoryService {
 	public void setPurchasedQuantity(ItemAccessory itemAccessory) {
 		itemAccessory.getAccessoryInventory().setPurchasedQuantity(itemAccessory.getAccessoryInventory().getPurchasedQuantity());
 		itemAccessoryService.save(itemAccessory);
-		ReceivedQuantity receivedQuantity = new ReceivedQuantity();
-		receivedQuantity.setPurchasedQuantity(itemAccessory.getAccessoryInventory().getPurchasedQuantity());
-		receivedQuantity.setReceivedDate(itemAccessory.getAccessoryInventory().getReceivedDate());
-		receivedQuantity.setItemAccessory(itemAccessory);
-		receivedQuantityService.save(receivedQuantity);
+		AccessoryReceivedQuantity accessoryReceivedQuantity = new AccessoryReceivedQuantity();
+		accessoryReceivedQuantity.setPurchasedQuantity(itemAccessory.getAccessoryInventory().getPurchasedQuantity());
+		accessoryReceivedQuantity.setReceivedDate(itemAccessory.getAccessoryInventory().getReceivedDate());
+		accessoryReceivedQuantity.setItemAccessory(itemAccessory);
+		accessoryReceivedQuantityService.save(accessoryReceivedQuantity);
 	}
 	
 	public void setTotalPurchasedQuantity(ItemAccessory itemAccessory) {
