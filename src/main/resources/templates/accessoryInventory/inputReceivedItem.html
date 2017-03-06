@@ -37,7 +37,7 @@
 			<div th:class="form-group" th:classappend="${#fields.hasErrors('accessoryInventory.receivedDate')}? 'has-error'">
 				<label class="col-sm-2 control-label">Received Date <span class="required">*</span></label>
 				<div class="col-md-10">
-					<input type="text" class="form-control" th:field="*{accessoryInventory.receivedDate}" />
+					<input type="text" class="form-control" th:id="*{accessoryInventory.receivedDate}" th:name="*{accessoryInventory.receivedDate}" th:value="${#dates.format(#dates.createNow(),'dd-MMM-yyyy')}"  />
 					<span th:if="${#fields.hasErrors('accessoryInventory.receivedDate')}" th:errors="*{accessoryInventory.receivedDate}" th:class="help-block">Received Date Errors</span>
 				</div>
 			</div>

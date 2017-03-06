@@ -1,7 +1,6 @@
 package com.obs.domain;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -52,7 +51,7 @@ public class ItemAccessory implements Serializable {
 	@Column(name="acc_weight")
 	private double accWeight;
 	
-	@ManyToOne(cascade={CascadeType.ALL})
+	@OneToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="accessory_inventory_id")
 	private AccessoryInventory accessoryInventory;
 	

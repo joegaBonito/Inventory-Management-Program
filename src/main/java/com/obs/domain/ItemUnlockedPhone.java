@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -46,7 +46,7 @@ public class ItemUnlockedPhone implements Serializable {
 	@Column(name="up_weight")
 	private double upWeight;
 	
-	@ManyToOne(cascade={CascadeType.ALL})
+	@OneToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="unlocked_phone_inventory_id")
 	private UnlockedPhonesInventory unlockedPhonesInventory;
 

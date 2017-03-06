@@ -1,15 +1,16 @@
 package com.obs.domain;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,6 +38,10 @@ public class UnlockedPhonesInventory {
 	@Column(name="purchased_quantity")
 	private int purchasedQuantity;
 	
+	@Column(name="received_date")
+	@DateTimeFormat(pattern="dd-MMM-yyyy")
+	private Date receivedDate = new Date();
+	
 	@Column(name="purchased_amount")
 	private double purchasedAmount;
 	
@@ -55,19 +60,15 @@ public class UnlockedPhonesInventory {
 	@Column(name="total_purchased_amount")
 	private double totalPurchasedAmount;
 	
-	@Column(name="received_date")
-	@DateTimeFormat(pattern="dd-MMM-yyyy")
-	private Date receivedDate;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="unlockedPhonesInventory")
-	private Set<ItemUnlockedPhone> itemUnlockedPhone;
+	@OneToOne(cascade = CascadeType.ALL, mappedBy="unlockedPhonesInventory")
+	private ItemUnlockedPhone itemUnlockedPhone;
 
 	public UnlockedPhonesInventory(){}
 
 	public UnlockedPhonesInventory(Long unlockedPhoneInventoryId, int currentInventory, double currentInventoryAmount,
 			int salesQuantity, double salesAmount, int purchasedQuantity, double purchasedAmount,
 			int totalCurrentInventory, int totalSalesQuantity, double totalSalesAmount, int totalPurchasedQuantity,
-			double totalPurchasedAmount, Date receivedDate, Set<ItemUnlockedPhone> itemUnlockedPhone) {
+			double totalPurchasedAmount, Date receivedDate, ItemUnlockedPhone itemUnlockedPhone) {
 		super();
 		this.unlockedPhoneInventoryId = unlockedPhoneInventoryId;
 		this.currentInventory = currentInventory;
@@ -189,11 +190,11 @@ public class UnlockedPhonesInventory {
 		this.receivedDate = receivedDate;
 	}
 
-	public Set<ItemUnlockedPhone> getItemUnlockedPhone() {
+	public ItemUnlockedPhone getItemUnlockedPhone() {
 		return itemUnlockedPhone;
 	}
 
-	public void setItemUnlockedPhone(Set<ItemUnlockedPhone> itemUnlockedPhone) {
+	public void setItemUnlockedPhone(ItemUnlockedPhone itemUnlockedPhone) {
 		this.itemUnlockedPhone = itemUnlockedPhone;
 	}
 

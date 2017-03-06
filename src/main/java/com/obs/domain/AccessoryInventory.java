@@ -1,15 +1,16 @@
 package com.obs.domain;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,7 +40,7 @@ public class AccessoryInventory {
 	
 	@Column(name="received_date")
 	@DateTimeFormat(pattern="dd-MMM-yyyy")
-	private Date receivedDate;
+	private Date receivedDate = new Date();
 	
 	@Column(name="purchased_amount")
 	private double purchasedAmount;
@@ -59,15 +60,15 @@ public class AccessoryInventory {
 	@Column(name="total_purchased_amount")
 	private double totalPurchasedAmount;
 	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy="accessoryInventory")
-	private Set<ItemAccessory> itemAccessory;
+	@OneToOne(cascade={CascadeType.ALL},mappedBy="accessoryInventory")
+	private ItemAccessory itemAccessory;
 
 	public AccessoryInventory() {}
 
 	public AccessoryInventory(Long accessoryInventoryId, int currentInventory, double currentInventoryAmount,
 			int salesQuantity, double salesAmount, int purchasedQuantity, Date receivedDate, double purchasedAmount,
 			int totalCurrentInventory, int totalSalesQuantity, double totalSalesAmount, int totalPurchasedQuantity,
-			double totalPurchasedAmount, Set<ItemAccessory> itemAccessory) {
+			double totalPurchasedAmount, ItemAccessory itemAccessory) {
 		super();
 		this.accessoryInventoryId = accessoryInventoryId;
 		this.currentInventory = currentInventory;
@@ -189,11 +190,11 @@ public class AccessoryInventory {
 		this.totalPurchasedAmount = totalPurchasedAmount;
 	}
 
-	public Set<ItemAccessory> getItemAccessory() {
+	public ItemAccessory getItemAccessory() {
 		return itemAccessory;
 	}
 
-	public void setItemAccessory(Set<ItemAccessory> itemAccessory) {
+	public void setItemAccessory(ItemAccessory itemAccessory) {
 		this.itemAccessory = itemAccessory;
 	}
 }
