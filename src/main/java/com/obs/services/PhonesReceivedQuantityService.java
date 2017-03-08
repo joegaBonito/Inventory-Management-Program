@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.obs.domain.PhonesReceivedQuantity;
 import com.obs.repositories.PhonesReceivedQuantityRepository;
@@ -21,7 +22,8 @@ public class PhonesReceivedQuantityService {
 		return phonesReceivedQuantityRepository.findByOrderByReceivedDate();
 	}
 	
-	public PhonesReceivedQuantity save(PhonesReceivedQuantity phonesReceivedQuantity) {
-		return phonesReceivedQuantityRepository.save(phonesReceivedQuantity);
+	public void save(PhonesReceivedQuantity phonesReceivedQuantity) {
+		phonesReceivedQuantityRepository.save(phonesReceivedQuantity);
 	}
+
 }

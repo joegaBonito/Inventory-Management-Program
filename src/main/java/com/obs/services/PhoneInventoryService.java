@@ -1,14 +1,11 @@
 package com.obs.services;
 
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.obs.domain.ItemUnlockedPhone;
 import com.obs.domain.PhonesReceivedQuantity;
-import com.obs.domain.AccessoryReceivedQuantity;
 import com.obs.domain.UnlockedPhonesInventory;
 import com.obs.domain.UpsOrder;
 
@@ -55,13 +52,16 @@ public class PhoneInventoryService {
 		}
 	
 	}
-	
+	@Transactional
 	public void setCurrentInventory(ItemUnlockedPhone itemUnlockedPhone) {
 		itemUnlockedPhone.getUnlockedPhonesInventory().setCurrentInventory(itemUnlockedPhone.getUnlockedPhonesInventory().getCurrentInventory() - 
 																		   itemUnlockedPhone.getUnlockedPhonesInventory().getSalesQuantity() + 
 																		   itemUnlockedPhone.getUnlockedPhonesInventory().getPurchasedQuantity());
 		itemUnlockedPhonesService.save(itemUnlockedPhone);
+		if(itemUnlockedPhone.getUnlockedPhonesInventory().getCurrentInventory() < 0) 
+			throw new RuntimeException();
 	}
+	
 	public void setPurchasedQuantity(ItemUnlockedPhone itemUnlockedPhone) {
 		itemUnlockedPhone.getUnlockedPhonesInventory().setPurchasedQuantity(itemUnlockedPhone.getUnlockedPhonesInventory().getPurchasedQuantity());
 		itemUnlockedPhonesService.save(itemUnlockedPhone);

@@ -33,7 +33,7 @@ public class PhonesReceivedQuantity {
 
 	public PhonesReceivedQuantity() {}
 	
-	public PhonesReceivedQuantity(Long receivedQuantityId, Date receivedDate, int purchasedQuantity,
+	public PhonesReceivedQuantity(Long receivedQuantityId, Date receivedDate, int purchasedQuantity, 
 			ItemUnlockedPhone itemUnlockedPhone) {
 		super();
 		this.receivedQuantityId = receivedQuantityId;
