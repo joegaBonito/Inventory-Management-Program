@@ -1,20 +1,12 @@
 package com.obs.services;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.obs.domain.AccessoryInventory;
-import com.obs.domain.ItemAccessory;
 import com.obs.domain.AccessoryReceivedQuantity;
+import com.obs.domain.ItemAccessory;
 import com.obs.domain.UpsOrder;
 
 @Service
@@ -60,10 +52,12 @@ public class AccessoryInventoryService {
 		}
 	
 	}
-	
+	@Transactional
 	public void setCurrentInventory(ItemAccessory itemAccessory) {
 		itemAccessory.getAccessoryInventory().setCurrentInventory(itemAccessory.getAccessoryInventory().getCurrentInventory() - itemAccessory.getAccessoryInventory().getSalesQuantity() + itemAccessory.getAccessoryInventory().getPurchasedQuantity());
 		itemAccessoryService.save(itemAccessory);
+		if(itemAccessory.getAccessoryInventory().getCurrentInventory() < 0) 
+			throw new RuntimeException();
 	}
 	public void setPurchasedQuantity(ItemAccessory itemAccessory) {
 		itemAccessory.getAccessoryInventory().setPurchasedQuantity(itemAccessory.getAccessoryInventory().getPurchasedQuantity());
