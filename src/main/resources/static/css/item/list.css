@@ -11,6 +11,47 @@ tr {
 	font-weight:bold;
 }
 
-table, th, td {
-    border: 1px solid black;
+table, th, td{
+	border: 1px solid black;
 }
+
+#accessoryInventoryTable {
+	border: 1px solid black;
+	table-layout: fixed;
+	width:70rem;
+}
+#accessoryInventoryTable th, #accessoryInventoryTable td {
+    border: 1px solid black;
+    width: 8rem;
+}
+
+#accessoryDateTable {
+	border: 1px solid black;
+}
+#accessoryDateTable th, #accessoryDateTable td {
+    border: 1px solid black;
+    width: 2rem;
+}
+
+#phoneInventoryTable {
+	border: 1px solid black;
+	table-layout: fixed;
+	width:80rem;
+}
+#phoneInventoryTable th, #phoneInventoryTable td {
+    border: 1px solid black;
+    width: 10rem;
+}
+
+#phoneDateTable {
+	border: 1px solid black;
+}
+#phoneDateTable th, #phoneDateTable td {
+    border: 1px solid black;
+    width: 2rem;
+}
+
+
+
+
+
