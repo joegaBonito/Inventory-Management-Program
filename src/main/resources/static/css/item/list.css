@@ -22,7 +22,7 @@ table, th, td{
 }
 #accessoryInventoryTable th, #accessoryInventoryTable td {
     border: 1px solid black;
-    width: 8rem;
+    width: 6.8rem;
 }
 
 #accessoryDateTable {
@@ -36,7 +36,7 @@ table, th, td{
 #phoneInventoryTable {
 	border: 1px solid black;
 	table-layout: fixed;
-	width:80rem;
+	width:78rem;
 }
 #phoneInventoryTable th, #phoneInventoryTable td {
     border: 1px solid black;
