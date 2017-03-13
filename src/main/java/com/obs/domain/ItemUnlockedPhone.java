@@ -53,9 +53,12 @@ public class ItemUnlockedPhone implements Serializable {
 	@OneToMany(cascade={CascadeType.ALL},mappedBy="itemUnlockedPhone")
 	private List<PhonesReceivedQuantity> phonesReceivedQuantity;
 	
+	@OneToOne(cascade={CascadeType.ALL},mappedBy="phone")
+	private Master master;
+	
 	public ItemUnlockedPhone(Long itemUnlockedPhoneId, String productId, String productName, double purchasePrice,
 			double salesPrice, double upLength, double upHeight, double upWidth, double upWeight,
-			UnlockedPhonesInventory unlockedPhonesInventory, List<PhonesReceivedQuantity> phonesReceivedQuantity) {
+			UnlockedPhonesInventory unlockedPhonesInventory, List<PhonesReceivedQuantity> phonesReceivedQuantity,Master master) {
 		super();
 		this.itemUnlockedPhoneId = itemUnlockedPhoneId;
 		this.productId = productId;
@@ -68,6 +71,7 @@ public class ItemUnlockedPhone implements Serializable {
 		this.upWeight = upWeight;
 		this.unlockedPhonesInventory = unlockedPhonesInventory;
 		this.phonesReceivedQuantity = phonesReceivedQuantity;
+		this.master = master;
 	}
 
 	public ItemUnlockedPhone() {
@@ -161,4 +165,11 @@ public class ItemUnlockedPhone implements Serializable {
 		this.phonesReceivedQuantity = phonesReceivedQuantity;
 	}
 
+	public Master getMaster() {
+		return master;
+	}
+
+	public void setMaster(Master master) {
+		this.master = master;
+	}
 }

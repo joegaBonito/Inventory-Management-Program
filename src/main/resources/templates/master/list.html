@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>OBS</title>
+	<link href="../static/css/item/list.css" th:href="@{/css/item/list.css}"  rel='stylesheet' type='text/css'/>	
+</head>
+<body>
+	<h2>Accessories Inventory</h2>
+	<table id="masterTable">
+		<thead>
+			<tr>
+				<td>LG.COM Product ID</td>
+				<td>Product Name</td>
+				<td>Purchase Price</td>
+				<td>Sales Price</td>
+				<td>Purchase Amount</td>
+				<td>Purchased Quantity</td>
+				<td>Sales Amount</td>
+				<td>Sales Quantity</td>
+				<td>Inventory Amount</td>
+				<td>Current Inventory</td>
+			</tr>
+		</thead>
+			<tbody>
+				<tr th:each="master : ${masters}">
+					<td th:text="${master.accessory != null} ? ${master.accessory.productId} : ${master.phone.productId}">Product ID</td>
+					<td th:text="${master.accessory != null} ? ${master.accessory.productName} : ${master.phone.productName}">Product Name</td>
+					<td th:text="${master.accessory != null} ? ${master.accessory.purchasePrice} : ${master.phone.purchasePrice}">Purchase Price</td>
+					<td th:text="${master.accessory != null} ? ${master.accessory.salesPrice} : ${master.phone.salesPrice}">Sales Price</td>
+					<td th:text="${master.accessory != null} ? ${#numbers.formatDecimal(master.accessory.accessoryInventory.totalPurchasedAmount, 0 ,2)} : ${#numbers.formatDecimal(master.phone.unlockedPhonesInventory.totalPurchasedAmount, 0 ,2)}">Purchase Amount</td>
+					<td th:text="${master.accessory != null} ? ${master.accessory.accessoryInventory.totalPurchasedQuantity} : ${master.phone.unlockedPhonesInventory.totalPurchasedQuantity}">Purchased Quantity</td>
+					<td th:text="${master.accessory != null} ? ${#numbers.formatDecimal(master.accessory.accessoryInventory.salesAmount, 0 ,2)} : ${#numbers.formatDecimal(master.phone.unlockedPhonesInventory.salesAmount, 0 ,2)}">Sales Amount</td>
+					<td th:text="${master.accessory != null} ? ${master.accessory.accessoryInventory.salesQuantity} : ${master.phone.unlockedPhonesInventory.salesQuantity}">Sales Quantity</td>
+					<td th:text="${master.accessory != null} ? ${#numbers.formatDecimal(master.accessory.accessoryInventory.currentInventoryAmount, 0 ,2)} : ${#numbers.formatDecimal(master.phone.unlockedPhonesInventory.currentInventoryAmount, 0 ,2)}">Inventory Amount</td>
+					<td th:text="${master.accessory != null} ? ${master.accessory.accessoryInventory.currentInventory} : ${master.phone.unlockedPhonesInventory.currentInventory}">Current Inventory</td>
+				</tr>
+			</tbody>
+	</table>
+	<br/>
+	<!-- <table id="accessoryDateTable">
+		<thead>
+			<tr>
+				<td >Product ID</td>
+				<td th:each="day : ${days}" th:text="${#dates.format(day,'dd-MMM-yyyy')}">Calendar Dates</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="itemAccessory : ${itemAccessories}">
+				<td th:text="${itemAccessory.productId}">Product ID</td>
+				<td th:each="day:${days}">
+					<th:block th:each="accessoryReceivedQuantity:${accessoryReceivedQuantities}" th:text="${#dates.format(accessoryReceivedQuantity.receivedDate,'dd-MMM-yyyy') == #dates.format(day,'dd-MMM-yyyy') 
+				                  and itemAccessory.itemAccessoryId == accessoryReceivedQuantity.itemAccessory.itemAccessoryId} ? ${accessoryReceivedQuantity.purchasedQuantity} : ''">Calendar Dates</th:block>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br/>
+	<br/> -->
+	<a href="/"><button type="button">Home</button></a>
+	
+</body>
+</html>

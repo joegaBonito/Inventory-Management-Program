@@ -40,7 +40,7 @@ table, th, td{
 }
 #phoneInventoryTable th, #phoneInventoryTable td {
     border: 1px solid black;
-    width: 10rem;
+    width: 5rem;
 }
 
 #phoneDateTable {

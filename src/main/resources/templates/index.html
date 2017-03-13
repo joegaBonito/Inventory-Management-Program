@@ -8,18 +8,19 @@
 <body style="display:none">
 	<h1 id="mainPage">Online Brand Shop</h1>
 	<div id="accordion">
-		<h3>Manage Item</h3>
+		<h3>Manage Item List</h3>
 		<div>
 		<div id="accessoryLink"><a href="/itemAccessory/list" th:href="@{/itemAccessory/list}">Accessory Item Lists</a></div>
 		<div id="phoneLink"><a href="/itemUnlockedPhone/list" th:href="@{/itemUnlockedPhone/list}">Unlocked Phone Item Lists</a></div>
 		</div>
-		<h3>Input Orders</h3>
-		<div id="upsOrderLink"><a href="/ups/list" th:href="@{/ups/list}">UPS Order Lists</a></div>
 		<h3>Item Inventory</h3>
 		<div>
 		<div id="accessoryInventoryLink"><a href="/accessoryInventory/list" th:href="@{/accessoryInventory/list}">Accessory Inventory</a></div>
 		<div id="phoneInventoryLink"><a href="/unlockedPhonesInventory/list" th:href="@{/unlockedPhonesInventory/list}">Unlocked Phones Inventory</a></div>
+		<div id="masterLink"><a href="/master/list" th:href="@{/master/list}">Master Inventory</a></div>
 		</div>
+		<h3>Input Orders</h3>
+		<div id="upsOrderLink"><a href="/ups/list" th:href="@{/ups/list}">UPS Order Lists</a></div>
 	</div>
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

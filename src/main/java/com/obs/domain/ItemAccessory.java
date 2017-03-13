@@ -58,11 +58,14 @@ public class ItemAccessory implements Serializable {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="itemAccessory")
 	private Set<AccessoryReceivedQuantity> accessoryReceivedQuantity;
 	
+	@OneToOne(cascade={CascadeType.ALL},mappedBy="accessory")
+	private Master master;
+	
 	public ItemAccessory() {}
 
 	public ItemAccessory(Long itemAccessoryId, String productId, String productName, double purchasePrice,
 			double salesPrice, double accLength, double accHeight, double accWidth, double accWeight,
-			AccessoryInventory accessoryInventory, Set<AccessoryReceivedQuantity> accessoryReceivedQuantity) {
+			AccessoryInventory accessoryInventory, Set<AccessoryReceivedQuantity> accessoryReceivedQuantity, Master master) {
 		super();
 		this.itemAccessoryId = itemAccessoryId;
 		this.productId = productId;
@@ -75,6 +78,7 @@ public class ItemAccessory implements Serializable {
 		this.accWeight = accWeight;
 		this.accessoryInventory = accessoryInventory;
 		this.accessoryReceivedQuantity = accessoryReceivedQuantity;
+		this.master = master;
 	}
 
 	public Long getItemAccessoryId() {
@@ -157,15 +161,19 @@ public class ItemAccessory implements Serializable {
 		this.accessoryInventory = accessoryInventory;
 	}
 
-	public Set<AccessoryReceivedQuantity> getReceivedQuantity() {
+	public Set<AccessoryReceivedQuantity> getAccessoryReceivedQuantity() {
 		return accessoryReceivedQuantity;
 	}
 
-	public void setReceivedQuantity(Set<AccessoryReceivedQuantity> accessoryReceivedQuantity) {
+	public void setAccessoryReceivedQuantity(Set<AccessoryReceivedQuantity> accessoryReceivedQuantity) {
 		this.accessoryReceivedQuantity = accessoryReceivedQuantity;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Master getMaster() {
+		return master;
+	}
+
+	public void setMaster(Master master) {
+		this.master = master;
 	}
 }
