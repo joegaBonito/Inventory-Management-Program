@@ -98,21 +98,4 @@ public class PhoneInventoryService {
 				                                                                  itemUnlockedPhone.getPurchasePrice());
 		itemUnlockedPhonesService.save(itemUnlockedPhone);
 	}
-	
-	public void setTotals(UnlockedPhonesInventory unlockedPhonesInventory) {
-		int num1 = 0;
-		int num2 = 0;
-		double num3 = 0;
-		double num4 = 0;
-		for(ItemUnlockedPhone itemUnlockedPhone : itemUnlockedPhonesService.list()){
-			num1 += itemUnlockedPhone.getUnlockedPhonesInventory().getSalesQuantity();
-			num2 += itemUnlockedPhone.getUnlockedPhonesInventory().getCurrentInventory();
-			num3 += itemUnlockedPhone.getUnlockedPhonesInventory().getSalesAmount();
-			num4 += itemUnlockedPhone.getUnlockedPhonesInventory().getPurchasedAmount();
-		}
-		unlockedPhonesInventory.setTotalSalesQuantity(num1);
-		unlockedPhonesInventory.setTotalCurrentInventory(num2);
-		unlockedPhonesInventory.setTotalSalesAmount(num3);
-		unlockedPhonesInventory.setTotalPurchasedAmount(num4);
-	}
 }

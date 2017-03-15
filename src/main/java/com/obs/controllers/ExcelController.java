@@ -17,25 +17,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.obs.excel.FileUpload;
 import com.obs.excel.FileUploadValidator;
+import com.obs.services.AccessoryInventoryService;
 import com.obs.services.OrdersExcelImportService;
+import com.obs.services.PhoneInventoryService;
 import com.obs.services.UpsService;
 
 @Controller
 public class ExcelController {
 	
-	@Autowired
 	private UpsService upsService;
-	
-	@Autowired  
 	private FileUploadValidator fileValidator; 
+	private OrdersExcelImportService ordersExcelImportService;
+	private AccessoryInventoryService accessoryInventoryService;
+	private PhoneInventoryService phoneInventoryService;
 	
 	@Autowired
-	private OrdersExcelImportService ordersExcelImportService;
-	
-	public ExcelController(UpsService upsService, FileUploadValidator fileValidator, OrdersExcelImportService ordersExcelImportService) {
+	public ExcelController(UpsService upsService, FileUploadValidator fileValidator, OrdersExcelImportService ordersExcelImportService, 
+			AccessoryInventoryService accessoryInventoryService, PhoneInventoryService phoneInventoryService) {
 		this.upsService = upsService;
 		this.fileValidator = fileValidator;
 		this.ordersExcelImportService = ordersExcelImportService;
+		this.accessoryInventoryService = accessoryInventoryService;
+		this.phoneInventoryService = phoneInventoryService;
 	}
 	
 	@RequestMapping("/downloadExcel")
@@ -83,8 +86,12 @@ public class ExcelController {
 	  return "redirect:/uploadExcel";
 	 }  
 	 @RequestMapping("/uploadExcel")  
-	 public String getUploadForm() {  
+	 public String getUploadForm() throws IOException {  
 		 ordersExcelImportService.excelImport();
+		 accessoryInventoryService.setSalesQuantity();
+		 accessoryInventoryService.setSalesAmount();
+		 phoneInventoryService.setSalesQuantity();
+		 phoneInventoryService.setSalesAmount();
 		 return "redirect:/ups/list";  
 	 }  
 }

@@ -1,11 +1,7 @@
 package com.obs.controllers;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.obs.domain.AccessoryInventory;
 import com.obs.domain.ItemAccessory;
 import com.obs.services.AccessoryInventoryService;
 import com.obs.services.AccessoryReceivedQuantityService;
@@ -42,8 +37,6 @@ public class AccessoryInventoryController {
 	
 	@RequestMapping("/accessoryInventory/list")
 	public String inventoryList(Model model) {
-		accessoryInventoryService.setSalesQuantity();
-		accessoryInventoryService.setSalesAmount();
 		List<Date> days = calendarService.getAllDays();
 		model.addAttribute("days",days);
 		model.addAttribute("accessoryReceivedQuantities",accessoryReceivedQuantityService.list());
@@ -67,8 +60,6 @@ public class AccessoryInventoryController {
 		accessoryInventoryService.setTotalPurchasedAmount(itemAccessory);
 		accessoryInventoryService.setCurrentInventoryAmount(itemAccessory);
 		accessoryInventoryService.setCurrentInventory(itemAccessory);
-		AccessoryInventory accessoryInventory = new AccessoryInventory();
-		accessoryInventoryService.setTotals(accessoryInventory);
 		model.addAttribute("itemAccessories", itemAccessoryService.productNameList());
 		return "redirect:/accessoryInventory/list";
 	}

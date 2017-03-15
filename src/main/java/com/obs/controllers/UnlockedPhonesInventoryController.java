@@ -40,8 +40,6 @@ public class UnlockedPhonesInventoryController {
 	
 	@RequestMapping("/unlockedPhonesInventory/list")
 	public String inventoryList(Model model) {
-		phoneInventoryService.setSalesQuantity();
-		phoneInventoryService.setSalesAmount();
 		List<Date> days = calendarService.getAllDays();
 		model.addAttribute("days",days);
 		model.addAttribute("phonesReceivedQuantities",phonesReceivedQuantityService.list());
@@ -64,8 +62,6 @@ public class UnlockedPhonesInventoryController {
 		phoneInventoryService.setTotalPurchasedAmount(itemUnlockedPhone);
 		phoneInventoryService.setCurrentInventoryAmount(itemUnlockedPhone);
 		phoneInventoryService.setCurrentInventory(itemUnlockedPhone);
-		UnlockedPhonesInventory unlockedPhonesInventory = itemUnlockedPhone.getUnlockedPhonesInventory();
-		phoneInventoryService.setTotals(unlockedPhonesInventory);
 		int num = itemUnlockedPhone.getUnlockedPhonesInventory().getPurchasedQuantity();
 		model.addAttribute("itemUnlockedPhones", itemUnlockedPhonesService.list());
 		return "redirect:/unlockedPhonesInventory/list";

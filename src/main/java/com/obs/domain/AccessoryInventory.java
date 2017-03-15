@@ -44,16 +44,7 @@ public class AccessoryInventory {
 	
 	@Column(name="purchased_amount")
 	private double purchasedAmount;
-	
-	@Column(name="total_current_inventory")
-	private int totalCurrentInventory;
-	
-	@Column(name="total_sales_quantity")
-	private int totalSalesQuantity;
-	
-	@Column(name="total_sales_amount")
-	private double totalSalesAmount;
-	
+		
 	@Column(name="total_purchased_quantity")
 	private int totalPurchasedQuantity;
 	
@@ -67,8 +58,7 @@ public class AccessoryInventory {
 
 	public AccessoryInventory(Long accessoryInventoryId, int currentInventory, double currentInventoryAmount,
 			int salesQuantity, double salesAmount, int purchasedQuantity, Date receivedDate, double purchasedAmount,
-			int totalCurrentInventory, int totalSalesQuantity, double totalSalesAmount, int totalPurchasedQuantity,
-			double totalPurchasedAmount, ItemAccessory itemAccessory) {
+			int totalPurchasedQuantity, double totalPurchasedAmount, ItemAccessory itemAccessory) {
 		super();
 		this.accessoryInventoryId = accessoryInventoryId;
 		this.currentInventory = currentInventory;
@@ -78,9 +68,6 @@ public class AccessoryInventory {
 		this.purchasedQuantity = purchasedQuantity;
 		this.receivedDate = receivedDate;
 		this.purchasedAmount = purchasedAmount;
-		this.totalCurrentInventory = totalCurrentInventory;
-		this.totalSalesQuantity = totalSalesQuantity;
-		this.totalSalesAmount = totalSalesAmount;
 		this.totalPurchasedQuantity = totalPurchasedQuantity;
 		this.totalPurchasedAmount = totalPurchasedAmount;
 		this.itemAccessory = itemAccessory;
@@ -148,30 +135,6 @@ public class AccessoryInventory {
 
 	public void setPurchasedAmount(double purchasedAmount) {
 		this.purchasedAmount = purchasedAmount;
-	}
-
-	public int getTotalCurrentInventory() {
-		return totalCurrentInventory;
-	}
-
-	public void setTotalCurrentInventory(int totalCurrentInventory) {
-		this.totalCurrentInventory = totalCurrentInventory;
-	}
-
-	public int getTotalSalesQuantity() {
-		return totalSalesQuantity;
-	}
-
-	public void setTotalSalesQuantity(int totalSalesQuantity) {
-		this.totalSalesQuantity = totalSalesQuantity;
-	}
-
-	public double getTotalSalesAmount() {
-		return totalSalesAmount;
-	}
-
-	public void setTotalSalesAmount(double totalSalesAmount) {
-		this.totalSalesAmount = totalSalesAmount;
 	}
 
 	public int getTotalPurchasedQuantity() {

@@ -20,6 +20,12 @@ public class MasterController {
 	@RequestMapping("/master/list") 
 	public String master(Model model) {
 		model.addAttribute("masters",masterService.list());
+		model.addAttribute("grandTotalPurchasedAmount",masterService.getGrandTotalPurchasedAmount());
+		model.addAttribute("grandTotalPurchasedQuantity",masterService.getGrandTotalPurchasedQuantity());
+		model.addAttribute("grandTotalSalesAmount",masterService.getGrandTotalSalesAmount());
+		model.addAttribute("grandTotalSalesQuantity",masterService.getGrandTotalSalesQuantity());
+		model.addAttribute("grandTotalCurrentInventory",masterService.getGrandTotalCurrentInventory());
+		model.addAttribute("grandTotalCurrentInventoryAmount",masterService.getGrandTotalCurrentInventoryAmount());
 		return "/master/list";
 	}
 }

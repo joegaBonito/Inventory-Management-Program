@@ -34,7 +34,7 @@ public class OrdersExcelImportService {
          HSSFWorkbook workbook = new HSSFWorkbook(file);
 
          //Get first/desired sheet from the workbook
-         Sheet sheet = workbook.getSheetAt(1);
+         Sheet sheet = workbook.getSheetAt(0);
          
          // Create an instance of SimpleDateFormat used for formatting 
          // the string representation of date (month/day/year)

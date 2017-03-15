@@ -45,15 +45,6 @@ public class UnlockedPhonesInventory {
 	@Column(name="purchased_amount")
 	private double purchasedAmount;
 	
-	@Column(name="total_current_inventory")
-	private int totalCurrentInventory;
-	
-	@Column(name="total_sales_quantity")
-	private int totalSalesQuantity;
-	
-	@Column(name="total_sales_amount")
-	private double totalSalesAmount;
-	
 	@Column(name="total_purchased_quantity")
 	private int totalPurchasedQuantity;
 	
@@ -66,9 +57,8 @@ public class UnlockedPhonesInventory {
 	public UnlockedPhonesInventory(){}
 
 	public UnlockedPhonesInventory(Long unlockedPhoneInventoryId, int currentInventory, double currentInventoryAmount,
-			int salesQuantity, double salesAmount, int purchasedQuantity, double purchasedAmount,
-			int totalCurrentInventory, int totalSalesQuantity, double totalSalesAmount, int totalPurchasedQuantity,
-			double totalPurchasedAmount, Date receivedDate, ItemUnlockedPhone itemUnlockedPhone) {
+			int salesQuantity, double salesAmount, int purchasedQuantity, Date receivedDate, double purchasedAmount,
+			int totalPurchasedQuantity, double totalPurchasedAmount, ItemUnlockedPhone itemUnlockedPhone) {
 		super();
 		this.unlockedPhoneInventoryId = unlockedPhoneInventoryId;
 		this.currentInventory = currentInventory;
@@ -76,13 +66,10 @@ public class UnlockedPhonesInventory {
 		this.salesQuantity = salesQuantity;
 		this.salesAmount = salesAmount;
 		this.purchasedQuantity = purchasedQuantity;
+		this.receivedDate = receivedDate;
 		this.purchasedAmount = purchasedAmount;
-		this.totalCurrentInventory = totalCurrentInventory;
-		this.totalSalesQuantity = totalSalesQuantity;
-		this.totalSalesAmount = totalSalesAmount;
 		this.totalPurchasedQuantity = totalPurchasedQuantity;
 		this.totalPurchasedAmount = totalPurchasedAmount;
-		this.receivedDate = receivedDate;
 		this.itemUnlockedPhone = itemUnlockedPhone;
 	}
 
@@ -134,36 +121,20 @@ public class UnlockedPhonesInventory {
 		this.purchasedQuantity = purchasedQuantity;
 	}
 
+	public Date getReceivedDate() {
+		return receivedDate;
+	}
+
+	public void setReceivedDate(Date receivedDate) {
+		this.receivedDate = receivedDate;
+	}
+
 	public double getPurchasedAmount() {
 		return purchasedAmount;
 	}
 
 	public void setPurchasedAmount(double purchasedAmount) {
 		this.purchasedAmount = purchasedAmount;
-	}
-
-	public int getTotalCurrentInventory() {
-		return totalCurrentInventory;
-	}
-
-	public void setTotalCurrentInventory(int totalCurrentInventory) {
-		this.totalCurrentInventory = totalCurrentInventory;
-	}
-
-	public int getTotalSalesQuantity() {
-		return totalSalesQuantity;
-	}
-
-	public void setTotalSalesQuantity(int totalSalesQuantity) {
-		this.totalSalesQuantity = totalSalesQuantity;
-	}
-
-	public double getTotalSalesAmount() {
-		return totalSalesAmount;
-	}
-
-	public void setTotalSalesAmount(double totalSalesAmount) {
-		this.totalSalesAmount = totalSalesAmount;
 	}
 
 	public int getTotalPurchasedQuantity() {
@@ -182,14 +153,6 @@ public class UnlockedPhonesInventory {
 		this.totalPurchasedAmount = totalPurchasedAmount;
 	}
 
-	public Date getReceivedDate() {
-		return receivedDate;
-	}
-
-	public void setReceivedDate(Date receivedDate) {
-		this.receivedDate = receivedDate;
-	}
-
 	public ItemUnlockedPhone getItemUnlockedPhone() {
 		return itemUnlockedPhone;
 	}
@@ -197,6 +160,5 @@ public class UnlockedPhonesInventory {
 	public void setItemUnlockedPhone(ItemUnlockedPhone itemUnlockedPhone) {
 		this.itemUnlockedPhone = itemUnlockedPhone;
 	}
-
 }
 	

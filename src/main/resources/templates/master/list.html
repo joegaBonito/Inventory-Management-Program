@@ -5,7 +5,7 @@
 	<link href="../static/css/item/list.css" th:href="@{/css/item/list.css}"  rel='stylesheet' type='text/css'/>	
 </head>
 <body>
-	<h2>Accessories Inventory</h2>
+	<h2>Master Inventory</h2>
 	<table id="masterTable">
 		<thead>
 			<tr>
@@ -33,6 +33,15 @@
 					<td th:text="${master.accessory != null} ? ${master.accessory.accessoryInventory.salesQuantity} : ${master.phone.unlockedPhonesInventory.salesQuantity}">Sales Quantity</td>
 					<td th:text="${master.accessory != null} ? ${#numbers.formatDecimal(master.accessory.accessoryInventory.currentInventoryAmount, 0 ,2)} : ${#numbers.formatDecimal(master.phone.unlockedPhonesInventory.currentInventoryAmount, 0 ,2)}">Inventory Amount</td>
 					<td th:text="${master.accessory != null} ? ${master.accessory.accessoryInventory.currentInventory} : ${master.phone.unlockedPhonesInventory.currentInventory}">Current Inventory</td>
+				</tr>
+				<tr> 
+					<td colspan="4" style="font-weight:bold; position: relative; text-align:center;">Grand Totals:</td>
+					<td th:text="${#numbers.formatDecimal(grandTotalPurchasedAmount,0,2)}">Grand Total Purchased Amount</td>
+					<td th:text="${grandTotalPurchasedQuantity}">Grand Total Purchased Quantity</td>
+					<td th:text="${#numbers.formatDecimal(grandTotalSalesAmount,0,2)}">Grand Total Sales Amount</td>
+					<td th:text="${grandTotalSalesQuantity}">Grand Total Sales Quantity</td>
+					<td th:text="${#numbers.formatDecimal(grandTotalCurrentInventoryAmount,0,2)}">Grand Total Current Inventory Amount</td>
+					<td th:text="${grandTotalCurrentInventory}">Grand Total Current Inventory</td>
 				</tr>
 			</tbody>
 	</table>

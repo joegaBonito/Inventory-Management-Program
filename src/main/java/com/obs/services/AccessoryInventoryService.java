@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.obs.domain.AccessoryInventory;
 import com.obs.domain.AccessoryReceivedQuantity;
 import com.obs.domain.ItemAccessory;
 import com.obs.domain.UpsOrder;
@@ -62,6 +61,9 @@ public class AccessoryInventoryService {
 	public void setPurchasedQuantity(ItemAccessory itemAccessory) {
 		itemAccessory.getAccessoryInventory().setPurchasedQuantity(itemAccessory.getAccessoryInventory().getPurchasedQuantity());
 		itemAccessoryService.save(itemAccessory);
+		/*
+		 * This part records each received quantity for the day. 
+		 */
 		AccessoryReceivedQuantity accessoryReceivedQuantity = new AccessoryReceivedQuantity();
 		accessoryReceivedQuantity.setPurchasedQuantity(itemAccessory.getAccessoryInventory().getPurchasedQuantity());
 		accessoryReceivedQuantity.setReceivedDate(itemAccessory.getAccessoryInventory().getReceivedDate());
@@ -88,22 +90,4 @@ public class AccessoryInventoryService {
 		itemAccessory.getAccessoryInventory().setCurrentInventoryAmount((itemAccessory.getAccessoryInventory().getCurrentInventory() + itemAccessory.getAccessoryInventory().getPurchasedQuantity() - itemAccessory.getAccessoryInventory().getSalesQuantity())* itemAccessory.getPurchasePrice());
 		itemAccessoryService.save(itemAccessory);
 	}
-	
-	public void setTotals(AccessoryInventory accessoryInventory) {
-		int num1 = 0;
-		int num2 = 0;
-		double num3 = 0;
-		double num4 = 0;
-		for(ItemAccessory itemAccessory: itemAccessoryService.list()){
-			num1 += itemAccessory.getAccessoryInventory().getSalesQuantity();
-			num2 += itemAccessory.getAccessoryInventory().getCurrentInventory();
-			num3 += itemAccessory.getAccessoryInventory().getSalesAmount();
-			num4 += itemAccessory.getAccessoryInventory().getPurchasedAmount();
-		}
-		accessoryInventory.setTotalSalesQuantity(num1);
-		accessoryInventory.setTotalCurrentInventory(num2);
-		accessoryInventory.setTotalSalesAmount(num3);
-		accessoryInventory.setTotalPurchasedAmount(num4);
-	}
-
 }
