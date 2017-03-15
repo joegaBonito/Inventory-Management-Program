@@ -5,20 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.obs.domain.ItemAccessory;
+import com.obs.domain.ItemUnlockedPhone;
 import com.obs.domain.UpsOrder;
 import com.obs.repositories.UpsRepository;
 
 @Service
 public class UpsService {
-	@Autowired
-	private UpsRepository upsRepository;
-	
-	@Autowired
-	private ItemAccessoryService itemAccessoryService;
-	
-	@Autowired
-	private ItemUnlockedPhonesService itemUnlockedPhonesService;
 
+	private UpsRepository upsRepository;
+	private ItemAccessoryService itemAccessoryService;
+	private ItemUnlockedPhonesService itemUnlockedPhonesService;
+	
+	@Autowired
 	public UpsService(UpsRepository upsRepository, ItemAccessoryService itemAccessoryService, ItemUnlockedPhonesService itemUnlockedPhonesService) {
 		this.upsRepository = upsRepository;
 		this.itemAccessoryService = itemAccessoryService;
@@ -26,6 +25,8 @@ public class UpsService {
 	}
 	
 	public List<UpsOrder> list() {
+		/*Pageable pageable = new PageRequest(1,10);
+		Page<UpsOrder> page = upsRepository.findAll(pageable);*/
 		return upsRepository.findByOrderByUpsOrderReceivedDesc();
 	}
 	
@@ -38,12 +39,38 @@ public class UpsService {
 	}
 
 	public void delete(Long systemId) {
+		/*
+		 * Cascade delete to the Inventory Table when an order is deleted from the Order Table.
+		 */
+		for(ItemAccessory itemAccessory : itemAccessoryService.list()){
+			if(get(systemId).getUpsProductId().equals(itemAccessory.getProductId())) {
+				itemAccessory.getAccessoryInventory().setSalesQuantity(itemAccessory.getAccessoryInventory().getSalesQuantity() - get(systemId).getUpsQuantity());
+				itemAccessory.getAccessoryInventory().setSalesAmount(itemAccessory.getAccessoryInventory().getSalesAmount() - (get(systemId).getUpsQuantity() * itemAccessory.getSalesPrice()));
+			}
+		}
+		for(ItemUnlockedPhone itemUnlockedPhone: itemUnlockedPhonesService.list()){
+			if(get(systemId).getUpsProductId().equals(itemUnlockedPhone.getProductId())){
+				itemUnlockedPhone.getUnlockedPhonesInventory().setSalesQuantity(itemUnlockedPhone.getUnlockedPhonesInventory().getSalesQuantity() - get(systemId).getUpsQuantity());
+				itemUnlockedPhone.getUnlockedPhonesInventory().setSalesAmount(itemUnlockedPhone.getUnlockedPhonesInventory().getSalesAmount() - (get(systemId).getUpsQuantity() * itemUnlockedPhone.getSalesPrice()));
+			}
+		}
 		upsRepository.delete(systemId);
 	}
 	public UpsOrder get(Long systemId) {
 		return upsRepository.findOne(systemId);
 	}
 	public void deleteAll() {
+		/*
+		 * When all orders are deleted, all sales amount and quantity resets to 0.
+		 */
+		for(ItemAccessory itemAccessory : itemAccessoryService.list()){
+			itemAccessory.getAccessoryInventory().setSalesQuantity(0);
+			itemAccessory.getAccessoryInventory().setSalesAmount(0);
+		}
+		for(ItemUnlockedPhone itemUnlockedPhone: itemUnlockedPhonesService.list()){
+			itemUnlockedPhone.getUnlockedPhonesInventory().setSalesQuantity(0);
+			itemUnlockedPhone.getUnlockedPhonesInventory().setSalesAmount(0);
+		}
 		upsRepository.deleteAll();
 	}
 	
