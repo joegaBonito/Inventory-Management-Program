@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="en" 
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layout/main">
 <head>
 	<title>Input Received Unlocked Phones</title>
 </head>
 <body>
-	
+	<div layout:fragment="content">
 		<h2>Input Received Unlocked Phones</h2>
 		<br/>
 		<form class="form-horizontal" th:object="${itemUnlockedPhone}" th:action="@{/inventorySave}" method="post">
@@ -44,5 +45,6 @@
 		</form>
 		
 		<br/><br/><br/>
+		</div>
 		</body>
 </html>

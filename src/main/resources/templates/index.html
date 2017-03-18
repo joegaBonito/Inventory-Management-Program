@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" 
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layout/main">
 <head>
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"></link>
-	
 	<title>Online Brand Shop</title>	
 </head>
 <body style="display:none">
+	<div layout:fragment="content">
 	<h1 id="mainPage">Online Brand Shop</h1>
 	<div id="accordion">
 		<h3>Manage Item List</h3>
@@ -22,9 +24,7 @@
 		<h3>Input Orders</h3>
 		<div id="upsOrderLink"><a href="/ups/list" th:href="@{/ups/list}">UPS Order Lists</a></div>
 	</div>
+	</div>
 	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/js/home/home.js"></script>
 </body>
 </html>

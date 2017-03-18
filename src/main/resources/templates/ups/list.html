@@ -1,42 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:ddl="http://www.thymeleaf.org/dandelion"
+    xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+    layout:decorator="layout/main">
 <head>
 	<title>OBS</title>
 	<link href="../static/css/ups/list.css" th:href="@{/css/ups/list.css}"  rel='stylesheet' type='text/css'/>	
 </head>
 <body>
+<div layout:fragment="content">	
 	<table>
 		<thead>
 			<tr>
-					<td>Order ID</td>
-					<td>Order Received</td>
-					<td>Product ID</td>
-					<td>Quantity</td>
-					<td>Product Name</td>
-					<td>Shipping Method</td>
-					<td>Name</td>
-					<td>Address 1</td>
-					<td>Address 2</td>
-					<td>City</td>
-					<td>State</td>
-					<td>Zip</td>
-					<td>Phone</td>
-					<td>Residential</td>
-					<td>Service</td>
-					<td>Package Type</td>
-					<td>Bill To</td>
-					<td>Length</td>
-					<td>Height</td>
-					<td>Width</td>
-					<td>Weight</td>
-					<td>Country</td>
-					<td>Customer Name</td>
-					<td>Edit</td>
-					<td>Delete</td>
+					<th>Order ID</th>
+					<th>Order Received</th>
+					<th>Product ID</th>
+					<th>Quantity</th>
+					<th>Product Name</th>
+					<th>Shipping Method</th>
+					<th>Name</th>
+					<th>Address 1</th>
+					<th>Address 2</th>
+					<th>City</th>
+					<th>State</th>
+					<th>Zip</th>
+					<th>Phone</th>
+					<th>Residential</th>
+					<th>Service</th>
+					<th>Package Type</th>
+					<th>Bill To</th>
+					<th>Length</th>
+					<th>Height</th>
+					<th>Width</th>
+					<th>Weight</th>
+					<th>Country</th>
+					<th>Customer Name</th>
+					<th>Edit</th>
+					<th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tbody>
 				<tr th:each="upsOrder : ${upsOrders}">
 					<td th:text="${upsOrder.upsOrderId}">Order ID</td>
 					<td th:text="${upsOrder.upsOrderReceived}">Order Received</td>
@@ -44,7 +48,7 @@
 					<td th:text="${upsOrder.upsQuantity}">Quantity</td>
 					<td th:text="${upsOrder.upsProductName}">Product Name</td>
 					<td th:text="${upsOrder.upsShippingMethod}">Shipping Method</td>
-					<td th:text="${upsOrder.upsFname} + ${upsOrder.upsLname}">Name</td>
+					<td th:text="${upsOrder.upsFname} + ' ' + ${upsOrder.upsLname}">Name</td>
 					<td th:text="${upsOrder.address1}">Address 1</td>
 					<td th:text="${upsOrder.address2}">Address 2</td>
 					<td th:text="${upsOrder.city}">City</td>
@@ -66,9 +70,28 @@
 					<td><a href="#" th:href="@{/ups/delete/} + ${upsOrder.systemId}">Delete</a></td>
 				</tr>
 			</tbody>
-		</tbody>
 	</table>
-	<br/>
+	<div class="table-pagination" th:if="${upsOrders.totalPages}">
+    	<ul class="pagination">
+      	  	<li th:class="${upsOrders.number == 0} ? 'disabled' : ''">
+       	  		<a th:if="${!upsOrders.first}" th:href="@{${'/ups/list'}(page=${upsOrders.number-1},size=${upsOrders.size})}">&larr; Previous</a>
+       	   	 	<a th:if="${upsOrders.first}" href="javascript:void(0);">&larr; Previous</a>
+       		</li>
+       		
+       		<li th:each="pageNo : ${#numbers.sequence(0, upsOrders.totalPages - 1)}" th:class="${upsOrders.number == pageNo} ? 'active' : ''">
+            	<a th:if="${upsOrders.number == pageNo}" href="javascript:void(0);">
+               	 <span th:text="${pageNo + 1}"></span>
+            	</a>
+           	 	<a th:if="${!(upsOrders.number == pageNo)}" th:href="@{${'/ups/list'}(page=${pageNo},size=${upsOrders.size})}">
+               	 <span th:text="${pageNo + 1}"></span>
+            	</a>
+       		</li>
+      	 	 <li th:class="${upsOrders.number + 1 >= upsOrders.totalPages} ? 'disabled' : ''">
+          		<a th:if="${!upsOrders.last}" th:href="@{${'/ups/list'}(page=${upsOrders.number+1},size=${upsOrders.size})}">Next &rarr;</a>
+        	    <a th:if="${upsOrders.last}" href="javascript:void(0);">Next &rarr;</a>
+        	</li>
+    	</ul>
+	</div>
 	<label>(Upload File Name "MOBILE SALES TO DATE - Real Time Cust Trans Dtl.xls")</label>
 	<form th:field="${uploadedFile}" method="post" th:action="@{/submitFileUpload}" enctype="multipart/form-data">
             <input name="file" type="file"/><br/>
@@ -80,5 +103,6 @@
 	<a href="/downloadExcel"><button th:href="@{/downloadExcel}">Download Excel File</button></a>
 	<a href="/ups/deleteAll"><button th:href="@{/ups/deleteAll}">Delete all rows</button></a>
 	
+	</div>
 </body>
 </html>

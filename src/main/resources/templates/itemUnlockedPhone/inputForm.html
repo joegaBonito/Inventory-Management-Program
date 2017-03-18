@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="en" 
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layout/main">
 <head>
 	<title>Create New Unlocked Phones Item</title>
 </head>
 <body>
-	
+	<div layout:fragment="content">
 		<h2>Create New ew Unlocked Phones Item</h2>
 		<br/>
 
@@ -72,5 +73,6 @@
 		</form>
 		
 		<br/><br/><br/>
-		</body>
+	</div>
+  </body>
 </html>

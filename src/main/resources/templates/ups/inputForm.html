@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="en" 
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layout/main">
 <head>
 	<title>Input Ups Orders</title>
 </head>
 <body>
-	
+	<div layout:fragment="content">
 		<h2>Create New Order</h2>
 		<br/>
 
@@ -125,5 +126,6 @@
 		</form>
 		
 		<br/><br/><br/>
+		</div>
 		</body>
 </html>

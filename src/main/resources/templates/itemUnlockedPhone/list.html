@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" 
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layout/main">
 <head>
 	<title>OBS</title>
 	<link href="../static/css/item/list.css" th:href="@{/css/item/list.css}"  rel='stylesheet' type='text/css'/>	
 </head>
 <body>
+<div layout:fragment="content">
 	<table>
 		<thead>
 			<tr>
@@ -40,5 +43,6 @@
 	<br/>
 	<a href="/"><button type="button">Home</button></a>
 	<a href="/itemUnlockedPhone/create"><button th:href="@{/itemUnlockedPhone/create}" type="button">Add a new item</button></a>
+</div>
 </body>
 </html>

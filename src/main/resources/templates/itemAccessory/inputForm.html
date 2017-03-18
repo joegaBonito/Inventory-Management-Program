@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="en" 
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layout/main">
 <head>
 	<title>Create New Accessory Item</title>
 </head>
 <body>
-	
+	<div layout:fragment="content">
 		<h2>Create New Accessory Item</h2>
 		<br/>
 
@@ -73,5 +74,6 @@
 		</form>
 		
 		<br/><br/><br/>
+		</div>
 		</body>
 </html>

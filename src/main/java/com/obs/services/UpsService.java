@@ -3,6 +3,10 @@ package com.obs.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.obs.domain.ItemAccessory;
@@ -25,9 +29,14 @@ public class UpsService {
 	}
 	
 	public List<UpsOrder> list() {
-		/*Pageable pageable = new PageRequest(1,10);
-		Page<UpsOrder> page = upsRepository.findAll(pageable);*/
-		return upsRepository.findByOrderByUpsOrderReceivedDesc();
+		return upsRepository.findByOrderByUpsOrderReceived();
+	}
+	
+	/*
+	 * Used for Pagination.
+	 */
+	public Page<UpsOrder> findAll(Pageable pageable) {
+		return upsRepository.findAll(pageable);
 	}
 	
 	public List<UpsOrder> systemIdList() {
@@ -116,7 +125,6 @@ public class UpsService {
 			upsOrder.setService("1DP");
 		}
 	}
-
 
 
 }
