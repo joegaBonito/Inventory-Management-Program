@@ -12,6 +12,7 @@
 
 		<form class="form-horizontal" th:object="${itemUnlockedPhone}" th:action="@{/itemUnlockedPhone/save}" method="post">
 			<input type="hidden" th:field="*{itemUnlockedPhoneId}" />
+			<input type="hidden" th:field="*{unlockedPhonesInventory.unlockedPhoneInventoryId}"/>
 			<div th:class="form-group" th:classappend="${#fields.hasErrors('productId')}? 'has-error'">
 				<label class="col-sm-2 control-label">productId <span class="required">*</span></label>
 				<div class="col-md-10">
@@ -48,21 +49,21 @@
 		    	</div>
 		  	</div>
 		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('upHeight')}? 'has-error'">
-		    	<label class="col-sm-2 control-label">Height Price<span class="required">*</span></label>
+		    	<label class="col-sm-2 control-label">Height<span class="required">*</span></label>
 		    	<div class="col-md-10">
 		    		<input type="text" class="form-control" th:field="*{upHeight}" />
 		    		<span th:if="${#fields.hasErrors('upHeight')}" th:errors="*{upHeight}" th:class="help-block">Height Errors</span>
 		    	</div>
 		  	</div>
 		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('upWidth')}? 'has-error'">
-		    	<label class="col-sm-2 control-label">Width Price<span class="required">*</span></label>
+		    	<label class="col-sm-2 control-label">Width<span class="required">*</span></label>
 		    	<div class="col-md-10">
 		    		<input type="text" class="form-control" th:field="*{upWidth}" />
 		    		<span th:if="${#fields.hasErrors('upWidth')}" th:errors="*{upWidth}" th:class="help-block">Width Errors</span>
 		    	</div>
 		  	</div>
 		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('upWeight')}? 'has-error'">
-		    	<label class="col-sm-2 control-label">Weight Price<span class="required">*</span></label>
+		    	<label class="col-sm-2 control-label">Weight<span class="required">*</span></label>
 		    	<div class="col-md-10">
 		    		<input type="text" class="form-control" th:field="*{upWeight}" />
 		    		<span th:if="${#fields.hasErrors('upWeight')}" th:errors="*{upWeight}" th:class="help-block">Weight Errors</span>

@@ -6,16 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.obs.domain.ItemAccessory;
+import com.obs.domain.Master;
 import com.obs.repositories.ItemAccessoryRepository;
 
 @Service
 public class ItemAccessoryService {
 	
-	@Autowired
+	
 	private ItemAccessoryRepository itemAccessoryRepository;
 	
 	public ItemAccessoryService() {}
-	
+	@Autowired
 	public ItemAccessoryService(ItemAccessoryRepository itemAccessoryRepository) {
 		super();
 		this.itemAccessoryRepository = itemAccessoryRepository;
@@ -35,6 +36,10 @@ public class ItemAccessoryService {
 
 	public ItemAccessory get(Long itemAccessoryId) {
 		return itemAccessoryRepository.findOne(itemAccessoryId);
+	}
+	
+	public void delete(Long itemAccessoryId) {
+		itemAccessoryRepository.delete(itemAccessoryId);
 	}
 	
 	public String getProductId(Long itemAccessoryId) {

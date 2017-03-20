@@ -45,4 +45,10 @@ public class ItemAccessoryController {
 		model.addAttribute("itemAccessory", itemAccessoryService.get(id));
 		return "/itemAccessory/inputForm";		
 	}
+	
+	@RequestMapping("/itemAccessory/delete/{id}")
+	public String delete(@PathVariable Long id, Model model){
+		itemAccessoryService.delete(id);
+		return "redirect:/itemAccessory/list";		
+	}
 }

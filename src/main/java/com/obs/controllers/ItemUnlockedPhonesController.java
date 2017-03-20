@@ -36,12 +36,18 @@ public class ItemUnlockedPhonesController {
 	@RequestMapping("/itemUnlockedPhone/list")
 	public String item(Model model) {
 		model.addAttribute("itemUnlockedPhones",itemUnlockedPhonesService.list());
-		return "itemUnlockedPhone/list";
+		return "/itemUnlockedPhone/list";
 	}
 	
 	@RequestMapping("/itemUnlockedPhone/edit/{id}")
 	public String edit(@PathVariable Long id, Model model){
 		model.addAttribute("itemUnlockedPhone", itemUnlockedPhonesService.get(id));
 		return "/itemUnlockedPhone/inputForm";		
+	}
+	
+	@RequestMapping("/itemUnlockedPhone/delete/{id}")
+	public String delete(@PathVariable Long id, Model model){
+		itemUnlockedPhonesService.delete(id);
+		return "redirect:/itemUnlockedPhone/list";		
 	}
 }

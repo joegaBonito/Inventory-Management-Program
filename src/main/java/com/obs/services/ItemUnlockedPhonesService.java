@@ -6,14 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.obs.domain.ItemUnlockedPhone;
+import com.obs.domain.Master;
 import com.obs.repositories.ItemUnlockedPhonesRepository;
 
 @Service
 public class ItemUnlockedPhonesService {
 	
-	@Autowired
-	ItemUnlockedPhonesRepository itemUnlockedPhonesRepository;
+	private ItemUnlockedPhonesRepository itemUnlockedPhonesRepository;
 	
+	@Autowired
 	public ItemUnlockedPhonesService(ItemUnlockedPhonesRepository itemUnlockedPhonesRepository) {
 		this.itemUnlockedPhonesRepository = itemUnlockedPhonesRepository;
 	}
@@ -32,6 +33,10 @@ public class ItemUnlockedPhonesService {
 
 	public ItemUnlockedPhone get(Long itemUnlockedPhoneId) {
 		return itemUnlockedPhonesRepository.findOne(itemUnlockedPhoneId);
+	}
+	
+	public void delete(Long itemUnlockedPhoneId) {
+		itemUnlockedPhonesRepository.delete(itemUnlockedPhoneId);
 	}
 	
 	public String getProductId(Long itemUnlockedPhoneId) {

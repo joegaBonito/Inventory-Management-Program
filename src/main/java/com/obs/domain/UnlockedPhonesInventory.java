@@ -51,7 +51,7 @@ public class UnlockedPhonesInventory {
 	@Column(name="total_purchased_amount")
 	private double totalPurchasedAmount;
 	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy="unlockedPhonesInventory")
+	@OneToOne(cascade ={CascadeType.ALL}, mappedBy="unlockedPhonesInventory")
 	private ItemUnlockedPhone itemUnlockedPhone;
 
 	public UnlockedPhonesInventory(){}

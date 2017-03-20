@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.obs.domain.ItemUnlockedPhone;
 import com.obs.domain.Master;
 import com.obs.repositories.MasterRepository;
 
@@ -16,6 +17,10 @@ public class MasterService {
 	@Autowired
 	public MasterService(MasterRepository masterRepository) {
 		this.masterRepository = masterRepository;
+	}
+	
+	public void add(Master master) {
+		masterRepository.save(master);
 	}
 	
 	public List<Master> list () {
@@ -112,5 +117,7 @@ public class MasterService {
 		}
 		return temp;
 	}
+
+
 	
 }

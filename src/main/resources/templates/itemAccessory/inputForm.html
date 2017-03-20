@@ -49,21 +49,21 @@
 		    	</div>
 		  	</div>
 		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('accHeight')}? 'has-error'">
-		    	<label class="col-sm-2 control-label">Height Price<span class="required">*</span></label>
+		    	<label class="col-sm-2 control-label">Height<span class="required">*</span></label>
 		    	<div class="col-md-10">
 		    		<input type="text" class="form-control" th:field="*{accHeight}" />
 		    		<span th:if="${#fields.hasErrors('accHeight')}" th:errors="*{accHeight}" th:class="help-block">Height Errors</span>
 		    	</div>
 		  	</div>
 		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('accWidth')}? 'has-error'">
-		    	<label class="col-sm-2 control-label">Width Price<span class="required">*</span></label>
+		    	<label class="col-sm-2 control-label">Width<span class="required">*</span></label>
 		    	<div class="col-md-10">
 		    		<input type="text" class="form-control" th:field="*{accWidth}" />
 		    		<span th:if="${#fields.hasErrors('accWidth')}" th:errors="*{accWidth}" th:class="help-block">Width Errors</span>
 		    	</div>
 		  	</div>
 		  	<div th:class="form-group" th:classappend="${#fields.hasErrors('accWeight')}? 'has-error'">
-		    	<label class="col-sm-2 control-label">Weight Price<span class="required">*</span></label>
+		    	<label class="col-sm-2 control-label">Weight<span class="required">*</span></label>
 		    	<div class="col-md-10">
 		    		<input type="text" class="form-control" th:field="*{accWeight}" />
 		    		<span th:if="${#fields.hasErrors('accWeight')}" th:errors="*{accWeight}" th:class="help-block">Weight Errors</span>
