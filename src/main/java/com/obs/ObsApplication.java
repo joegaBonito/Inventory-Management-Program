@@ -7,7 +7,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@ImportResource("classpath:/views.xml")
+//@ImportResource recognizes XML configuration.
+@ImportResource("classpath:/views.xml") 
 public class ObsApplication {
 
 	public static void main(String[] args) {
