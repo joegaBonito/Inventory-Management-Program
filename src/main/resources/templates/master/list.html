@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" 
 	xmlns:th="http://www.thymeleaf.org"
+	xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
 	layout:decorator="layout/main">
 <head>
 	<title>OBS</title>
-	<link href="../static/css/item/list.css" th:href="@{/css/item/list.css}"  rel='stylesheet' type='text/css'/>	
+	<link href="../static/css/item/list.css" th:href="@{/css/item/list.css}"  rel='stylesheet' type='text/css'/>
+		
 </head>
 <body>
 <div layout:fragment="content">
 	<h2>Master Inventory</h2>
-	<table id="masterTable">
+	<table id="masterTable" dt:table="true">
 		<thead>
 			<tr>
 				<td>LG.COM Product ID</td>
@@ -30,7 +32,7 @@
 					<td th:text="${master.accessory != null} ? ${master.accessory.productName} : ${master.phone.productName}">Product Name</td>
 					<td th:text="${master.accessory != null} ? ${master.accessory.purchasePrice} : ${master.phone.purchasePrice}">Purchase Price</td>
 					<td th:text="${master.accessory != null} ? ${master.accessory.salesPrice} : ${master.phone.salesPrice}">Sales Price</td>
-					<td th:text="${master.accessory != null} ? ${#numbers.formatDecimal(master.accessory.accessoryInventory.totalPurchasedAmount, 0 ,2)} : ${#numbers.formatDecimal(master.phone.unlockedPhonesInventory.totalPurchasedAmount, 0 ,2)}">Purchase Amount</td>
+					<td th:text="${master.accessory != null} ? ${#numbers.formatDecimal(master.accessory.accessoryInventory.totalPurchasedAmount, 0 ,2)} : ${#numbers.formatDecimal(master.phone.unlockedPhonesInventory.totalPurchasedAmount, 0 ,2)}">Purchased Amount</td>
 					<td th:text="${master.accessory != null} ? ${master.accessory.accessoryInventory.totalPurchasedQuantity} : ${master.phone.unlockedPhonesInventory.totalPurchasedQuantity}">Purchased Quantity</td>
 					<td th:text="${master.accessory != null} ? ${#numbers.formatDecimal(master.accessory.accessoryInventory.salesAmount, 0 ,2)} : ${#numbers.formatDecimal(master.phone.unlockedPhonesInventory.salesAmount, 0 ,2)}">Sales Amount</td>
 					<td th:text="${master.accessory != null} ? ${master.accessory.accessoryInventory.salesQuantity} : ${master.phone.unlockedPhonesInventory.salesQuantity}">Sales Quantity</td>
@@ -69,6 +71,7 @@
 	<br/>
 	<br/> -->
 	<a href="/"><button type="button">Home</button></a>
+	<a href="/downloadInventoryExcel"><button th:href="@{/downloadInventoryExcel}">Download Excel File</button></a>
 	</div>
 </body>
 </html>

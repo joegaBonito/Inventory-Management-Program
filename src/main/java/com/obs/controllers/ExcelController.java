@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.obs.excel.FileUpload;
 import com.obs.excel.FileUploadValidator;
 import com.obs.services.AccessoryInventoryService;
+import com.obs.services.MasterService;
 import com.obs.services.OrdersExcelImportService;
 import com.obs.services.PhoneInventoryService;
 import com.obs.services.UpsService;
@@ -30,20 +31,27 @@ public class ExcelController {
 	private OrdersExcelImportService ordersExcelImportService;
 	private AccessoryInventoryService accessoryInventoryService;
 	private PhoneInventoryService phoneInventoryService;
+	private MasterService masterService;
 	
 	@Autowired
 	public ExcelController(UpsService upsService, FileUploadValidator fileValidator, OrdersExcelImportService ordersExcelImportService, 
-			AccessoryInventoryService accessoryInventoryService, PhoneInventoryService phoneInventoryService) {
+			AccessoryInventoryService accessoryInventoryService, PhoneInventoryService phoneInventoryService, MasterService masterService) {
 		this.upsService = upsService;
 		this.fileValidator = fileValidator;
 		this.ordersExcelImportService = ordersExcelImportService;
 		this.accessoryInventoryService = accessoryInventoryService;
 		this.phoneInventoryService = phoneInventoryService;
+		this.masterService = masterService;
 	}
 	
-	@RequestMapping("/downloadExcel")
-	public ModelAndView excelDownload() {
+	@RequestMapping(value= "/downloadOrderExcel",method=RequestMethod.GET)
+	public ModelAndView excelOrderDownload() {
 		return new ModelAndView("ordersExcelExport","upsOrders",upsService.list());
+	}
+	
+	@RequestMapping(value="/downloadInventoryExcel",method=RequestMethod.GET)
+	public ModelAndView excelInventoryDownload() {
+		return new ModelAndView("inventoryExcelExport","masters",masterService.list());
 	}
 	 
 	 @RequestMapping(value="/submitFileUpload", method=RequestMethod.POST)  

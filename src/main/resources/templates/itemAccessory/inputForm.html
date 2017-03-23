@@ -14,14 +14,14 @@
 			<input type="hidden" th:field="*{itemAccessoryId}" />
 			<input type="hidden" th:field="*{accessoryInventory.accessoryInventoryId}"/>
 			<div th:class="form-group" th:classappend="${#fields.hasErrors('productId')}? 'has-error'">
-				<label class="col-sm-2 control-label">productId <span class="required">*</span></label>
+				<label class="col-sm-2 control-label">Product Id <span class="required">*</span></label>
 				<div class="col-md-10">
 					<input type="text" class="form-control" th:field="*{productId}"/>
 					<span th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}" th:class="help-block">Product Id Errors</span>
 				</div>
 			</div>
 			<div th:class="form-group" th:classappend="${#fields.hasErrors('productName')}? 'has-error'">
-		    	<label class="col-sm-2 control-label">productName <span class="required">*</span></label>
+		    	<label class="col-sm-2 control-label">Product Name <span class="required">*</span></label>
 		    	<div class="col-md-10">
 		    		<input type="text" class="form-control" th:field="*{productName}" />
 		    		<span th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}" th:class="help-block">Product Name Errors</span>

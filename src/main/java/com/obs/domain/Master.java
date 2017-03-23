@@ -15,7 +15,7 @@ public class Master {
 	@Id
 	@GeneratedValue
 	@Column(name="id")
-	private int id;
+	private Long id;
 	
 	@OneToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="accessory")
@@ -27,18 +27,18 @@ public class Master {
 
 	public Master() {}
 	
-	public Master(int id, ItemAccessory accessory, ItemUnlockedPhone phone) {
+	public Master(Long id, ItemAccessory accessory, ItemUnlockedPhone phone) {
 		super();
 		this.id = id;
 		this.accessory = accessory;
 		this.phone = phone;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

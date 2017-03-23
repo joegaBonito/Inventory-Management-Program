@@ -118,6 +118,10 @@ public class MasterService {
 		return temp;
 	}
 
+	public Master getMasterById(long id) {
+		return masterRepository.findOne(id);
+	}
+
 
 	
 }

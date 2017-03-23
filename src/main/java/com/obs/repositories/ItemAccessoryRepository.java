@@ -13,5 +13,4 @@ public interface ItemAccessoryRepository extends CrudRepository<ItemAccessory,Lo
 	List<ItemAccessory> findByOrderByProductId();
 
 	List<ItemAccessory> findByOrderByProductName();
-	
 }

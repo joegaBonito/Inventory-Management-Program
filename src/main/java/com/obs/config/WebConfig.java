@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
@@ -24,7 +23,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	 * This allows dependency injection.
 	 * Here, Map<Date,Integer> can be used globally.
 	 */
-	
 	@Bean
 	public Map<Date, Integer> myMap() {
 	    final Map<Date, Integer> myMap = new HashMap<Date,Integer>();
