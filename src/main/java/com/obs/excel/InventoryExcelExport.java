@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsView;
 
 import com.obs.domain.Master;
 
+@Component
 public class InventoryExcelExport extends AbstractXlsView {
 
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		// change the file name
-        response.setHeader("Content-Disposition", "attachment; filename=\"LG.COM Inventory.xls\"");
+		String filename="LG.COM Inventory.xls";
+        response.setHeader("Content-Disposition", "inline; filename="+filename+";");
 
         @SuppressWarnings("unchecked")
         List<Master> masters = (List<Master>) model.get("masters");
