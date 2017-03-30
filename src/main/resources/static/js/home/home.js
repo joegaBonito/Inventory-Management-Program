@@ -5,8 +5,6 @@ $(window).on("load",function() {
 		collapsible: true,
 		active:false
 	});
-	
-	
 });
 
 

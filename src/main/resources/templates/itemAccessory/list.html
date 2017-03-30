@@ -1,29 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" 
-	xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
 	layout:decorator="layout/main">
 <head>
-	<title>OBS</title>
-	<link href="../static/css/item/list.css" th:href="@{/css/item/list.css}"  rel='stylesheet' type='text/css'/>	
+<title>OBS</title>
+<link href="../static/css/item/list.css" th:href="@{/css/item/list.css}"
+	rel='stylesheet' type='text/css' />
 </head>
 <body>
-<div layout:fragment="content">
-	<table id="itemAccessoryTable">
-		<thead>
-			<tr>
-				<td>Product ID</td>
-				<td>Product Name</td>
-				<td>Purchase Price</td>
-				<td>Sales Price</td>
-				<td>Length</td>
-				<td>Height</td>
-				<td>Width</td>
-				<td>Weight</td>
-				<td>Edit</td>
-				<td>Delete</td>
-			</tr>
-		</thead>
-		<tbody>
+	<div layout:fragment="content">
+		<h2>Accessory Item List</h2>
+		<table id="itemAccessoryTable">
+			<thead>
+				<tr>
+					<td>Product ID</td>
+					<td>Product Name</td>
+					<td>Purchase Price</td>
+					<td>Sales Price</td>
+					<td>Length</td>
+					<td>Height</td>
+					<td>Width</td>
+					<td>Weight</td>
+					<td>Edit</td>
+					<td>Delete</td>
+				</tr>
+			</thead>
+			<tbody>
 			<tbody>
 				<tr th:each="itemAccessory : ${itemAccessories}">
 					<td th:text="${itemAccessory.productId}">Product ID</td>
@@ -34,15 +35,18 @@
 					<td th:text="${itemAccessory.accHeight}">Height</td>
 					<td th:text="${itemAccessory.accWidth}">Width</td>
 					<td th:text="${itemAccessory.accWeight}">Weight</td>
-					<td><a href="#" th:href="@{/itemAccessory/edit/} + ${itemAccessory.itemAccessoryId}">Edit</a></td>
-					<td><a href="#" th:href="@{/itemAccessory/delete/} + ${itemAccessory.itemAccessoryId}">Delete</a></td>
+					<td><a href="#"
+						th:href="@{/itemAccessory/edit/} + ${itemAccessory.itemAccessoryId}">Edit</a></td>
+					<td><a href="#"
+						th:href="@{/itemAccessory/delete/} + ${itemAccessory.itemAccessoryId}">Delete</a></td>
 				</tr>
 			</tbody>
-		</tbody>
-	</table>
-	<br/>
-	<a href="/"><button type="button">Home</button></a>
-	<a href="/itemAccessory/create"><button th:href="@{/itemAccessory/create}" type="button">Add a new item</button></a>
-</div>
+			</tbody>
+		</table>
+		<br /> <a href="/"><button type="button">Home</button></a> <a
+			href="/itemAccessory/create"><button
+				th:href="@{/itemAccessory/create}" type="button">Add a new
+				item</button></a>
+	</div>
 </body>
 </html>

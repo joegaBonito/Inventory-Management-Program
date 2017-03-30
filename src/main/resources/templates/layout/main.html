@@ -1,27 +1,62 @@
 <!DOCTYPE html>
-<html lang="en"
-	xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"></link>
-	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"></link>
-	<title>Online Brand Shop</title>	
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"></link>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+	integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+	crossorigin="anonymous" />
+<link rel="stylesheet" href="../static/css/main/main.css" th:href="@{/css/main/main.css}" />
+<title>Online Brand Shop</title>
 </head>
-	<body style="display:none">
-	
-	<div layout:fragment="content">
-	</div>
+<body style="display: none">
+	<div class="container">
+		<!-- <div id="google_translate_element"></div> -->
+		<div class="float-right">
+			<span class="glyphicon glyphicon-user"></span>
+			<form sec:authorize="isAuthenticated()" id="frmlogout"
+				th:action="@{/logout}" method="post" class="form-inline">
+				<span sec:authentication="name">Guest</span> | <a
+					href="javascript:{}"
+					onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
+			</form>
+			<!-- <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span
+				class="glyphicon glyphicon-log-in"></span> Login</a> -->
+		</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="/js/home/home.js"></script>
-<script type="text/javascript" src="/js/ups/list.js"></script>
-<script type="text/javascript" src="/js/master/master.js"></script>
-<script type="text/javascript" src="/js/accessory/accessory.js"></script>
+		<div layout:fragment="content"></div>
+
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="/js/home/home.js"></script>
+	<script type="text/javascript" src="/js/ups/list.js"></script>
+	<script type="text/javascript" src="/js/master/master.js"></script>
+	<script type="text/javascript" src="/js/accessory/accessory.js"></script>
+	<script type="text/javascript" src="/js/auth/auth.js"></script>
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement({
+				pageLanguage : 'en',
+				layout : google.translate.TranslateElement.InlineLayout.SIMPLE,
+				autoDisplay : false
+			}, 'google_translate_element');
+		}
+	</script>
+	<script type="text/javascript"
+		src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
