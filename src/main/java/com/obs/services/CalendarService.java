@@ -14,8 +14,8 @@ public class CalendarService {
 	 * Getting all days for a specific month
 	 */
 	public List<Date> getAllDays() {
-		  Calendar cal = new GregorianCalendar(2017,2,31);
-		  cal.set(Calendar.MONTH, 2);  //Controls Month
+		  Calendar cal = new GregorianCalendar(2017,1,31);
+		  cal.set(Calendar.MONTH, Calendar.getInstance().get(Calendar.MONTH));  //Controls Month.
 		  cal.set(Calendar.DAY_OF_MONTH, 1);
 		  int maxDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		  List<Date> calTemp = new ArrayList<Date>();

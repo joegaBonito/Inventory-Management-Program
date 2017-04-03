@@ -12,7 +12,9 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsView;
 
+import com.obs.domain.AccessoryReceivedQuantity;
 import com.obs.domain.Master;
+import com.obs.domain.PhonesReceivedQuantity;
 
 @Component
 public class InventoryExcelExport extends AbstractXlsView {
@@ -20,6 +22,7 @@ public class InventoryExcelExport extends AbstractXlsView {
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		
 		// change the file name
 		String filename="LG.COM Inventory.xls";
         response.setHeader("Content-Disposition", "inline; filename="+filename+";");
@@ -28,9 +31,9 @@ public class InventoryExcelExport extends AbstractXlsView {
         List<Master> masters = (List<Master>) model.get("masters");
 
         // create excel xls sheet
-        Sheet sheet3 = workbook.createSheet("Master Inventory List");
         Sheet sheet1 = workbook.createSheet("Mobile Accessory Inventory List");
         Sheet sheet2 = workbook.createSheet("Unlocked Phone Inventory List");
+        Sheet sheet3 = workbook.createSheet("Master Inventory List");
         
      // create sheet1 header row
         Row header1 = sheet1.createRow(0);
@@ -95,7 +98,7 @@ public class InventoryExcelExport extends AbstractXlsView {
         	}
         }
         
-     // create sheet2 header row
+     // create sheet3 header row
         Row header3 = sheet3.createRow(0);
         header3.createCell(0).setCellValue("LG.COM Product ID");
         header3.createCell(1).setCellValue("Product Name");
@@ -109,7 +112,7 @@ public class InventoryExcelExport extends AbstractXlsView {
         header3.createCell(9).setCellValue("Current Inventory");
         
 
-        // Create data cells for sheet2
+        // Create data cells for sheet3
         int rowCount3 = 1;
         for (Master master : masters){
         	if(master.getPhone() == null) {
