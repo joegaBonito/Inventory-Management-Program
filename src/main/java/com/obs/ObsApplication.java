@@ -9,15 +9,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-//@ImportResource recognizes XML configuration.
-@ImportResource("classpath:/views.xml") 
+// @ImportResource recognizes XML configuration.
+@ImportResource("classpath:/views.xml")
 public class ObsApplication extends SpringBootServletInitializer {
 
-	 @Override
-	    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-	        return application.sources(ObsApplication.class);
-	    }
-	
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(ObsApplication.class);
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(ObsApplication.class, args);
 	}

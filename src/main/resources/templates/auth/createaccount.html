@@ -19,46 +19,65 @@
 					</div>
 					<div class="row">
 						<div class="col-lg-6">
-							<div th:class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+							<div th:class="form-group"
+								th:classappend="${#fields.hasErrors('email')}? 'has-error'">
 								<label for="inputEmail" class="col-lg-6">Email*</label>
 								<div class="col-lg-10">
 									<input type="text" th:field="*{email}" class="form-control"
-										id="inputEmail" placeholder="Email"></input>
-									<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:class="help-block">Email Errors</span>
+										id="inputEmail" placeholder="Email"></input> <span
+										th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+										th:class="help-block">Email Errors</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div th:class="form-group">
+								<label for="inputEmail" class="col-lg-6">Name</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" placeholder="Name"></input>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-6">
-							<div th:class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
-								<label for="inputPassword" class="col-lg-6">Password</label>
+						<div class="col-lg-6">
+							<div th:class="form-group"
+								th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+								<label for="inputPassword" class="col-lg-6">Password*</label>
 								<div class="col-lg-10">
 									<input type="password" th:field="*{password}"
 										class="form-control" id="inputPassword" placeholder="Password"></input>
-										<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:class="help-block">Password Errors</span>
-										<div style="color:red;" id="divCheckPasswordMatch"></div>
+									<span th:if="${#fields.hasErrors('password')}"
+										th:errors="*{password}" th:class="help-block">Password
+										Errors</span>
+									<div style="color: red;" id="divCheckPasswordMatch"></div>
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6">
-							<div th:class="form-group" th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error'">
-								<label for="inputConfirmPassword" class="col-lg-6">Confirm Password</label>
+						<div class="col-lg-6">
+							<div th:class="form-group"
+								th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error'">
+								<label for="inputConfirmPassword" class="col-lg-6">Confirm
+									Password*</label>
 								<div class="col-lg-10">
 									<input type="password" th:field="*{confirmPassword}"
 										class="form-control" id="inputConfirmPassword"
-										placeholder="Confirm Password"></input>
-									<span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" th:class="help-block">Confirm Password Errors</span>
+										placeholder="Confirm Password"></input> <span
+										th:if="${#fields.hasErrors('confirmPassword')}"
+										th:errors="*{confirmPassword}" th:class="help-block">Confirm
+										Password Errors</span>
 								</div>
 							</div>
 						</div>
-						
+
 					</div>
 					<div class="row">
-						<div class="col-sm-4 col-sm-offset-4">
-							<div class="form-group">
-								<button type="submit" class="btn btn-primary">Submit</button>
-								<a href="/"><button type="button" class="btn btn-default">Back</button></a>
+						<div class="col-lg-6">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary">Submit</button>
+									<a href="/"><button type="button" class="btn btn-default">Back</button></a>
+								</div>
 							</div>
 						</div>
 					</div>

@@ -7,8 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="member")
@@ -18,12 +18,18 @@ public class Member {
 	@Column(name="id")
 	private Long id;
 	
+	@NotNull(message="Email is required")
+	@Size(min=1, message="Email is required")
 	@Column(name="email")
 	private String email;
 	
+	@NotNull(message="Password is required")
+	@Size(min=1, message="Password is required")
 	@Column(name="password")
 	private String password;
 	
+	@NotNull(message="Confirming Password is required")
+	@Size(min=1, message="Confirming Password is required")
 	@Column(name="confirm_password")
 	private String confirmPassword;
 	
