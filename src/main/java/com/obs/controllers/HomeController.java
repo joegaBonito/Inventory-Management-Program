@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-	@Secured({"ROLE_USER","ROLE_ADMIN"})
+	@Secured({"ROLE_GUEST","ROLE_USER","ROLE_ADMIN"})
 	@RequestMapping("/")
 	public String index(Model model) {
 		return "index";

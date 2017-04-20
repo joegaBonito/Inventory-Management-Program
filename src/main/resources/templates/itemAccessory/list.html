@@ -20,8 +20,8 @@
 					<td>Height</td>
 					<td>Width</td>
 					<td>Weight</td>
-					<td>Edit</td>
-					<td>Delete</td>
+					<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Edit</td>
+					<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Delete</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,16 +35,16 @@
 					<td th:text="${itemAccessory.accHeight}">Height</td>
 					<td th:text="${itemAccessory.accWidth}">Width</td>
 					<td th:text="${itemAccessory.accWeight}">Weight</td>
-					<td><a href="#"
-						th:href="@{/itemAccessory/edit/} + ${itemAccessory.itemAccessoryId}">Edit</a></td>
-					<td><a href="#"
-						th:href="@{/itemAccessory/delete/} + ${itemAccessory.itemAccessoryId}">Delete</a></td>
+					<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a href="#"
+						th:href="@{/itemAccessory/edit/} + ${itemAccessory.itemAccessoryId}" >Edit</a></td>
+					<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a href="#"
+						th:href="@{/itemAccessory/delete/} + ${itemAccessory.itemAccessoryId}" >Delete</a></td>
 				</tr>
 			</tbody>
 			</tbody>
 		</table>
 		<br /> <a href="/"><button type="button">Home</button></a> <a
-			href="/itemAccessory/create"><button
+			href="/itemAccessory/create" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><button
 				th:href="@{/itemAccessory/create}" type="button">Add a new
 				item</button></a>
 	</div>

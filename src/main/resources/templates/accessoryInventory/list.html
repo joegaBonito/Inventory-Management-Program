@@ -22,7 +22,7 @@
 				<td>Sales Quantity</td>
 				<td>Inventory Amount</td>
 				<td>Current Inventory</td>
-				<td>Input Received Item</td>
+				<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Input Received Item</td>
 			</tr>
 		</thead>
 			<tbody>
@@ -37,7 +37,7 @@
 					<td th:text="${itemAccessory.accessoryInventory.salesQuantity}">Sales Quantity</td>
 					<td th:text="${#numbers.formatDecimal(itemAccessory.accessoryInventory.currentInventoryAmount, 0 ,2)}">Inventory Amount</td>
 					<td th:text="${itemAccessory.accessoryInventory.currentInventory}">Current Inventory</td>
-					<td><a href="#" th:href="@{/accessoryInventory/inputReceivedItem/save/} + ${itemAccessory.itemAccessoryId}">Input Received Item</a></td>
+					<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a href="#" th:href="@{/accessoryInventory/inputReceivedItem/save/} + ${itemAccessory.itemAccessoryId}">Input Received Item</a></td>
 				</tr>
 			</tbody>
 	</table>

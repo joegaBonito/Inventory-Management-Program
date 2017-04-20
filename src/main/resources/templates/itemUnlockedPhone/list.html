@@ -20,8 +20,8 @@
 					<td>Height</td>
 					<td>Width</td>
 					<td>Weight</td>
-					<td>Edit</td>
-					<td>Delete</td>
+					<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Edit</td>
+					<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Delete</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,16 +36,16 @@
 					<td th:text="${itemUnlockedPhone.upHeight}">Height</td>
 					<td th:text="${itemUnlockedPhone.upWidth}">Width</td>
 					<td th:text="${itemUnlockedPhone.upWeight}">Weight</td>
-					<td><a href="#"
-						th:href="@{/itemUnlockedPhone/edit/} + ${itemUnlockedPhone.itemUnlockedPhoneId}">Edit</a></td>
-					<td><a href="#"
+					<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a href="#"
+						th:href="@{/itemUnlockedPhone/edit/} + ${itemUnlockedPhone.itemUnlockedPhoneId}" >Edit</a></td>
+					<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a href="#"
 						th:href="@{/itemUnlockedPhone/delete/} + ${itemUnlockedPhone.itemUnlockedPhoneId}">Delete</a></td>
 				</tr>
 			</tbody>
 			</tbody>
 		</table>
-		<br /> <a href="/"><button type="button">Home</button></a> <a
-			href="/itemUnlockedPhone/create"><button
+		<br /> <a href="/"><button type="button">Home</button></a> 
+		<a href="/itemUnlockedPhone/create" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><button
 				th:href="@{/itemUnlockedPhone/create}" type="button">Add a
 				new item</button></a>
 	</div>
