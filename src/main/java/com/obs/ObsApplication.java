@@ -5,12 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
 // @ImportResource recognizes XML configuration.
-@ImportResource("classpath:/views.xml")
+@ImportResource("classpath:/WEB-INF/views.xml")
 public class ObsApplication extends SpringBootServletInitializer {
 
 	@Override
