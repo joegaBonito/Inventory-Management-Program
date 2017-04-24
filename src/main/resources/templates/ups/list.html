@@ -10,6 +10,9 @@
 </head>
 <body>
 <div layout:fragment="content">	
+<div class="container">
+			<div class="row">
+				<div class="col-ls-12">
 	<table>
 		<thead>
 			<tr>
@@ -65,9 +68,8 @@
 					<td th:text="${upsOrder.upsWeight}">Weight</td>
 					<td th:text="${upsOrder.country}">Country</td>
 					<td th:text="${upsOrder.customerName}">Customer Name</td>
-			
-					<td><a href="#" th:href="@{/ups/edit/} + ${upsOrder.systemId}">Edit</a></td>
-					<td><a href="#" th:href="@{/ups/delete/} + ${upsOrder.systemId}">Delete</a></td>
+					<td  sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a href="#" th:href="@{/ups/edit/} + ${upsOrder.systemId}">Edit</a></td>
+					<td  sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a href="#" th:href="@{/ups/delete/} + ${upsOrder.systemId}">Delete</a></td>
 				</tr>
 			</tbody>
 	</table>
@@ -92,17 +94,17 @@
         	</li>
     	</ul>
 	</div>
-	<label>(Upload File Name "MOBILE SALES TO DATE - Real Time Cust Trans Dtl.xls")</label>
-	<form th:field="${uploadedFile}" method="post" th:action="@{/submitFileUpload}" enctype="multipart/form-data">
+	<label sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">(Upload File Name "MOBILE SALES TO DATE - Real Time Cust Trans Dtl.xls")</label>
+	<form th:field="${uploadedFile}" method="post" th:action="@{/submitFileUpload}" enctype="multipart/form-data"  sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
             <input name="file" type="file"/><br/>
             <input type="submit" value="Upload"/>
     </form>
     <br/>
 	<a href="/"><button type="button">Home</button></a>
-	<a href="/ups/create"><button th:href="@{/ups/create}" type="button">Add a new order</button></a>
-	<a href="/downloadOrderExcel"><button th:href="@{/downloadOrderExcel}">Download Excel File</button></a>
-	<a href="/ups/deleteAll"><button th:href="@{/ups/deleteAll}">Delete all rows</button></a>
-	
+	<a href="/ups/create"><button th:href="@{/ups/create}" type="button" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Add a new order</button></a>
+	<a href="/downloadOrderExcel"><button th:href="@{/downloadOrderExcel}" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Download Excel File</button></a>
+	<a href="/ups/deleteAll"><button th:href="@{/ups/deleteAll}" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Delete all rows</button></a>
+	</div></div></div>
 	</div>
 </body>
 </html>

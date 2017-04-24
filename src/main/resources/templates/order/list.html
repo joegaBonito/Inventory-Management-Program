@@ -8,6 +8,9 @@
 </head>
 <body>
 <div layout:fragment="content">
+<div class="container">
+			<div class="row">
+				<div class="col-xs-6">
 	<table>
 		<thead>
 			<tr>
@@ -30,9 +33,11 @@
 			</tbody>
 		</tbody>
 	</table>
+
 	<br/>
 	<a href="/"><button type="button">Home</button></a>
 	<a href="/order/create"><button th:href="@{/order/create}" type="button">Add another order</button></a>
 	</div>
+	</div></div></div>
 </body>
 </html>

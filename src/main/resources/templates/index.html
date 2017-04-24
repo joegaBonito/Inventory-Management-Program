@@ -8,6 +8,9 @@
 </head>
 <body style="display:none">
 	<div layout:fragment="content">
+	<div class="container">
+			<div class="row">
+				<div class="col-lg-10">
 	<h1 id="mainPage">Online Brand Shop</h1>
 	<div id="accordion">
 		<h3>Manage Item List</h3>
@@ -21,9 +24,11 @@
 		<div id="phoneInventoryLink"><a href="/unlockedPhonesInventory/list" th:href="@{/unlockedPhonesInventory/list}">Unlocked Phones Inventory</a></div>
 		<div id="masterLink"><a href="/master/list" th:href="@{/master/list}">Master Inventory</a></div>
 		</div>
-		<h3>Input Orders</h3>
-		<div id="upsOrderLink"><a href="/ups/list" th:href="@{/ups/list}">UPS Order Lists</a></div>
+		<h3>Order Details</h3>
+		<div id="upsOrderLink"><a href="/ups/list" th:href="@{/ups/list}">Manage Incoming Orders</a></div>
 	</div>
+	</div>
+	</div></div>
 	</div>
 	
 </body>

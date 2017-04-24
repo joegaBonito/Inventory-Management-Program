@@ -31,15 +31,15 @@ table, th, td{
     border: 1px solid black;
 }
 
-#phoneInventoryTable {
+/* #phoneInventoryTable {
 	border: 1px solid black;
 	table-layout: fixed;
-	width:78rem;
+	 width: 50rem;
 }
 #phoneInventoryTable th, #phoneInventoryTable td {
     border: 1px solid black;
-    width: 5rem;
-}
+    width: 2rem;
+} */
 
 #phoneDateTable {
 	border: 1px solid black;
