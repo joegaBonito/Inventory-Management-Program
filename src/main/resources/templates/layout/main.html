@@ -14,31 +14,71 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
 	integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
 	crossorigin="anonymous" />
-<link rel="stylesheet" href="../static/css/main/main.css" th:href="@{/css/main/main.css}" />
+<link rel="stylesheet" href="../static/css/main/main.css"
+	th:href="@{/css/main/main.css}" />
 <title>Online Brand Shop</title>
 </head>
 <body style="display: none">
 	<div class="container">
-	<div class="row">
-		<div class="col-lg-12 col-lg-offset-12">
-		<!-- <div id="google_translate_element"></div> -->
-		<div class="float-right">
-			<span class="glyphicon glyphicon-user"></span>
-			<form sec:authorize="isAuthenticated()" id="frmlogout"
-				th:action="@{/logout}" method="post" class="form-inline">
-				<span sec:authentication="name">Guest</span> | <a
-					href="javascript:{}"
-					onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
-			</form>
-			<!-- <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span
-				class="glyphicon glyphicon-log-in"></span> Login</a> -->
-		</div>
-		</div>
-		</div>
+		<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#obs-nav-dropdown"
+				aria-controls="obs-nav-dropdown" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="navbar-brand" href="/">OBS</a>
+			<div class="collapse navbar-collapse" id="obs-nav-dropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+					<li class="nav-item dropdown active" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
+						<a class="nav-link dropdown-toggle" id="obs-nav-dropdown-menulink"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" role="button">
+							Manage Item List </a>
+						<div class="dropdown-menu" aria-labelledby="obs-nav-dropdown-menulink">
+							<a class="dropdown-item" href="/itemAccessory/list"	th:href="@{/itemAccessory/list}">Accessory Item List</a> 
+							<a class="dropdown-item" href="/itemUnlockedPhone/list" th:href="@{/itemUnlockedPhone/list}">Unlocked Phone Item List</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown active" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
+						<a class="nav-link dropdown-toggle" id="obs-nav-dropdown-menulink"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" role="button">
+							Item Inventory </a>
+						<div class="dropdown-menu" aria-labelledby="obs-nav-dropdown-menulink">
+							<a class="dropdown-item" href="/accessoryInventory/list"
+									th:href="@{/accessoryInventory/list}">Accessory Inventory</a>
+							<a class="dropdown-item" href="/unlockedPhonesInventory/list"
+									th:href="@{/unlockedPhonesInventory/list}">Unlocked Phones
+									Inventory</a>
+									<a class="dropdown-item" href="/master/list" th:href="@{/master/list}">Master
+									Inventory</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown active" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
+						<a class="nav-link dropdown-toggle" id="obs-nav-dropdown-menulink"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" role="button">
+							Order Details</a>
+						<div class="dropdown-menu" aria-labelledby="obs-nav-dropdown-menulink">
+							<a class="dropdown-item" href="/ups/list" th:href="@{/ups/list}">Manage Incoming
+								Orders</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="navbar-text navbar-right">
+					<span sec:authentication="name">Guest</span>
+					<form class="form-inline" sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post">
+						<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;"><span>Logout</span></a>
+					</form>
+			</div>
+		</nav>
 
 		<div layout:fragment="content"></div>
 
 	</div>
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script

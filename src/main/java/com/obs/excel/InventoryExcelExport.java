@@ -12,9 +12,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsView;
 
-import com.obs.domain.AccessoryReceivedQuantity;
 import com.obs.domain.Master;
-import com.obs.domain.PhonesReceivedQuantity;
 
 @Component
 public class InventoryExcelExport extends AbstractXlsView {
