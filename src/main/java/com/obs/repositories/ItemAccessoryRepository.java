@@ -2,6 +2,8 @@ package com.obs.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +15,6 @@ public interface ItemAccessoryRepository extends CrudRepository<ItemAccessory,Lo
 	List<ItemAccessory> findByOrderByProductId();
 
 	List<ItemAccessory> findByOrderByProductName();
+
+	Page<ItemAccessory> findAll(Pageable pageable);
 }

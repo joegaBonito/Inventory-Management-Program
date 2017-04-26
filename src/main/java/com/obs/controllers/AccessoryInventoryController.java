@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.obs.domain.ItemAccessory;
+import com.obs.domain.UpsOrder;
 import com.obs.services.AccessoryInventoryService;
 import com.obs.services.AccessoryReceivedQuantityService;
 import com.obs.services.CalendarService;
@@ -36,12 +40,28 @@ public class AccessoryInventoryController {
 		this.calendarService = calendarService;
 	}
 	
-	@RequestMapping("/accessoryInventory/list")
+	/*
+	 * Replaced by Pageable List View below.
+	 */
+/*	@RequestMapping("/accessoryInventory/list")
 	public String inventoryList(Model model) {
 		List<Date> days = calendarService.getAllDays();
 		model.addAttribute("days",days);
 		model.addAttribute("accessoryReceivedQuantities",accessoryReceivedQuantityService.list());
 		model.addAttribute("itemAccessories", itemAccessoryService.productNameList());
+		return "/accessoryInventory/list";
+	}*/
+	
+	@RequestMapping("/accessoryInventory/list")
+	public String inventoryPagination(Model model, @PageableDefault(value = 5) Pageable pageable) {
+		/*
+		 * By changing List<?> to Page<?>, the upsOrders variable now has the pagination ability.
+		 */
+		List<Date> days = calendarService.getAllDays();
+		model.addAttribute("days",days);
+		model.addAttribute("accessoryReceivedQuantities",accessoryReceivedQuantityService.list());
+		Page<ItemAccessory> itemAccessories = itemAccessoryService.findAll(pageable);
+		model.addAttribute("itemAccessories", itemAccessories);
 		return "/accessoryInventory/list";
 	}
 	
@@ -63,5 +83,7 @@ public class AccessoryInventoryController {
 		accessoryInventoryService.setCurrentInventory(itemAccessory);
 		model.addAttribute("itemAccessories", itemAccessoryService.productNameList());
 		return "redirect:/accessoryInventory/list";
-	}	
+	}
+	
+
 }

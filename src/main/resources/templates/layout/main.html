@@ -30,8 +30,8 @@
 			<a class="navbar-brand" href="/">OBS</a>
 			<div class="collapse navbar-collapse" id="obs-nav-dropdown">
 				<ul class="navbar-nav">
-					<li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
-					<li class="nav-item dropdown active" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
+					<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+					<li class="nav-item dropdown" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
 						<a class="nav-link dropdown-toggle" id="obs-nav-dropdown-menulink"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" role="button">
 							Manage Item List </a>
@@ -40,7 +40,7 @@
 							<a class="dropdown-item" href="/itemUnlockedPhone/list" th:href="@{/itemUnlockedPhone/list}">Unlocked Phone Item List</a>
 						</div>
 					</li>
-					<li class="nav-item dropdown active" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
+					<li class="nav-item dropdown" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
 						<a class="nav-link dropdown-toggle" id="obs-nav-dropdown-menulink"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" role="button">
 							Item Inventory </a>
@@ -54,7 +54,7 @@
 									Inventory</a>
 						</div>
 					</li>
-					<li class="nav-item dropdown active" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
+					<li class="nav-item dropdown" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
 						<a class="nav-link dropdown-toggle" id="obs-nav-dropdown-menulink"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" role="button">
 							Order Details</a>
@@ -65,20 +65,21 @@
 					</li>
 				</ul>
 			</div>
-			<div class="navbar-text navbar-right">
-					<span sec:authentication="name">Guest</span>
-					<form class="form-inline" sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post">
-						<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;"><span>Logout</span></a>
+			<div class="navbar-text navbar-right" style="white-space:nowrap;">
+					
+					<form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" style="white-space:nowrap;">
+						<span  sec:authentication="name" style="white-space:nowrap;">Guest</span> &nbsp;|&nbsp;
+						<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
 					</form>
 			</div>
 		</nav>
 
-		<div layout:fragment="content"></div>
+		<div layout:fragment="content" style="background:#e9ecf0;"></div>
 
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script
@@ -90,15 +91,7 @@
 	<script type="text/javascript" src="/js/master/master.js"></script>
 	<script type="text/javascript" src="/js/accessory/accessory.js"></script>
 	<script type="text/javascript" src="/js/auth/auth.js"></script>
-	<script type="text/javascript">
-		function googleTranslateElementInit() {
-			new google.translate.TranslateElement({
-				pageLanguage : 'en',
-				layout : google.translate.TranslateElement.InlineLayout.SIMPLE,
-				autoDisplay : false
-			}, 'google_translate_element');
-		}
-	</script>
+	<script type="text/javascript" src="/js/item/list.js"></script>
 	<script type="text/javascript"
 		src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 

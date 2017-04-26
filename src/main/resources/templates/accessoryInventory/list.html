@@ -81,8 +81,33 @@
 						</tbody>
 					</table>
 					<br/>
-							<a href="/"><button type="button">Home</button></a>
-							<br/><br/>
+					<nav class="Page navigation table-pagination" th:if="${itemAccessories.totalPages}">
+						<ul class="pagination">
+							<li class="page-item" th:class="${itemAccessories.number == 0} ? 'disabled' : ''">
+								<a class="page-link" th:if="${!itemAccessories.first}"
+								th:href="@{${'/accessoryInventory/list'}(page=${itemAccessories.number-1},size=${itemAccessories.size})}">&larr;
+									Previous</a> <a th:if="${itemAccessories.first}"
+								href="javascript:void(0);">&larr; Previous</a>
+							</li>
+
+							<li class="page-item"
+								th:each="pageNo : ${#numbers.sequence(0, itemAccessories.totalPages - 1)}"
+								th:class="${itemAccessories.number == pageNo} ? 'active' : ''">
+								<a class="page-link" th:if="${itemAccessories.number == pageNo}" href="javascript:void(0);"> <span th:text="${pageNo + 1}"></span>
+							</a> <a th:if="${!(itemAccessories.number == pageNo)}"
+								th:href="@{${'/accessoryInventory/list'}(page=${pageNo},size=${itemAccessories.size})}">
+									<span th:text="${pageNo + 1}"></span>
+							</a>
+							</li>
+							<li class="page-item"
+								th:class="${itemAccessories.number + 1 >= itemAccessories.totalPages} ? 'disabled' : ''">
+								<a class="page-link" th:if="${!itemAccessories.last}" th:href="@{${'/accessoryInventory/list'}(page=${itemAccessories.number+1},size=${itemAccessories.size})}">Next
+									&rarr;</a> <a th:if="${itemAccessories.last}" href="javascript:void(0);">Next &rarr;</a>
+							</li>
+						</ul>
+					</nav>
+					<br /> <a href="/"><button type="button">Home</button></a> <br />
+					<br />
 				</div>
 			</div>
 		</div>

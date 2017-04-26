@@ -88,6 +88,32 @@
 							</tr>
 						</tbody>
 					</table>
+					<br/>
+					<nav class="Page navigation table-pagination" th:if="${itemUnlockedPhones.totalPages}">
+						<ul class="pagination">
+							<li class="page-item" th:class="${itemUnlockedPhones.number == 0} ? 'disabled' : ''">
+								<a class="page-link" th:if="${!itemUnlockedPhones.first}"
+								th:href="@{${'/unlockedPhonesInventory/list'}(page=${itemUnlockedPhones.number-1},size=${itemUnlockedPhones.size})}">&larr;
+									Previous</a> <a th:if="${itemUnlockedPhones.first}"
+								href="javascript:void(0);">&larr; Previous</a>
+							</li>
+
+							<li class="page-item"
+								th:each="pageNo : ${#numbers.sequence(0, itemUnlockedPhones.totalPages - 1)}"
+								th:class="${itemUnlockedPhones.number == pageNo} ? 'active' : ''">
+								<a class="page-link" th:if="${itemUnlockedPhones.number == pageNo}" href="javascript:void(0);"> <span th:text="${pageNo + 1}"></span>
+							</a> <a th:if="${!(itemUnlockedPhones.number == pageNo)}"
+								th:href="@{${'/unlockedPhonesInventory/list'}(page=${pageNo},size=${itemUnlockedPhones.size})}">
+									<span th:text="${pageNo + 1}"></span>
+							</a>
+							</li>
+							<li class="page-item"
+								th:class="${itemUnlockedPhones.number + 1 >= itemUnlockedPhones.totalPages} ? 'disabled' : ''">
+								<a class="page-link" th:if="${!itemUnlockedPhones.last}" th:href="@{${'/unlockedPhonesInventory/list'}(page=${itemUnlockedPhones.number+1},size=${itemUnlockedPhones.size})}">Next
+									&rarr;</a> <a th:if="${itemUnlockedPhones.last}" href="javascript:void(0);">Next &rarr;</a>
+							</li>
+						</ul>
+					</nav>
 					<br/><a href="/"><button type="button">Home</button></a>
 					<br/><br/>
 				</div>

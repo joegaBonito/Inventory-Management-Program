@@ -3,6 +3,8 @@ package com.obs.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.obs.domain.ItemUnlockedPhone;
@@ -66,6 +68,10 @@ public class ItemUnlockedPhonesService {
 
 	public List<ItemUnlockedPhone> productNameList() {
 		return itemUnlockedPhonesRepository.findByOrderByProductName();
+	}
+
+	public Page<ItemUnlockedPhone> findAll(Pageable pageable) {
+		return itemUnlockedPhonesRepository.findAll(pageable);
 	}
 
 }
