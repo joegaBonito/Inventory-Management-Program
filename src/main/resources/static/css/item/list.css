@@ -7,13 +7,12 @@ body {
 } */
 
 tr {
-	font-size:.8rem;
-	font-weight:bold;
+	font-size:.7rem;
 }
 
-table, th, td{
+/* table, th, td{
 	border: 1px solid black;
-}
+} */
 
 #accessoryInventoryTable {
 	border: 1px solid black;

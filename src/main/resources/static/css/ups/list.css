@@ -2,19 +2,19 @@ body {
 	background-color:#asdfad;
 }
 
-td {
-	padding-right:.4rem;
-} 
-
-tr {
+table {
 	font-size:.7rem;
-	font-weight:bold;
+	line-height: 10px;
+   	min-height: 10px;
+   	height: 10px;
+   	width:100%;
+	display:inline-table;
 }
-
+/*
 table, th, td {
     border: .4px solid black;
-}
-
+}  
+ */
 .table-pagination {
 	position:relative;
 	text-align:center;

@@ -9,10 +9,9 @@
 <body>
 	<div layout:fragment="content">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
 					<h2>Unlocked Phone Item List</h2>
-					<table>
+					<div class="table-responsive">
+					<table class="table table-striped table-bordered">
 						<thead>
 							<tr>
 								<td>Product ID</td>
@@ -27,7 +26,6 @@
 								<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Delete</td>
 							</tr>
 						</thead>
-						<tbody>
 						<tbody>
 							<tr th:each="itemUnlockedPhone : ${itemUnlockedPhones}">
 								<td th:text="${itemUnlockedPhone.productId}">Product ID</td>
@@ -47,16 +45,14 @@
 									th:href="@{/itemUnlockedPhone/delete/} + ${itemUnlockedPhone.itemUnlockedPhoneId}">Delete</a></td>
 							</tr>
 						</tbody>
-						</tbody>
 					</table>
+					</div>
 					<br /> <a href="/"><button type="button">Home</button></a> <a
 						href="/itemUnlockedPhone/create"
 						sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><button
 							th:href="@{/itemUnlockedPhone/create}" type="button">Add
 							a new item</button></a>
 				</div>
-			</div>
-		</div>
 	</div>
 </body>
 </html>

@@ -1,110 +1,146 @@
 <!DOCTYPE html>
-<html lang="en" 
-	xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:ddl="http://www.thymeleaf.org/dandelion"
-    xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
-    layout:decorator="layout/main">
+	xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+	layout:decorator="layout/main">
 <head>
-	<title>OBS</title>
-	<link href="../static/css/ups/list.css" th:href="@{/css/ups/list.css}"  rel='stylesheet' type='text/css'/>	
+<title>OBS</title>
+<link href="../static/css/ups/list.css" th:href="@{/css/ups/list.css}"
+	rel='stylesheet' type='text/css' />
 </head>
 <body>
-<div layout:fragment="content">	
-<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-	<table>
-		<thead>
-			<tr>
-					<th>Order ID</th>
-					<th>Order Received</th>
-					<th>Product ID</th>
-					<th>Quantity</th>
-					<th>Product Name</th>
-					<th>Shipping Method</th>
-					<th>Name</th>
-					<th>Address 1</th>
-					<th>Address 2</th>
-					<th>City</th>
-					<th>State</th>
-					<th>Zip</th>
-					<th>Phone</th>
-					<th>Residential</th>
-					<th>Service</th>
-					<th>Package Type</th>
-					<th>Bill To</th>
-					<th>Length</th>
-					<th>Height</th>
-					<th>Width</th>
-					<th>Weight</th>
-					<th>Country</th>
-					<th>Customer Name</th>
-					<th>Edit</th>
-					<th>Delete</th>
-			</tr>
-		</thead>
-		<tbody>
-				<tr th:each="upsOrder : ${upsOrders}">
-					<td th:text="${upsOrder.upsOrderId}">Order ID</td>
-					<td th:text="${upsOrder.upsOrderReceived}">Order Received</td>
-					<td th:text="${upsOrder.upsProductId}">Product ID</td>
-					<td th:text="${upsOrder.upsQuantity}">Quantity</td>
-					<td th:text="${upsOrder.upsProductName}">Product Name</td>
-					<td th:text="${upsOrder.upsShippingMethod}">Shipping Method</td>
-					<td th:text="${upsOrder.upsFname} + ' ' + ${upsOrder.upsLname}">Name</td>
-					<td th:text="${upsOrder.address1}">Address 1</td>
-					<td th:text="${upsOrder.address2}">Address 2</td>
-					<td th:text="${upsOrder.city}">City</td>
-					<td th:text="${upsOrder.state}">State</td>
-					<td th:text="${upsOrder.zip}">Zip</td>
-					<td th:text="${upsOrder.phone}">Phone</td>
-					<td th:text="${upsOrder.residential}">Residential</td>
-					<td th:text="${upsOrder.service}">Service</td>
-					<td th:text="${upsOrder.packageType}">Package Type</td>
-					<td th:text="${upsOrder.billTo}">Bill To</td>
-					<td th:text="${upsOrder.upsLength}">Length</td>
-					<td th:text="${upsOrder.upsHeight}">Height</td>
-					<td th:text="${upsOrder.upsWidth}">Width</td>
-					<td th:text="${upsOrder.upsWeight}">Weight</td>
-					<td th:text="${upsOrder.country}">Country</td>
-					<td th:text="${upsOrder.customerName}">Customer Name</td>
-					<td  sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a href="#" th:href="@{/ups/edit/} + ${upsOrder.systemId}">Edit</a></td>
-					<td  sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a href="#" th:href="@{/ups/delete/} + ${upsOrder.systemId}">Delete</a></td>
-				</tr>
-			</tbody>
-	</table>
-	<div class="table-pagination" th:if="${upsOrders.totalPages}">
-    	<ul class="pagination">
-      	  	<li th:class="${upsOrders.number == 0} ? 'disabled' : ''">
-       	  		<a th:if="${!upsOrders.first}" th:href="@{${'/ups/list'}(page=${upsOrders.number-1},size=${upsOrders.size})}">&larr; Previous</a>
-       	   	 	<a th:if="${upsOrders.first}" href="javascript:void(0);">&larr; Previous</a>
-       		</li>
-       		
-       		<li th:each="pageNo : ${#numbers.sequence(0, upsOrders.totalPages - 1)}" th:class="${upsOrders.number == pageNo} ? 'active' : ''">
-            	<a th:if="${upsOrders.number == pageNo}" href="javascript:void(0);">
-               	 <span th:text="${pageNo + 1}"></span>
-            	</a>
-           	 	<a th:if="${!(upsOrders.number == pageNo)}" th:href="@{${'/ups/list'}(page=${pageNo},size=${upsOrders.size})}">
-               	 <span th:text="${pageNo + 1}"></span>
-            	</a>
-       		</li>
-      	 	 <li th:class="${upsOrders.number + 1 >= upsOrders.totalPages} ? 'disabled' : ''">
-          		<a th:if="${!upsOrders.last}" th:href="@{${'/ups/list'}(page=${upsOrders.number+1},size=${upsOrders.size})}">Next &rarr;</a>
-        	    <a th:if="${upsOrders.last}" href="javascript:void(0);">Next &rarr;</a>
-        	</li>
-    	</ul>
-	</div>
-	<label sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">(Upload File Name "MOBILE SALES TO DATE - Real Time Cust Trans Dtl.xls")</label>
-	<form th:field="${uploadedFile}" method="post" th:action="@{/submitFileUpload}" enctype="multipart/form-data"  sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
-            <input name="file" type="file"/><br/>
-            <input type="submit" value="Upload"/>
-    </form>
-    <br/>
-	<a href="/"><button type="button">Home</button></a>
-	<a href="/ups/create"><button th:href="@{/ups/create}" type="button" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Add a new order</button></a>
-	<a href="/downloadOrderExcel"><button th:href="@{/downloadOrderExcel}" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Download Excel File</button></a>
-	<a href="/ups/deleteAll"><button th:href="@{/ups/deleteAll}" sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Delete all rows</button></a>
-	</div></div></div>
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead style="white-space:nowrap;">
+						<tr>
+							<th>Order ID</th>
+							<th>Order Received</th>
+							<th>Product ID</th>
+							<th>Quantity</th>
+							<th>Product Name</th>
+							<th>Shipping Method</th>
+							<th>Name</th>
+							<th>Address 1</th>
+							<th>Address 2</th>
+							<th>City</th>
+							<th>State</th>
+							<th>Zip</th>
+							<th>Phone</th>
+							<th>Residential</th>
+							<th>Service</th>
+							<th>Package Type</th>
+							<th>Bill To</th>
+							<th>Length</th>
+							<th>Height</th>
+							<th>Width</th>
+							<th>Weight</th>
+							<th>Country</th>
+							<th>Customer Name</th>
+							<th sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Edit</th>
+							<th sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="upsOrder : ${upsOrders}">
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.upsOrderId}">Order ID</td>
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.upsOrderReceived}">Order Received</td>
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.upsProductId}">Product ID</td>
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.upsQuantity}">Quantity</td>
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.upsProductName}">Product Name</td>
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.upsShippingMethod}">Shipping Method</td>
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.upsFname} + ' ' + ${upsOrder.upsLname}">Name</td>
+							<td style="word-break: break-all;" th:text="${upsOrder.address1}">Address
+								1</td>
+							<td style="word-break: break-all;" th:text="${upsOrder.address2}">Address
+								2</td>
+							<td style="word-break: break-all;" th:text="${upsOrder.city}">City</td>
+							<td style="word-break: break-all;" th:text="${upsOrder.state}">State</td>
+							<td style="word-break: break-all;" th:text="${upsOrder.zip}">Zip</td>
+							<td style="word-break: break-all;" th:text="${upsOrder.phone}">Phone</td>
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.residential}">Residential</td>
+							<td style="word-break: break-all;" th:text="${upsOrder.service}">Service</td>
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.packageType}">Package Type</td>
+							<td style="word-break: break-all;" th:text="${upsOrder.billTo}">Bill
+								To</td>
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.upsLength}">Length</td>
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.upsHeight}">Height</td>
+							<td style="word-break: break-all;" th:text="${upsOrder.upsWidth}">Width</td>
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.upsWeight}">Weight</td>
+							<td style="word-break: break-all;" th:text="${upsOrder.country}">Country</td>
+							<td style="word-break: break-all;"
+								th:text="${upsOrder.customerName}">Customer Name</td>
+							<td style="word-break: break-all;"
+								sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a
+								href="#" th:href="@{/ups/edit/} + ${upsOrder.systemId}">Edit</a></td>
+							<td style="word-break: break-all;"
+								sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a
+								href="#" th:href="@{/ups/delete/} + ${upsOrder.systemId}">Delete</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-lg-12">
+				<div class="table-pagination" th:if="${upsOrders.totalPages}">
+					<ul class="pagination">
+						<li th:class="${upsOrders.number == 0} ? 'disabled' : ''"><a
+							th:if="${!upsOrders.first}"
+							th:href="@{${'/ups/list'}(page=${upsOrders.number-1},size=${upsOrders.size})}">&larr;
+								Previous</a> <a th:if="${upsOrders.first}"
+							href="javascript:void(0);">&larr; Previous</a></li>
+
+						<li
+							th:each="pageNo : ${#numbers.sequence(0, upsOrders.totalPages - 1)}"
+							th:class="${upsOrders.number == pageNo} ? 'active' : ''"><a
+							th:if="${upsOrders.number == pageNo}" href="javascript:void(0);">
+								<span th:text="${pageNo + 1}"></span>
+						</a> <a th:if="${!(upsOrders.number == pageNo)}"
+							th:href="@{${'/ups/list'}(page=${pageNo},size=${upsOrders.size})}">
+								<span th:text="${pageNo + 1}"></span>
+						</a></li>
+						<li
+							th:class="${upsOrders.number + 1 >= upsOrders.totalPages} ? 'disabled' : ''">
+							<a th:if="${!upsOrders.last}"
+							th:href="@{${'/ups/list'}(page=${upsOrders.number+1},size=${upsOrders.size})}">Next
+								&rarr;</a> <a th:if="${upsOrders.last}" href="javascript:void(0);">Next
+								&rarr;</a>
+						</li>
+					</ul>
+				</div>
+				<label sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">(Upload
+					File Name "MOBILE SALES TO DATE - Real Time Cust Trans Dtl.xls")</label>
+				<form th:field="${uploadedFile}" method="post"
+					th:action="@{/submitFileUpload}" enctype="multipart/form-data"
+					sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
+					<input name="file" type="file" /><br /> <input type="submit"
+						value="Upload" />
+				</form>
+				<br /> <a href="/"><button type="button">Home</button></a> <a
+					href="/ups/create"><button th:href="@{/ups/create}"
+						type="button"
+						sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Add
+						a new order</button></a> <a href="/downloadOrderExcel"><button
+						th:href="@{/downloadOrderExcel}"
+						sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Download
+						Excel File</button></a> <a href="/ups/deleteAll"><button
+						th:href="@{/ups/deleteAll}"
+						sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Delete
+						all rows</button></a>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
