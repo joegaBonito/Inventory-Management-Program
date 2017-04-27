@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -16,7 +18,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ItemAccessory")
 public class ItemAccessory implements Serializable {
-
 	/**
 	 * 
 	 */
@@ -61,11 +62,14 @@ public class ItemAccessory implements Serializable {
 	@OneToOne(cascade={CascadeType.ALL},mappedBy="accessory")
 	private Master master;
 	
+	@Column(name="delete_YN")
+	private char deleteYN;
+	
 	public ItemAccessory() {}
 
 	public ItemAccessory(Long itemAccessoryId, String productId, String productName, double purchasePrice,
 			double salesPrice, double accLength, double accHeight, double accWidth, double accWeight,
-			AccessoryInventory accessoryInventory, Set<AccessoryReceivedQuantity> accessoryReceivedQuantity, Master master) {
+			AccessoryInventory accessoryInventory, Set<AccessoryReceivedQuantity> accessoryReceivedQuantity, Master master, char deleteYN) {
 		super();
 		this.itemAccessoryId = itemAccessoryId;
 		this.productId = productId;
@@ -79,6 +83,7 @@ public class ItemAccessory implements Serializable {
 		this.accessoryInventory = accessoryInventory;
 		this.accessoryReceivedQuantity = accessoryReceivedQuantity;
 		this.master = master;
+		this.deleteYN = deleteYN;
 	}
 
 	public Long getItemAccessoryId() {
@@ -175,5 +180,13 @@ public class ItemAccessory implements Serializable {
 
 	public void setMaster(Master master) {
 		this.master = master;
+	}
+
+	public char getDeleteYN() {
+		return deleteYN;
+	}
+
+	public void setDeleteYN(char deleteYN) {
+		this.deleteYN = deleteYN;
 	}
 }

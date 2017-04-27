@@ -52,7 +52,7 @@ public class ItemAccessoryController {
 	
 	@RequestMapping("/itemAccessory/delete/{id}")
 	public String delete(@PathVariable Long id, Model model){
-		itemAccessoryService.delete(id);
+		itemAccessoryService.deleteYN(id);
 		return "redirect:/itemAccessory/list";		
 	}
 }

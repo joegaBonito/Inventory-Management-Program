@@ -8,12 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.obs.domain.ItemAccessory;
-import com.obs.domain.Master;
 import com.obs.repositories.ItemAccessoryRepository;
 
 @Service
 public class ItemAccessoryService {
-	
 	
 	private ItemAccessoryRepository itemAccessoryRepository;
 	
@@ -24,8 +22,8 @@ public class ItemAccessoryService {
 		this.itemAccessoryRepository = itemAccessoryRepository;
 	}
 	
-	public List<ItemAccessory> list(){
-		return itemAccessoryRepository.findByOrderByProductId();
+	public List<ItemAccessory> list(){ 
+		return itemAccessoryRepository.findByDeleteYN();
 	}
 	
 	public List<ItemAccessory> productNameList() {
@@ -40,8 +38,10 @@ public class ItemAccessoryService {
 		return itemAccessoryRepository.findOne(itemAccessoryId);
 	}
 	
-	public void delete(Long itemAccessoryId) {
-		itemAccessoryRepository.delete(itemAccessoryId);
+	public void deleteYN(Long itemAccessoryId) {    
+		ItemAccessory item = itemAccessoryRepository.findOne(itemAccessoryId);
+		item.setDeleteYN('Y');
+		save(item);
 	}
 	
 	public String getProductId(Long itemAccessoryId) {
