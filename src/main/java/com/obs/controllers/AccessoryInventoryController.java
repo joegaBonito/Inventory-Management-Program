@@ -60,7 +60,7 @@ public class AccessoryInventoryController {
 		List<Date> days = calendarService.getAllDays();
 		model.addAttribute("days",days);
 		model.addAttribute("accessoryReceivedQuantities",accessoryReceivedQuantityService.list());
-		Page<ItemAccessory> itemAccessories = itemAccessoryService.findAll(pageable);
+		Page<ItemAccessory> itemAccessories = itemAccessoryService.findByDeleteYNPageable(pageable);
 		model.addAttribute("itemAccessories", itemAccessories);
 		return "/accessoryInventory/list";
 	}

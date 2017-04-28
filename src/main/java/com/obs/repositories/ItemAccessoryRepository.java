@@ -21,5 +21,6 @@ public interface ItemAccessoryRepository extends CrudRepository<ItemAccessory,Lo
 
 	List<ItemAccessory> findByOrderByProductName();
 
-	Page<ItemAccessory> findAll(Pageable pageable);
+	@Query("SELECT ia FROM ItemAccessory ia where ia.deleteYN = 'N'")
+	Page<ItemAccessory> findByDeleteYNPageable(Pageable pageable);
 }

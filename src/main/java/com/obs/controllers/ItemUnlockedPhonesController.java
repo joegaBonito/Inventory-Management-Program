@@ -10,15 +10,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.obs.domain.ItemUnlockedPhone;
 import com.obs.services.ItemUnlockedPhonesService;
+import com.obs.services.MasterService;
 
 @Controller
 public class ItemUnlockedPhonesController {
-	@Autowired
+
 	private ItemUnlockedPhonesService itemUnlockedPhonesService;
+	private MasterService masterService;
 	
-	public ItemUnlockedPhonesController(ItemUnlockedPhonesService itemUnlockedPhonesService) {
+	@Autowired
+	public ItemUnlockedPhonesController(ItemUnlockedPhonesService itemUnlockedPhonesService, MasterService masterService) {
 		super();
 		this.itemUnlockedPhonesService = itemUnlockedPhonesService;
+		this.masterService = masterService;
 	}
 	
 	@RequestMapping("/itemUnlockedPhone/create")
@@ -48,6 +52,7 @@ public class ItemUnlockedPhonesController {
 	@RequestMapping("/itemUnlockedPhone/delete/{id}")
 	public String delete(@PathVariable Long id, Model model){
 		itemUnlockedPhonesService.delete(id);
+		masterService.delete(id);
 		return "redirect:/itemUnlockedPhone/list";		
 	}
 }

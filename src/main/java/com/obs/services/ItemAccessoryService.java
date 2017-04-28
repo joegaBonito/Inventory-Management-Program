@@ -68,7 +68,7 @@ public class ItemAccessoryService {
 		ItemAccessory item = itemAccessoryRepository.findOne(itemAccessoryId);
 		return item.getAccWeight();
 	}
-	public Page<ItemAccessory> findAll(Pageable pageable) {
-		return itemAccessoryRepository.findAll(pageable);
+	public Page<ItemAccessory> findByDeleteYNPageable(Pageable pageable) {
+		return itemAccessoryRepository.findByDeleteYNPageable(pageable);
 	}
 }

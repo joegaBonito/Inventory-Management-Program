@@ -56,9 +56,12 @@ public class ItemUnlockedPhone implements Serializable {
 	@OneToOne(cascade={CascadeType.ALL},mappedBy="phone")
 	private Master master;
 	
+	@Column(name="delete_YN")
+	private char deleteYN;
+	
 	public ItemUnlockedPhone(Long itemUnlockedPhoneId, String productId, String productName, double purchasePrice,
 			double salesPrice, double upLength, double upHeight, double upWidth, double upWeight,
-			UnlockedPhonesInventory unlockedPhonesInventory, List<PhonesReceivedQuantity> phonesReceivedQuantity,Master master) {
+			UnlockedPhonesInventory unlockedPhonesInventory, List<PhonesReceivedQuantity> phonesReceivedQuantity,Master master, char deleteYN) {
 		super();
 		this.itemUnlockedPhoneId = itemUnlockedPhoneId;
 		this.productId = productId;
@@ -72,6 +75,7 @@ public class ItemUnlockedPhone implements Serializable {
 		this.unlockedPhonesInventory = unlockedPhonesInventory;
 		this.phonesReceivedQuantity = phonesReceivedQuantity;
 		this.master = master;
+		this.deleteYN = deleteYN;
 	}
 
 	public ItemUnlockedPhone() {
@@ -172,4 +176,13 @@ public class ItemUnlockedPhone implements Serializable {
 	public void setMaster(Master master) {
 		this.master = master;
 	}
+
+	public char getDeleteYN() {
+		return deleteYN;
+	}
+
+	public void setDeleteYN(char deleteYN) {
+		this.deleteYN = deleteYN;
+	}
+	
 }

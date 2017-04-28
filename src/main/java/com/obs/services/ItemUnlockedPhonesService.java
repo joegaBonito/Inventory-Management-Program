@@ -30,15 +30,20 @@ public class ItemUnlockedPhonesService {
 	}
 
 	public List<ItemUnlockedPhone> list() {
-		return itemUnlockedPhonesRepository.findByOrderByProductId();
+		return itemUnlockedPhonesRepository.findByDeleteYN();
 	}
 
 	public ItemUnlockedPhone get(Long itemUnlockedPhoneId) {
 		return itemUnlockedPhonesRepository.findOne(itemUnlockedPhoneId);
 	}
 	
+	/*
+	 * Changes the column delete_YN to Y, instead of completely deleting it from DB.
+	 */
 	public void delete(Long itemUnlockedPhoneId) {
-		itemUnlockedPhonesRepository.delete(itemUnlockedPhoneId);
+		ItemUnlockedPhone item = itemUnlockedPhonesRepository.findOne(itemUnlockedPhoneId);
+		item.setDeleteYN('Y');
+		save(item);
 	}
 	
 	public String getProductId(Long itemUnlockedPhoneId) {
@@ -70,8 +75,8 @@ public class ItemUnlockedPhonesService {
 		return itemUnlockedPhonesRepository.findByOrderByProductName();
 	}
 
-	public Page<ItemUnlockedPhone> findAll(Pageable pageable) {
-		return itemUnlockedPhonesRepository.findAll(pageable);
+	public Page<ItemUnlockedPhone> findByDeleteYNPageable(Pageable pageable) {
+		return itemUnlockedPhonesRepository.findByDeleteYNPageable(pageable);
 	}
 
 }

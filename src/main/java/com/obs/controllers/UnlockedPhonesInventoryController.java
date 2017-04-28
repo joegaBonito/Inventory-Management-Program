@@ -62,7 +62,7 @@ public class UnlockedPhonesInventoryController {
 		List<Date> days = calendarService.getAllDays();
 		model.addAttribute("days",days);
 		model.addAttribute("phonesReceivedQuantities",phonesReceivedQuantityService.list());
-		Page<ItemUnlockedPhone> itemUnlockedPhones = itemUnlockedPhonesService.findAll(pageable);
+		Page<ItemUnlockedPhone> itemUnlockedPhones = itemUnlockedPhonesService.findByDeleteYNPageable(pageable);
 		model.addAttribute("itemUnlockedPhones", itemUnlockedPhones);
 		return "/unlockedPhonesInventory/list";
 	}

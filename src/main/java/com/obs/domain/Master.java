@@ -25,13 +25,17 @@ public class Master {
 	@JoinColumn(name="phone")
 	private ItemUnlockedPhone phone;
 
+	@Column(name="delete_YN")
+	private char deleteYN;
+	
 	public Master() {}
 	
-	public Master(Long id, ItemAccessory accessory, ItemUnlockedPhone phone) {
+	public Master(Long id, ItemAccessory accessory, ItemUnlockedPhone phone, char deleteYN) {
 		super();
 		this.id = id;
 		this.accessory = accessory;
 		this.phone = phone;
+		this.deleteYN = deleteYN;
 	}
 
 	public Long getId() {
@@ -56,5 +60,11 @@ public class Master {
 
 	public void setPhone(ItemUnlockedPhone phone) {
 		this.phone = phone;
+	}
+	public char getDeleteYN() {
+		return deleteYN;
+	}
+	public void setDeleteYN(char deleteYN) {
+		this.deleteYN = deleteYN;
 	}
 }

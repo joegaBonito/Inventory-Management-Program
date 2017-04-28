@@ -23,8 +23,14 @@ public class MasterService {
 		masterRepository.save(master);
 	}
 	
+	public void delete(Long id) {
+		Master m = masterRepository.findOne(id);
+		m.setDeleteYN('Y');
+		add(m);
+	}
+	
 	public List<Master> list () {
-		return masterRepository.findByOrderById();
+		return masterRepository.findByDeleteYN();
 	}
 	
 	/*
