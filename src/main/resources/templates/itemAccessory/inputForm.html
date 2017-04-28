@@ -14,9 +14,8 @@
 
 					<form class="form-horizontal" th:object="${itemAccessory}"
 						th:action="@{/itemAccessory/save}" method="post">
-						<input type="hidden" th:field="*{itemAccessoryId}" /> <input
-							type="hidden"
-							th:field="*{accessoryInventory.accessoryInventoryId}" />
+						<input type="hidden" th:field="*{itemAccessoryId}" /> 
+						<input type="hidden" th:field="*{accessoryInventory.accessoryInventoryId}" />
 						<div th:class="form-group"
 							th:classappend="${#fields.hasErrors('productId')}? 'has-error'">
 							<label class="col-sm-2 control-label">Product Id <span

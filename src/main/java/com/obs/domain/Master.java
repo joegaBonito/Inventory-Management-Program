@@ -28,14 +28,18 @@ public class Master {
 	@Column(name="delete_YN")
 	private char deleteYN;
 	
+	@Column(name="product_id")
+	private String productId;
+	
 	public Master() {}
 	
-	public Master(Long id, ItemAccessory accessory, ItemUnlockedPhone phone, char deleteYN) {
+	public Master(Long id, ItemAccessory accessory, ItemUnlockedPhone phone, char deleteYN, String productId) {
 		super();
 		this.id = id;
 		this.accessory = accessory;
 		this.phone = phone;
 		this.deleteYN = deleteYN;
+		this.productId = productId;
 	}
 
 	public Long getId() {
@@ -67,4 +71,13 @@ public class Master {
 	public void setDeleteYN(char deleteYN) {
 		this.deleteYN = deleteYN;
 	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+	
 }

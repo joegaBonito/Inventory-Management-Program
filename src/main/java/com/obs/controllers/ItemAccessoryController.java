@@ -32,6 +32,7 @@ public class ItemAccessoryController {
 	
 	@RequestMapping(value = "/itemAccessory/save", method=RequestMethod.POST) 
 	public String inputForm(@ModelAttribute("itemAccessory") ItemAccessory itemAccessory) {
+		itemAccessory.setDeleteYN('N');
 		itemAccessoryService.save(itemAccessory);
 		return "redirect:/itemAccessory/list"; 
 	}
@@ -51,7 +52,7 @@ public class ItemAccessoryController {
 	@RequestMapping("/itemAccessory/delete/{id}")
 	public String delete(@PathVariable Long id, Model model){
 		itemAccessoryService.deleteYN(id);
-		masterService.delete(id);
+		masterService.delete(itemAccessoryService.getProductId(id));
 		return "redirect:/itemAccessory/list";		
 	}
 }

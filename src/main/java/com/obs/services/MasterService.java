@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.obs.domain.ItemAccessory;
 import com.obs.domain.ItemUnlockedPhone;
 import com.obs.domain.Master;
 import com.obs.repositories.MasterRepository;
@@ -23,8 +24,8 @@ public class MasterService {
 		masterRepository.save(master);
 	}
 	
-	public void delete(Long id) {
-		Master m = masterRepository.findOne(id);
+	public void delete(String productId) {
+		Master m = masterRepository.findByProductId(productId);
 		m.setDeleteYN('Y');
 		add(m);
 	}
@@ -32,6 +33,7 @@ public class MasterService {
 	public List<Master> list () {
 		return masterRepository.findByDeleteYN();
 	}
+	
 	
 	/*
 	 * Retrieves the grand total of every product's total purchased amount on /master/index.html 

@@ -13,4 +13,5 @@ public interface MasterRepository extends CrudRepository<Master,Long> {
 	@Query("SELECT m FROM Master m where m.deleteYN = 'N'")
 	List<Master> findByDeleteYN();
 	List<Master> findByOrderById();
+	Master findByProductId(String productId);
 }

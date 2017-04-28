@@ -33,6 +33,7 @@ public class ItemUnlockedPhonesController {
 	
 	@RequestMapping(value = "/itemUnlockedPhone/save", method=RequestMethod.POST) 
 	public String inputForm(@ModelAttribute("itemUnlockedPhone") ItemUnlockedPhone itemUnlockedPhone) {
+		itemUnlockedPhone.setDeleteYN('N');
 		itemUnlockedPhonesService.save(itemUnlockedPhone);
 		return "redirect:/itemUnlockedPhone/list"; 
 	}
@@ -52,7 +53,7 @@ public class ItemUnlockedPhonesController {
 	@RequestMapping("/itemUnlockedPhone/delete/{id}")
 	public String delete(@PathVariable Long id, Model model){
 		itemUnlockedPhonesService.delete(id);
-		masterService.delete(id);
+		masterService.delete(itemUnlockedPhonesService.getProductId(id));
 		return "redirect:/itemUnlockedPhone/list";		
 	}
 }
