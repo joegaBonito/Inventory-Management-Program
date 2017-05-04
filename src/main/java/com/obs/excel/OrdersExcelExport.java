@@ -12,7 +12,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsView;
 
-import com.obs.domain.UpsOrder;
+import com.obs.General.domain.UpsOrder;
 
 @Component
 public class OrdersExcelExport extends AbstractXlsView {

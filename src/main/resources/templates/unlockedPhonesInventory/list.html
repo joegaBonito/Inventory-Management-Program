@@ -24,12 +24,12 @@
 								<td>Sales Quantity</td>
 								<td>Inventory Amount</td>
 								<td>Current Inventory</td>
-								<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Input
-									Received Item</td>
+								<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Quantity Received</td>
+								<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Return Received</td>
 							</tr>
 						</thead>
 						<tbody>
-						<tbody>
+						<tbody style="white-space:nowrap;">
 							<tr th:each="itemUnlockedPhone: ${itemUnlockedPhones}">
 								<td th:text="${itemUnlockedPhone.productId}">Product ID</td>
 								<td th:text="${itemUnlockedPhone.productName}">Product Name</td>
@@ -56,8 +56,10 @@
 									Inventory</td>
 								<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a
 									href="#"
-									th:href="@{/unlockedPhonesInventory/inputReceivedItem/save/} + ${itemUnlockedPhone.itemUnlockedPhoneId}">Input
-										Received Item</a></td>
+									th:href="@{/unlockedPhonesInventory/inputReceivedItem/save/} + ${itemUnlockedPhone.itemUnlockedPhoneId}">Input</a></td>
+								<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a
+									href="#"
+									th:href="@{/unlockedPhonesInventory/inputReturnedItem/save/} + ${itemUnlockedPhone.itemUnlockedPhoneId}">Input</a></td>
 							</tr>
 						</tbody>
 						</tbody>

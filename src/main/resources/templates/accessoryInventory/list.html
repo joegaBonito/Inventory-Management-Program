@@ -24,11 +24,11 @@
 								<td>Sales Quantity</td>
 								<td>Inventory Amount</td>
 								<td>Current Inventory</td>
-								<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Input
-									Received Item</td>
+								<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Quantity	Received</td>
+								<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">Return Received</td>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody style="white-space:nowrap;">
 							<tr th:each="itemAccessory : ${itemAccessories}">
 								<td th:text="${itemAccessory.productId}">Product ID</td>
 								<td th:text="${itemAccessory.productName}">Product Name</td>
@@ -53,8 +53,10 @@
 									Inventory</td>
 								<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a
 									href="#"
-									th:href="@{/accessoryInventory/inputReceivedItem/save/} + ${itemAccessory.itemAccessoryId}">Input
-										Received Item</a></td>
+									th:href="@{/accessoryInventory/inputReceivedItem/save/} + ${itemAccessory.itemAccessoryId}">Input</a></td>
+								<td sec:authorize="hasAnyRole({'ROLE_ADMIN','ROLE_USER'})"><a
+									href="#"
+									th:href="@{/accessoryInventory/inputReturnedItem/save/} + ${itemAccessory.itemAccessoryId}">Input</a></td>
 							</tr>
 						</tbody>
 					</table>

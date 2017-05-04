@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layout/main">
+<head>
+<title>Input Returned Accessory</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2>Input Returned Accessory</h2>
+					<br />
+					<form class="form-horizontal" th:object="${itemAccessory}"
+						th:action="@{/accessoryInventory/saveReturns}" method="post">
+						<input type="hidden"
+							th:field="${itemAccessory.itemAccessoryId}" /> <input
+							type="hidden" th:field="${itemAccessory.productId}" /> <input
+							type="hidden" th:field="${itemAccessory.productName}" /> <input
+							type="hidden" th:field="${itemAccessory.purchasePrice}" /> <input
+							type="hidden"
+							th:field="${itemAccessory.accessoryInventory.salesQuantity}" />
+						<input type="hidden"
+							th:field="${itemAccessory.accessoryInventory.salesAmount}" />
+						<input type="hidden" th:field="${itemAccessory.salesPrice}" />
+						<input type="hidden" th:field="${itemAccessory.accLength}" />
+						<input type="hidden" th:field="${itemAccessory.accHeight}" />
+						<input type="hidden" th:field="${itemAccessory.accWidth}" /> <input
+							type="hidden" th:field="${itemAccessory.accWeight}" /> <input
+							type="hidden"
+							th:field="${itemAccessory.accessoryInventory.accessoryInventoryId}"
+							th:value="${itemAccessory.itemAccessoryId}" /> <input
+							type="hidden"
+							th:field="${itemAccessory.accessoryInventory.totalPurchasedAmount}" />
+						<input type="hidden"
+							th:field="${itemAccessory.accessoryInventory.totalPurchasedQuantity}" />
+						<input type="hidden"
+							th:field="${itemAccessory.accessoryInventory.currentInventoryAmount}" />
+						<input type="hidden" th:field="${itemAccessory.accessoryInventory.currentInventory}" />
+						<input type="hidden" th:field="${itemAccessory.accessoryInventory.purchasedQuantity}" />
+						<div th:class="form-group"
+							th:classappend="${#fields.hasErrors('accessoryInventory.returnedQuantity')}? 'has-error'">
+							<label class="col-sm-2 control-label">Input Returned
+								Quantity <span class="required">*</span>
+							</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control"
+									th:field="${itemAccessory.accessoryInventory.returnedQuantity}" />
+								<span
+									th:if="${#fields.hasErrors('accessoryInventory.returnedQuantity')}"
+									th:errors="${itemAccessory.accessoryInventory.returnedQuantity}"
+									th:class="help-block">Returned Quantity Errors</span>
+							</div>
+						</div>
+						<div th:class="form-group"
+							th:classappend="${#fields.hasErrors('accessoryInventory.returnedDate')}? 'has-error'">
+							<label class="col-sm-2 control-label">Returned Date <span
+								class="required">*</span></label>
+							<div class="col-md-10">
+								<input type="text" class="form-control"
+									th:value="${#dates.format(#dates.createNow(),'dd-MMM-yyyy')}"
+									th:id="*{accessoryInventory.returnedDate}"
+									th:name="*{accessoryInventory.returnedDate}" /> <span
+									th:if="${#fields.hasErrors('accessoryInventory.returnedDate')}"
+									th:errors="*{accessoryInventory.returnedDate}"
+									th:class="help-block">Returned Date Errors</span>
+							</div>
+						</div>
+						<br />
+						<div th:class="form-group">
+							<div class="col-md-10">
+								<a href="/"><button type="button">Home</button></a>
+								<button type="submit" class="btn btn-primary pull-right">Submit</button>
+							</div>
+						</div>
+					</form>
+
+					<br />
+					<br />
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

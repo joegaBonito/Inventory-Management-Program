@@ -12,7 +12,7 @@
 					<h2>Input Received Unlocked Phones</h2>
 					<br />
 					<form class="form-horizontal" th:object="${itemUnlockedPhone}"
-						th:action="@{/inventorySave}" method="post">
+						th:action="@{/accessoryInventory/save}" method="post">
 						<input type="hidden"
 							th:field="${itemUnlockedPhone.itemUnlockedPhoneId}" /> <input
 							type="hidden" th:field="${itemUnlockedPhone.productId}" /> <input
