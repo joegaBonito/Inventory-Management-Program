@@ -38,6 +38,10 @@
 							th:field="${itemUnlockedPhone.unlockedPhonesInventory.currentInventoryAmount}" />
 						<input type="hidden"
 							th:field="${itemUnlockedPhone.unlockedPhonesInventory.currentInventory}" />
+							<input type="hidden"
+							th:field="${itemUnlockedPhone.unlockedPhonesInventory.salesQuantity}"/> 
+							<input type="hidden"
+							th:field="${itemUnlockedPhone.unlockedPhonesInventory.salesAmount}"/> 
 						<div th:class="form-group"
 							th:classappend="${#fields.hasErrors('unlockedPhonesInventory.purchasedQuantity')}? 'has-error'">
 							<label class="col-sm-2 control-label">Input Purchased

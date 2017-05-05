@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.obs.Accessory.domain.ItemAccessory;
+import com.obs.Accessory.services.AccessoryInventoryService;
 import com.obs.Accessory.services.ItemAccessoryService;
 import com.obs.Master.services.MasterService;
 
@@ -16,12 +17,14 @@ import com.obs.Master.services.MasterService;
 public class ItemAccessoryController {
 	
 	private ItemAccessoryService itemAccessoryService;
+	private AccessoryInventoryService accessoryInventoryService;
 	private MasterService masterService;
 	
 	@Autowired
-	public ItemAccessoryController(ItemAccessoryService itemAccessoryService, MasterService masterService) {
+	public ItemAccessoryController(ItemAccessoryService itemAccessoryService, MasterService masterService, AccessoryInventoryService accessoryInventoryService) {
 		super();
 		this.itemAccessoryService = itemAccessoryService;
+		this.accessoryInventoryService =accessoryInventoryService;
 		this.masterService = masterService;
 	}
 	
@@ -35,6 +38,7 @@ public class ItemAccessoryController {
 	public String inputForm(@ModelAttribute("itemAccessory") ItemAccessory itemAccessory) {
 		itemAccessory.setDeleteYN('N');
 		itemAccessoryService.save(itemAccessory);
+		masterService.saveItemAccessory(itemAccessory);
 		return "redirect:/itemAccessory/list"; 
 	}
 	

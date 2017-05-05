@@ -29,16 +29,16 @@
 		</thead>
 			<tbody>
 				<tr th:each="master : ${masters}">
-					<td th:text="${master.accessory != null} ? ${master.accessory.productId} : ${master.phone.productId}">Product ID</td>
-					<td th:text="${master.accessory != null} ? ${master.accessory.productName} : ${master.phone.productName}">Product Name</td>
-					<td th:text="${master.accessory != null} ? ${master.accessory.purchasePrice} : ${master.phone.purchasePrice}">Purchase Price</td>
-					<td th:text="${master.accessory != null} ? ${master.accessory.salesPrice} : ${master.phone.salesPrice}">Sales Price</td>
-					<td th:text="${master.accessory != null} ? ${#numbers.formatDecimal(master.accessory.accessoryInventory.totalPurchasedAmount, 0 ,2)} : ${#numbers.formatDecimal(master.phone.unlockedPhonesInventory.totalPurchasedAmount, 0 ,2)}">Purchased Amount</td>
-					<td th:text="${master.accessory != null} ? ${master.accessory.accessoryInventory.totalPurchasedQuantity} : ${master.phone.unlockedPhonesInventory.totalPurchasedQuantity}">Purchased Quantity</td>
-					<td th:text="${master.accessory != null} ? ${#numbers.formatDecimal(master.accessory.accessoryInventory.salesAmount, 0 ,2)} : ${#numbers.formatDecimal(master.phone.unlockedPhonesInventory.salesAmount, 0 ,2)}">Sales Amount</td>
-					<td th:text="${master.accessory != null} ? ${master.accessory.accessoryInventory.salesQuantity} : ${master.phone.unlockedPhonesInventory.salesQuantity}">Sales Quantity</td>
-					<td th:text="${master.accessory != null} ? ${#numbers.formatDecimal(master.accessory.accessoryInventory.currentInventoryAmount, 0 ,2)} : ${#numbers.formatDecimal(master.phone.unlockedPhonesInventory.currentInventoryAmount, 0 ,2)}">Inventory Amount</td>
-					<td th:text="${master.accessory != null} ? ${master.accessory.accessoryInventory.currentInventory} : ${master.phone.unlockedPhonesInventory.currentInventory}">Current Inventory</td>
+					<td th:text="${master.productId}">Product ID</td>
+					<td th:text="${master.productName}">Product Name</td>
+					<td th:text="${master.purchasePrice}">Purchase Price</td>
+					<td th:text="${master.salesPrice}">Sales Price</td>
+					<td th:text="${#numbers.formatDecimal(master.totalPurchasedAmount, 0 ,2)}">Purchased Amount</td>
+					<td th:text="${master.totalPurchasedQuantity}">Purchased Quantity</td>
+					<td th:text="${#numbers.formatDecimal(master.salesAmount, 0 ,2)}">Sales Amount</td>
+					<td th:text="${master.salesQuantity == null} ? 0 : ${master.salesQuantity}">Sales Quantity</td>
+					<td th:text="${#numbers.formatDecimal(master.currentInventoryAmount, 0 ,2)}">Inventory Amount</td>
+					<td th:text="${master.currentInventory}">Current Inventory</td>
 				</tr>
 				<tr> 
 					<td colspan="4" style="font-weight:bold; position: relative; text-align:center;">Grand Totals:</td>

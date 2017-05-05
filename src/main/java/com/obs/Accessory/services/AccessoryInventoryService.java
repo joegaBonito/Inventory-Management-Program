@@ -30,7 +30,6 @@ public class AccessoryInventoryService {
 	}
 
 	public void setSalesQuantity() {
-		
 		for(ItemAccessory itemAccessory : itemAccessoryService.list()) {
 			int num = 0;
 			for(UpsOrder upsOrder : upsService.systemIdList()) {

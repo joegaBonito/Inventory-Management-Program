@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.obs.Accessory.domain.ItemAccessory;
 import com.obs.Master.domain.Master;
 
 @Repository
@@ -14,4 +15,5 @@ public interface MasterRepository extends CrudRepository<Master,Long> {
 	List<Master> findByDeleteYN();
 	List<Master> findByOrderById();
 	Master findByProductId(String productId);
+	void save(ItemAccessory itemAccessory);
 }

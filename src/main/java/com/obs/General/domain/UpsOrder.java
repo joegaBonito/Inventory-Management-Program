@@ -127,7 +127,6 @@ public class UpsOrder implements Serializable {
 	}
 
 	public UpsOrder() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getSystemId() {

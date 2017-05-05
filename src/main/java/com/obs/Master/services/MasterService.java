@@ -5,17 +5,25 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.obs.Accessory.domain.ItemAccessory;
+import com.obs.Accessory.services.ItemAccessoryService;
 import com.obs.Master.domain.Master;
 import com.obs.Master.repositories.MasterRepository;
+import com.obs.Phones.domain.ItemUnlockedPhone;
+import com.obs.Phones.services.ItemUnlockedPhonesService;
 
 @Service
 public class MasterService {
 	
 	private MasterRepository masterRepository;
+	private ItemAccessoryService itemAccessoryService;
+	private ItemUnlockedPhonesService itemUnlockedPhonesService;
 	
 	@Autowired
-	public MasterService(MasterRepository masterRepository) {
+	public MasterService(MasterRepository masterRepository, ItemAccessoryService itemAccessoryService, ItemUnlockedPhonesService itemUnlockedPhonesService) {
 		this.masterRepository = masterRepository;
+		this.itemAccessoryService =itemAccessoryService;
+		this.itemUnlockedPhonesService = itemUnlockedPhonesService;
 	}
 	
 	public void add(Master master) {
@@ -39,10 +47,15 @@ public class MasterService {
 	public double getGrandTotalPurchasedAmount() {
 		double temp = 0;
 		for(Master master : list()) {
-			if(master.getAccessory() != null) {
-				temp += master.getAccessory().getAccessoryInventory().getTotalPurchasedAmount();
-			} else {
-				temp += master.getPhone().getUnlockedPhonesInventory().getTotalPurchasedAmount();
+			for(ItemAccessory itemAccessory : itemAccessoryService.list()){
+				if(master.getProductId() == itemAccessory.getProductId()) {
+					temp += itemAccessory.getAccessoryInventory().getTotalPurchasedAmount();
+				}
+			}
+			for(ItemUnlockedPhone itemUnlockedPhone : itemUnlockedPhonesService.list()){
+				if(master.getProductId() == itemUnlockedPhone.getProductId()) {
+					temp += itemUnlockedPhone.getUnlockedPhonesInventory().getTotalPurchasedAmount();
+				}
 			}
 		}
 		return temp;
@@ -54,10 +67,15 @@ public class MasterService {
 	public int getGrandTotalPurchasedQuantity() {
 		int temp = 0;
 		for(Master master : list()) {
-			if(master.getAccessory() != null) {
-				temp += master.getAccessory().getAccessoryInventory().getTotalPurchasedQuantity();
-			} else {
-				temp += master.getPhone().getUnlockedPhonesInventory().getTotalPurchasedQuantity();
+			for(ItemAccessory itemAccessory : itemAccessoryService.list()){
+				if(master.getProductId() == itemAccessory.getProductId()) {
+					temp += itemAccessory.getAccessoryInventory().getTotalPurchasedQuantity();
+				}
+			}
+			for(ItemUnlockedPhone itemUnlockedPhone : itemUnlockedPhonesService.list()){
+				if(master.getProductId() == itemUnlockedPhone.getProductId()) {
+					temp += itemUnlockedPhone.getUnlockedPhonesInventory().getTotalPurchasedQuantity();
+				}
 			}
 		}
 		return temp;
@@ -69,10 +87,15 @@ public class MasterService {
 	public double getGrandTotalSalesAmount() {
 		double temp = 0;
 		for(Master master : list()) {
-			if(master.getAccessory() != null) {
-				temp += master.getAccessory().getAccessoryInventory().getSalesAmount();
-			} else {
-				temp += master.getPhone().getUnlockedPhonesInventory().getSalesAmount();
+			for(ItemAccessory itemAccessory : itemAccessoryService.list()){
+				if(master.getProductId() == itemAccessory.getProductId()) {
+					temp += itemAccessory.getAccessoryInventory().getSalesAmount();
+				}
+			}
+			for(ItemUnlockedPhone itemUnlockedPhone : itemUnlockedPhonesService.list()){
+				if(master.getProductId() == itemUnlockedPhone.getProductId()) {
+					temp += itemUnlockedPhone.getUnlockedPhonesInventory().getSalesAmount();
+				}
 			}
 		}
 		return temp;
@@ -84,10 +107,15 @@ public class MasterService {
 	public int getGrandTotalSalesQuantity() {
 		int temp = 0;
 		for(Master master : list()) {
-			if(master.getAccessory() != null) {
-				temp += master.getAccessory().getAccessoryInventory().getSalesQuantity();
-			} else {
-				temp += master.getPhone().getUnlockedPhonesInventory().getSalesQuantity();
+			for(ItemAccessory itemAccessory : itemAccessoryService.list()){
+				if(master.getProductId() == itemAccessory.getProductId()) {
+					temp += itemAccessory.getAccessoryInventory().getSalesQuantity();
+				}
+			}
+			for(ItemUnlockedPhone itemUnlockedPhone : itemUnlockedPhonesService.list()){
+				if(master.getProductId() == itemUnlockedPhone.getProductId()) {
+					temp += itemUnlockedPhone.getUnlockedPhonesInventory().getSalesQuantity();
+				}
 			}
 		}
 		return temp;
@@ -99,10 +127,15 @@ public class MasterService {
 	public int getGrandTotalCurrentInventory() {
 		int temp = 0;
 		for(Master master : list()) {
-			if(master.getAccessory() != null) {
-				temp += master.getAccessory().getAccessoryInventory().getCurrentInventory();
-			} else {
-				temp += master.getPhone().getUnlockedPhonesInventory().getCurrentInventory();
+			for(ItemAccessory itemAccessory : itemAccessoryService.list()){
+				if(master.getProductId() == itemAccessory.getProductId()) {
+					temp += itemAccessory.getAccessoryInventory().getCurrentInventory();
+				}
+			}
+			for(ItemUnlockedPhone itemUnlockedPhone : itemUnlockedPhonesService.list()){
+				if(master.getProductId() == itemUnlockedPhone.getProductId()) {
+					temp += itemUnlockedPhone.getUnlockedPhonesInventory().getCurrentInventory();
+				}
 			}
 		}
 		return temp;
@@ -115,10 +148,15 @@ public class MasterService {
 	public double getGrandTotalCurrentInventoryAmount() {
 		double temp = 0;
 		for(Master master : list()) {
-			if(master.getAccessory() != null) {
-				temp += (master.getAccessory().getAccessoryInventory().getCurrentInventory() * master.getAccessory().getPurchasePrice());
-			} else {
-				temp += (master.getPhone().getUnlockedPhonesInventory().getCurrentInventory() * master.getPhone().getPurchasePrice());
+			for(ItemAccessory itemAccessory : itemAccessoryService.list()){
+				if(master.getProductId() == itemAccessory.getProductId()) {
+					temp += (itemAccessory.getAccessoryInventory().getCurrentInventory() * itemAccessory.getPurchasePrice());
+				}
+			}
+			for(ItemUnlockedPhone itemUnlockedPhone : itemUnlockedPhonesService.list()){
+				if(master.getProductId() == itemUnlockedPhone.getProductId()) {
+					temp += (itemUnlockedPhone.getUnlockedPhonesInventory().getCurrentInventory() * itemUnlockedPhone.getPurchasePrice());
+				}
 			}
 		}
 		return temp;
@@ -128,6 +166,35 @@ public class MasterService {
 		return masterRepository.findOne(id);
 	}
 
+	public void saveItemAccessory(ItemAccessory itemAccessory) {
+		Master master = new Master();
+		master.setProductId(itemAccessory.getProductId());
+		master.setProductName(itemAccessory.getProductName());
+		master.setPurchasePrice(itemAccessory.getPurchasePrice());
+		master.setSalesPrice(itemAccessory.getSalesPrice());
+		master.setTotalPurchasedAmount(itemAccessory.getAccessoryInventory().getTotalPurchasedAmount());
+		master.setTotalPurchasedQuantity(itemAccessory.getAccessoryInventory().getTotalPurchasedQuantity());
+		master.setTotalSalesAmount(itemAccessory.getAccessoryInventory().getSalesAmount());
+		master.setTotalSalesQuantity(itemAccessory.getAccessoryInventory().getSalesQuantity());
+		master.setCurrentInventoryAmount(itemAccessory.getAccessoryInventory().getCurrentInventoryAmount());
+		master.setCurrentInventory(itemAccessory.getAccessoryInventory().getCurrentInventory());
+		master.setDeleteYN(itemAccessory.getDeleteYN());
+		masterRepository.save(master);
+	}
 
-	
+	public void saveItemUnlockedPhone(ItemUnlockedPhone itemUnlockedPhone) {
+		Master master = new Master();
+		master.setProductId(itemUnlockedPhone.getProductId());
+		master.setProductName(itemUnlockedPhone.getProductName());
+		master.setPurchasePrice(itemUnlockedPhone.getPurchasePrice());
+		master.setSalesPrice(itemUnlockedPhone.getSalesPrice());
+		master.setTotalPurchasedAmount(itemUnlockedPhone.getUnlockedPhonesInventory().getTotalPurchasedAmount());
+		master.setTotalPurchasedQuantity(itemUnlockedPhone.getUnlockedPhonesInventory().getTotalPurchasedQuantity());
+		master.setTotalSalesAmount(itemUnlockedPhone.getUnlockedPhonesInventory().getSalesAmount());
+		master.setTotalSalesQuantity(itemUnlockedPhone.getUnlockedPhonesInventory().getSalesQuantity());
+		master.setCurrentInventoryAmount(itemUnlockedPhone.getUnlockedPhonesInventory().getCurrentInventoryAmount());
+		master.setCurrentInventory(itemUnlockedPhone.getUnlockedPhonesInventory().getCurrentInventory());
+		master.setDeleteYN(itemUnlockedPhone.getDeleteYN());
+		masterRepository.save(master);
+	}
 }

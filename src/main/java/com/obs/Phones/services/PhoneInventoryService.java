@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.obs.Accessory.domain.ItemAccessory;
 import com.obs.General.domain.UpsOrder;
 import com.obs.General.services.UpsService;
 import com.obs.Phones.domain.ItemUnlockedPhone;
@@ -37,7 +36,7 @@ public class PhoneInventoryService {
 			int num = 0;
 			for(UpsOrder upsOrder : upsService.systemIdList()) {
 				if(upsOrder.getUpsProductId().equals(itemUnlockedPhone.getProductId())) {
-					num += upsOrder.getUpsQuantity() - itemUnlockedPhone.getUnlockedPhonesInventory().getReturnedQuantity();	
+					num += upsOrder.getUpsQuantity();
 					itemUnlockedPhone.getUnlockedPhonesInventory().setSalesQuantity(num);
 				}	
 			}
@@ -50,7 +49,7 @@ public class PhoneInventoryService {
 			double num = 0;
 			for(UpsOrder upsOrder : upsService.systemIdList()) {
 				if(upsOrder.getUpsProductId().equals(itemUnlockedPhone.getProductId())) {
-					num += itemUnlockedPhone.getSalesPrice() * upsOrder.getUpsQuantity() - itemUnlockedPhone.getSalesPrice() * itemUnlockedPhone.getUnlockedPhonesInventory().getReturnedQuantity();	
+					num += itemUnlockedPhone.getSalesPrice() * upsOrder.getUpsQuantity();	
 					itemUnlockedPhone.getUnlockedPhonesInventory().setSalesAmount(num);
 				}	
 			}

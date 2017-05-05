@@ -19,7 +19,7 @@ import com.obs.Accessory.services.AccessoryInventoryService;
 import com.obs.Accessory.services.AccessoryReceivedQuantityService;
 import com.obs.Accessory.services.ItemAccessoryService;
 import com.obs.General.services.CalendarService;
-import com.obs.Phones.domain.ItemUnlockedPhone;
+
 @Controller	
 public class AccessoryInventoryController {
 	
@@ -85,6 +85,8 @@ public class AccessoryInventoryController {
 		accessoryInventoryService.setTotalPurchasedAmount(itemAccessory);
 		accessoryInventoryService.setCurrentInventoryAmount(itemAccessory);
 		accessoryInventoryService.setCurrentInventory(itemAccessory);
+		accessoryInventoryService.setSalesAmount();
+		accessoryInventoryService.setSalesQuantity();
 		model.addAttribute("itemAccessories", itemAccessoryService.productNameList());
 		return "redirect:/accessoryInventory/list";
 	}

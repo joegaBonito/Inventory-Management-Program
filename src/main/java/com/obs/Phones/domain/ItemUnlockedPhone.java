@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.obs.Master.domain.Master;
 import com.obs.Phones.domain.PhonesReturned;
 
 @Entity
@@ -61,9 +60,6 @@ public class ItemUnlockedPhone implements Serializable {
 	@OneToMany(cascade={CascadeType.ALL},mappedBy="itemUnlockedPhone")
 	private List<PhonesReceivedQuantity> phonesReceivedQuantity;
 	
-	@OneToOne(cascade={CascadeType.ALL},mappedBy="phone")
-	private Master master;
-	
 	@Column(name="delete_YN")
 	private char deleteYN;
 	
@@ -72,7 +68,7 @@ public class ItemUnlockedPhone implements Serializable {
 	
 	public ItemUnlockedPhone(Long itemUnlockedPhoneId, String productId, String productName, double purchasePrice,
 			double salesPrice, double upLength, double upHeight, double upWidth, double upWeight,
-			UnlockedPhonesInventory unlockedPhonesInventory, List<PhonesReceivedQuantity> phonesReceivedQuantity,Master master, char deleteYN, List<PhonesReturned> phonesReturned) {
+			UnlockedPhonesInventory unlockedPhonesInventory, List<PhonesReceivedQuantity> phonesReceivedQuantity, char deleteYN, List<PhonesReturned> phonesReturned) {
 		super();
 		this.itemUnlockedPhoneId = itemUnlockedPhoneId;
 		this.productId = productId;
@@ -85,7 +81,6 @@ public class ItemUnlockedPhone implements Serializable {
 		this.upWeight = upWeight;
 		this.unlockedPhonesInventory = unlockedPhonesInventory;
 		this.phonesReceivedQuantity = phonesReceivedQuantity;
-		this.master = master;
 		this.deleteYN = deleteYN;
 		this.phonesReturned = phonesReturned;
 	}
@@ -179,14 +174,6 @@ public class ItemUnlockedPhone implements Serializable {
 
 	public void setPhonesReceivedQuantity(List<PhonesReceivedQuantity> phonesReceivedQuantity) {
 		this.phonesReceivedQuantity = phonesReceivedQuantity;
-	}
-
-	public Master getMaster() {
-		return master;
-	}
-
-	public void setMaster(Master master) {
-		this.master = master;
 	}
 
 	public char getDeleteYN() {

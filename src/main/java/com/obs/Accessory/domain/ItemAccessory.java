@@ -13,8 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.obs.Master.domain.Master;
-
 @Entity
 @Table(name="ItemAccessory")
 public class ItemAccessory implements Serializable {
@@ -59,9 +57,6 @@ public class ItemAccessory implements Serializable {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="itemAccessory")
 	private Set<AccessoryReceivedQuantity> accessoryReceivedQuantity;
 	
-	@OneToOne(cascade={CascadeType.ALL},mappedBy="accessory")
-	private Master master;
-	
 	@Column(name="delete_YN")
 	private char deleteYN;
 	
@@ -69,7 +64,7 @@ public class ItemAccessory implements Serializable {
 
 	public ItemAccessory(Long itemAccessoryId, String productId, String productName, double purchasePrice,
 			double salesPrice, double accLength, double accHeight, double accWidth, double accWeight,
-			AccessoryInventory accessoryInventory, Set<AccessoryReceivedQuantity> accessoryReceivedQuantity, Master master, char deleteYN) {
+			AccessoryInventory accessoryInventory, Set<AccessoryReceivedQuantity> accessoryReceivedQuantity, char deleteYN) {
 		super();
 		this.itemAccessoryId = itemAccessoryId;
 		this.productId = productId;
@@ -82,7 +77,6 @@ public class ItemAccessory implements Serializable {
 		this.accWeight = accWeight;
 		this.accessoryInventory = accessoryInventory;
 		this.accessoryReceivedQuantity = accessoryReceivedQuantity;
-		this.master = master;
 		this.deleteYN = deleteYN;
 	}
 
@@ -172,14 +166,6 @@ public class ItemAccessory implements Serializable {
 
 	public void setAccessoryReceivedQuantity(Set<AccessoryReceivedQuantity> accessoryReceivedQuantity) {
 		this.accessoryReceivedQuantity = accessoryReceivedQuantity;
-	}
-
-	public Master getMaster() {
-		return master;
-	}
-
-	public void setMaster(Master master) {
-		this.master = master;
 	}
 
 	public char getDeleteYN() {

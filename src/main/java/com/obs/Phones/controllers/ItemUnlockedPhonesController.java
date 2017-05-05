@@ -35,6 +35,7 @@ public class ItemUnlockedPhonesController {
 	public String inputForm(@ModelAttribute("itemUnlockedPhone") ItemUnlockedPhone itemUnlockedPhone) {
 		itemUnlockedPhone.setDeleteYN('N');
 		itemUnlockedPhonesService.save(itemUnlockedPhone);
+		masterService.saveItemUnlockedPhone(itemUnlockedPhone);
 		return "redirect:/itemUnlockedPhone/list"; 
 	}
 	

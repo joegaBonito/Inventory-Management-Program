@@ -1,16 +1,11 @@
 package com.obs.Master.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.obs.Accessory.domain.ItemAccessory;
-import com.obs.Phones.domain.ItemUnlockedPhone;
 
 @Entity
 @Table(name="master")
@@ -19,14 +14,6 @@ public class Master {
 	@GeneratedValue
 	@Column(name="id")
 	private Long id;
-	
-	@OneToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="accessory")
-	private ItemAccessory accessory;
-	
-	@OneToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="phone")
-	private ItemUnlockedPhone phone;
 
 	@Column(name="delete_YN")
 	private char deleteYN;
@@ -34,15 +21,60 @@ public class Master {
 	@Column(name="product_id")
 	private String productId;
 	
-	public Master() {}
+	@Column(name="product_name")
+	private String productName;
 	
-	public Master(Long id, ItemAccessory accessory, ItemUnlockedPhone phone, char deleteYN, String productId) {
+	@Column(name="purchase_price")
+	private double purchasePrice;
+	
+	@Column(name="sales_price")
+	private double salesPrice;
+	
+	@Column(name="sales_amount")
+	private double salesAmount;
+	
+	@Column(name="sales_quantity")
+	private Integer salesQuantity;
+	
+	@Column(name="total_purchased_amount")
+	private double totalPurchasedAmount;
+	
+	@Column(name="total_purchased_quantity")
+	private Integer totalPurchasedQuantity;
+	
+	@Column(name="total_sales_amount")
+	private double totalSalesAmount;
+	
+	@Column(name="total_sales_quantity")
+	private Integer totalSalesQuantity;
+	
+	@Column(name="current_inventory_amount")
+	private double currentInventoryAmount;
+	
+	@Column(name="current_inventory")
+	private Integer currentInventory;
+	
+	public Master() {}
+
+	public Master(Long id, char deleteYN, String productId, String productName, double purchasePrice,
+			double salesPrice, double salesAmount, Integer salesQuantity, double totalPurchasedAmount,
+			Integer totalPurchasedQuantity, double totalSalesAmount, Integer totalSalesQuantity,
+			double currentInventoryAmount, Integer currentInventory) {
 		super();
 		this.id = id;
-		this.accessory = accessory;
-		this.phone = phone;
 		this.deleteYN = deleteYN;
 		this.productId = productId;
+		this.productName = productName;
+		this.purchasePrice = purchasePrice;
+		this.salesPrice = salesPrice;
+		this.salesAmount = salesAmount;
+		this.salesQuantity = salesQuantity;
+		this.totalPurchasedAmount = totalPurchasedAmount;
+		this.totalPurchasedQuantity = totalPurchasedQuantity;
+		this.totalSalesAmount = totalSalesAmount;
+		this.totalSalesQuantity = totalSalesQuantity;
+		this.currentInventoryAmount = currentInventoryAmount;
+		this.currentInventory = currentInventory;
 	}
 
 	public Long getId() {
@@ -53,24 +85,10 @@ public class Master {
 		this.id = id;
 	}
 
-	public ItemAccessory getAccessory() {
-		return accessory;
-	}
-
-	public void setAccessory(ItemAccessory accessory) {
-		this.accessory = accessory;
-	}
-
-	public ItemUnlockedPhone getPhone() {
-		return phone;
-	}
-
-	public void setPhone(ItemUnlockedPhone phone) {
-		this.phone = phone;
-	}
 	public char getDeleteYN() {
 		return deleteYN;
 	}
+
 	public void setDeleteYN(char deleteYN) {
 		this.deleteYN = deleteYN;
 	}
@@ -82,5 +100,92 @@ public class Master {
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
-	
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public double getPurchasePrice() {
+		return purchasePrice;
+	}
+
+	public void setPurchasePrice(double purchasePrice) {
+		this.purchasePrice = purchasePrice;
+	}
+
+	public double getSalesPrice() {
+		return salesPrice;
+	}
+
+	public void setSalesPrice(double salesPrice) {
+		this.salesPrice = salesPrice;
+	}
+
+	public double getSalesAmount() {
+		return salesAmount;
+	}
+
+	public void setSalesAmount(double salesAmount) {
+		this.salesAmount = salesAmount;
+	}
+
+	public Integer getSalesQuantity() {
+		return salesQuantity;
+	}
+
+	public void setSalesQuantity(Integer salesQuantity) {
+		this.salesQuantity = salesQuantity;
+	}
+
+	public double getTotalPurchasedAmount() {
+		return totalPurchasedAmount;
+	}
+
+	public void setTotalPurchasedAmount(double totalPurchasedAmount) {
+		this.totalPurchasedAmount = totalPurchasedAmount;
+	}
+
+	public Integer getTotalPurchasedQuantity() {
+		return totalPurchasedQuantity;
+	}
+
+	public void setTotalPurchasedQuantity(Integer totalPurchasedQuantity) {
+		this.totalPurchasedQuantity = totalPurchasedQuantity;
+	}
+
+	public double getTotalSalesAmount() {
+		return totalSalesAmount;
+	}
+
+	public void setTotalSalesAmount(double totalSalesAmount) {
+		this.totalSalesAmount = totalSalesAmount;
+	}
+
+	public Integer getTotalSalesQuantity() {
+		return totalSalesQuantity;
+	}
+
+	public void setTotalSalesQuantity(Integer totalSalesQuantity) {
+		this.totalSalesQuantity = totalSalesQuantity;
+	}
+
+	public double getCurrentInventoryAmount() {
+		return currentInventoryAmount;
+	}
+
+	public void setCurrentInventoryAmount(double currentInventoryAmount) {
+		this.currentInventoryAmount = currentInventoryAmount;
+	}
+
+	public Integer getCurrentInventory() {
+		return currentInventory;
+	}
+
+	public void setCurrentInventory(Integer currentInventory) {
+		this.currentInventory = currentInventory;
+	}
 }
