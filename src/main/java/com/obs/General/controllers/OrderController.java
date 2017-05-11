@@ -12,29 +12,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.obs.Accessory.services.ItemAccessoryService;
+import com.obs.Accessory.services.impl.ItemAccessoryServiceImpl;
 import com.obs.General.domain.OrderEntity;
-import com.obs.General.services.OrderService;
+import com.obs.General.services.impl.OrderServiceImpl;
 
 @Controller
 public class OrderController {
 	
 	@Autowired
-	private OrderService orderService;
+	private OrderServiceImpl orderServiceImpl;
 	
 	@Autowired
-	private ItemAccessoryService itemAccessoryService;
+	private ItemAccessoryServiceImpl itemAccessoryServiceImpl;
 	
-	public OrderController(OrderService orderService, ItemAccessoryService itemAccessoryService) {
+	public OrderController(OrderServiceImpl orderServiceImpl, ItemAccessoryServiceImpl itemAccessoryServiceImpl) {
 		super();
-		this.orderService = orderService;
-		this.itemAccessoryService = itemAccessoryService;
+		this.orderServiceImpl = orderServiceImpl;
+		this.itemAccessoryServiceImpl = itemAccessoryServiceImpl;
 	}
 	
 	@RequestMapping("/order/create") 
 	public String orderCreate(Model model) {
 		model.addAttribute("orderEntity", new OrderEntity());
-		model.addAttribute("itemAccessories",itemAccessoryService.list());
+		model.addAttribute("itemAccessories",itemAccessoryServiceImpl.list());
 		return "/order/inputForm";
 	}
 	
@@ -43,19 +43,19 @@ public class OrderController {
 /*		if (bindingResultOrderEntity.hasErrors()) {
 	        return "index";
 	    }*/
-		orderService.save(orderEntity);
+		orderServiceImpl.save(orderEntity);
 		return "redirect:/order/list";
 	}
 	
 	@RequestMapping("/order/list")
 	public String orderList(Model model) {
-		model.addAttribute("orderEntities", orderService.list());
+		model.addAttribute("orderEntities", orderServiceImpl.list());
 		return "/order/list";
 	}
 	
 	@RequestMapping("/order/delete/{id}")
 	public String delete(@PathVariable Long id, RedirectAttributes redirectAttrs) {
-						orderService.delete(id);
+						orderServiceImpl.delete(id);
 		redirectAttrs.addFlashAttribute("message", "Order was deleted!");
 		return "redirect:/order/list";
 	}

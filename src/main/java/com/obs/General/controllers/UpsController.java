@@ -11,35 +11,35 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.obs.Accessory.services.ItemAccessoryService;
+import com.obs.Accessory.services.impl.ItemAccessoryServiceImpl;
 import com.obs.General.domain.UpsOrder;
-import com.obs.General.services.UpsService;
+import com.obs.General.services.impl.UpsServiceImpl;
 
 @Controller
 public class UpsController {
 	
 	@Autowired
-	private UpsService upsService;
+	private UpsServiceImpl upsServiceImpl;
 	
 	@Autowired
-	private ItemAccessoryService itemAccessoryService;
+	private ItemAccessoryServiceImpl itemAccessoryServiceImpl;
 	
-	public UpsController(UpsService upsService) {
-		this.upsService = upsService;
+	public UpsController(UpsServiceImpl upsServiceImpl) {
+		this.upsServiceImpl = upsServiceImpl;
 	}
 	
 	@RequestMapping("/ups/create")
 	public String upsCreate(Model model) {
 		model.addAttribute("upsOrder", new UpsOrder());
-		model.addAttribute("itemAccessories", itemAccessoryService.list());
+		model.addAttribute("itemAccessories", itemAccessoryServiceImpl.list());
 		return "/ups/inputForm";
 	}
 	
 	@RequestMapping(value="/ups/save",method=RequestMethod.POST)
 	public String upsSave(@ModelAttribute("upsOrder") UpsOrder upsOrder){
-		upsService.upsAccSetProductName(upsOrder);
-		upsService.upsSetShippingMethod(upsOrder);
-		upsService.save(upsOrder);
+		upsServiceImpl.upsAccSetProductName(upsOrder);
+		upsServiceImpl.upsSetShippingMethod(upsOrder);
+		upsServiceImpl.save(upsOrder);
 		return "redirect:/ups/list";
 	} 
 	
@@ -48,26 +48,26 @@ public class UpsController {
 		/*
 		 * By changing List<?> to Page<?>, the upsOrders variable now has the pagination ability.
 		 */
-		Page<UpsOrder> upsOrders = upsService.findAll(pageable);
+		Page<UpsOrder> upsOrders = upsServiceImpl.findAll(pageable);
 		model.addAttribute("upsOrders", upsOrders);
 		return "/ups/list";
 	}
 	
 	@RequestMapping("/ups/edit/{systemId}")
 	public String upsEdit(@PathVariable("systemId") Long systemId, Model model) {
-		model.addAttribute("upsOrder",upsService.get(systemId));
-		model.addAttribute("itemAccessories", itemAccessoryService.list());
+		model.addAttribute("upsOrder",upsServiceImpl.get(systemId));
+		model.addAttribute("itemAccessories", itemAccessoryServiceImpl.list());
 		return "/ups/inputForm";
 	}
 	@RequestMapping("/ups/delete/{systemId}")
 	public String upsDelete(@PathVariable("systemId") Long systemId, Model model) {
-		upsService.delete(systemId);
+		upsServiceImpl.delete(systemId);
 		return "redirect:/ups/list";
 	}
 	
 	@RequestMapping("/ups/deleteAll")
 	public String upsDeletAll() {
-		upsService.deleteAll();
+		upsServiceImpl.deleteAll();
 		return "redirect:/ups/list";
 	}
 	

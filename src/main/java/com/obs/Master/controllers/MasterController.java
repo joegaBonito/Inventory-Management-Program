@@ -5,27 +5,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.obs.Master.services.MasterService;
+import com.obs.Master.services.impl.MasterServiceImpl;
 
 @Controller
 public class MasterController {
 	
-	private MasterService masterService;
+	private MasterServiceImpl masterServiceImpl;
 	
 	@Autowired
-	public MasterController(MasterService masterService) {
-		this.masterService = masterService;
+	public MasterController(MasterServiceImpl masterServiceImpl) {
+		this.masterServiceImpl = masterServiceImpl;
 	}
 	
 	@RequestMapping("/master/list") 
 	public String master(Model model) {
-		model.addAttribute("masters",masterService.list());
-		model.addAttribute("grandTotalPurchasedAmount",masterService.getGrandTotalPurchasedAmount());
-		model.addAttribute("grandTotalPurchasedQuantity",masterService.getGrandTotalPurchasedQuantity());
-		model.addAttribute("grandTotalSalesAmount",masterService.getGrandTotalSalesAmount());
-		model.addAttribute("grandTotalSalesQuantity",masterService.getGrandTotalSalesQuantity());
-		model.addAttribute("grandTotalCurrentInventory",masterService.getGrandTotalCurrentInventory());
-		model.addAttribute("grandTotalCurrentInventoryAmount",masterService.getGrandTotalCurrentInventoryAmount());
+		model.addAttribute("masters",masterServiceImpl.list());
+		model.addAttribute("grandTotalPurchasedAmount",masterServiceImpl.getGrandTotalPurchasedAmount());
+		model.addAttribute("grandTotalPurchasedQuantity",masterServiceImpl.getGrandTotalPurchasedQuantity());
+		model.addAttribute("grandTotalSalesAmount",masterServiceImpl.getGrandTotalSalesAmount());
+		model.addAttribute("grandTotalSalesQuantity",masterServiceImpl.getGrandTotalSalesQuantity());
+		model.addAttribute("grandTotalCurrentInventory",masterServiceImpl.getGrandTotalCurrentInventory());
+		model.addAttribute("grandTotalCurrentInventoryAmount",masterServiceImpl.getGrandTotalCurrentInventoryAmount());
 		return "/master/list";
 	}
 }

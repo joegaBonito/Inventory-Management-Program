@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.obs.Accessory.domain.ItemAccessory;
-import com.obs.Accessory.services.AccessoryInventoryService;
-import com.obs.Accessory.services.AccessoryReceivedQuantityService;
-import com.obs.Accessory.services.ItemAccessoryService;
-import com.obs.General.services.CalendarService;
+import com.obs.Accessory.services.impl.AccessoryInventoryServiceImpl;
+import com.obs.Accessory.services.impl.AccessoryReceivedQuantityServiceImpl;
+import com.obs.Accessory.services.impl.ItemAccessoryServiceImpl;
+import com.obs.General.services.impl.CalendarServiceImpl;
 
 @Controller	
 public class AccessoryInventoryController {
 	
-	private AccessoryInventoryService accessoryInventoryService;
-	private ItemAccessoryService itemAccessoryService;
-	private AccessoryReceivedQuantityService accessoryReceivedQuantityService;
-	private CalendarService calendarService;
+	private AccessoryInventoryServiceImpl accessoryInventoryServiceImpl;
+	private ItemAccessoryServiceImpl itemAccessoryServiceImpl;
+	private AccessoryReceivedQuantityServiceImpl accessoryReceivedQuantityServiceImpl;
+	private CalendarServiceImpl calendarServiceImpl;
 	
 	@Autowired
-	public AccessoryInventoryController(AccessoryInventoryService accessoryInventoryService, 
-										ItemAccessoryService itemAccessoryService,
-										AccessoryReceivedQuantityService accessoryReceivedQuantityService,
-										CalendarService calendarService) {
-		this.accessoryInventoryService = accessoryInventoryService;
-		this.itemAccessoryService = itemAccessoryService;
-		this.accessoryReceivedQuantityService = accessoryReceivedQuantityService;
-		this.calendarService = calendarService;
+	public AccessoryInventoryController(AccessoryInventoryServiceImpl accessoryInventoryServiceImpl, 
+										ItemAccessoryServiceImpl itemAccessoryServiceImpl,
+										AccessoryReceivedQuantityServiceImpl accessoryReceivedQuantityServiceImpl,
+										CalendarServiceImpl calendarServiceImpl) {
+		this.accessoryInventoryServiceImpl = accessoryInventoryServiceImpl;
+		this.itemAccessoryServiceImpl = itemAccessoryServiceImpl;
+		this.accessoryReceivedQuantityServiceImpl = accessoryReceivedQuantityServiceImpl;
+		this.calendarServiceImpl = calendarServiceImpl;
 	}
 	
 	/*
@@ -56,46 +56,46 @@ public class AccessoryInventoryController {
 		/*
 		 * By changing List<?> to Page<?>, the upsOrders variable now has the pagination ability.
 		 */
-		List<Date> days = calendarService.getAllDays();
+		List<Date> days = calendarServiceImpl.getAllDays();
 		model.addAttribute("days",days);
-		model.addAttribute("accessoryReceivedQuantities",accessoryReceivedQuantityService.list());
-		Page<ItemAccessory> itemAccessories = itemAccessoryService.findByDeleteYNPageable(pageable);
+		model.addAttribute("accessoryReceivedQuantities",accessoryReceivedQuantityServiceImpl.list());
+		Page<ItemAccessory> itemAccessories = itemAccessoryServiceImpl.findByDeleteYNPageable(pageable);
 		model.addAttribute("itemAccessories", itemAccessories);
 		return "/accessoryInventory/list";
 	}
 	
 	@RequestMapping("/accessoryInventory/inputReceivedItem/save/{id}")
 	public String inputReceivedItem(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("itemAccessory",itemAccessoryService.get(id));
+		model.addAttribute("itemAccessory",itemAccessoryServiceImpl.get(id));
 		return "/accessoryInventory/inputReceivedItem";
 		
 	}
 	
 	@RequestMapping("/accessoryInventory/inputReturnedItem/save/{id}")
 	public String inputReturnedItem(@PathVariable(value="id") Long id, Model model) {
-		model.addAttribute("itemAccessory", itemAccessoryService.get(id));
+		model.addAttribute("itemAccessory", itemAccessoryServiceImpl.get(id));
 		return "/accessoryInventory/inputReturnedItem";
 	}
 	
 	@RequestMapping(value="/accessoryInventory/save", method=RequestMethod.POST)
 	public String inventorySave(@ModelAttribute("itemAccessory") ItemAccessory itemAccessory, Model model) {
-		accessoryInventoryService.setPurchasedQuantity(itemAccessory);
-		accessoryInventoryService.setPurchasedAmount(itemAccessory);
-		accessoryInventoryService.setTotalPurchasedQuantity(itemAccessory);
-		accessoryInventoryService.setTotalPurchasedAmount(itemAccessory);
-		accessoryInventoryService.setCurrentInventoryAmount(itemAccessory);
-		accessoryInventoryService.setCurrentInventory(itemAccessory);
-		accessoryInventoryService.setSalesAmount();
-		accessoryInventoryService.setSalesQuantity();
-		model.addAttribute("itemAccessories", itemAccessoryService.productNameList());
+		accessoryInventoryServiceImpl.setPurchasedQuantity(itemAccessory);
+		accessoryInventoryServiceImpl.setPurchasedAmount(itemAccessory);
+		accessoryInventoryServiceImpl.setTotalPurchasedQuantity(itemAccessory);
+		accessoryInventoryServiceImpl.setTotalPurchasedAmount(itemAccessory);
+		accessoryInventoryServiceImpl.setCurrentInventoryAmount(itemAccessory);
+		accessoryInventoryServiceImpl.setCurrentInventory(itemAccessory);
+		accessoryInventoryServiceImpl.setSalesAmount();
+		accessoryInventoryServiceImpl.setSalesQuantity();
+		model.addAttribute("itemAccessories", itemAccessoryServiceImpl.productNameList());
 		return "redirect:/accessoryInventory/list";
 	}
 	
 	@RequestMapping(value="/accessoryInventory/saveReturns", method=RequestMethod.POST)
 	public String saveReturns(@ModelAttribute("itemAccessory") ItemAccessory itemAccessory, Model model) {
-		accessoryInventoryService.setReturnedInventory(itemAccessory);
-		accessoryInventoryService.setSalesAmountAfterReturn(itemAccessory);
-		accessoryInventoryService.setSalesQuantityAfterReturn(itemAccessory);
+		accessoryInventoryServiceImpl.setReturnedInventory(itemAccessory);
+		accessoryInventoryServiceImpl.setSalesAmountAfterReturn(itemAccessory);
+		accessoryInventoryServiceImpl.setSalesQuantityAfterReturn(itemAccessory);
 		return "redirect:/accessoryInventory/list";
 	}
 	

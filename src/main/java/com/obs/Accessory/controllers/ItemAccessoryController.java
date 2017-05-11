@@ -9,22 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.obs.Accessory.domain.ItemAccessory;
-import com.obs.Accessory.services.AccessoryInventoryService;
-import com.obs.Accessory.services.ItemAccessoryService;
+import com.obs.Accessory.services.impl.ItemAccessoryServiceImpl;
 import com.obs.Master.services.MasterService;
 
 @Controller
 public class ItemAccessoryController {
 	
-	private ItemAccessoryService itemAccessoryService;
-	private AccessoryInventoryService accessoryInventoryService;
+	private ItemAccessoryServiceImpl itemAccessoryServiceImpl;
 	private MasterService masterService;
 	
 	@Autowired
-	public ItemAccessoryController(ItemAccessoryService itemAccessoryService, MasterService masterService, AccessoryInventoryService accessoryInventoryService) {
+	public ItemAccessoryController(ItemAccessoryServiceImpl itemAccessoryServiceImpl, MasterService masterService) {
 		super();
-		this.itemAccessoryService = itemAccessoryService;
-		this.accessoryInventoryService =accessoryInventoryService;
+		this.itemAccessoryServiceImpl = itemAccessoryServiceImpl;
 		this.masterService = masterService;
 	}
 	
@@ -37,27 +34,27 @@ public class ItemAccessoryController {
 	@RequestMapping(value = "/itemAccessory/save", method=RequestMethod.POST) 
 	public String inputForm(@ModelAttribute("itemAccessory") ItemAccessory itemAccessory) {
 		itemAccessory.setDeleteYN('N');
-		itemAccessoryService.save(itemAccessory);
+		itemAccessoryServiceImpl.save(itemAccessory);
 		masterService.saveItemAccessory(itemAccessory);
 		return "redirect:/itemAccessory/list"; 
 	}
 	
 	@RequestMapping("/itemAccessory/list")
 	public String item(Model model) {
-		model.addAttribute("itemAccessories",itemAccessoryService.list());
+		model.addAttribute("itemAccessories",itemAccessoryServiceImpl.list());
 		return "itemAccessory/list";
 	}
 	
 	@RequestMapping("/itemAccessory/edit/{id}")
 	public String edit(@PathVariable Long id, Model model){
-		model.addAttribute("itemAccessory", itemAccessoryService.get(id));
+		model.addAttribute("itemAccessory", itemAccessoryServiceImpl.get(id));
 		return "/itemAccessory/inputForm";		
 	}
 	
 	@RequestMapping("/itemAccessory/delete/{id}")
 	public String delete(@PathVariable Long id, Model model){
-		itemAccessoryService.deleteYN(id);
-		masterService.delete(itemAccessoryService.getProductId(id));
+		itemAccessoryServiceImpl.deleteYN(id);
+		masterService.delete(itemAccessoryServiceImpl.getProductId(id));
 		return "redirect:/itemAccessory/list";		
 	}
 }

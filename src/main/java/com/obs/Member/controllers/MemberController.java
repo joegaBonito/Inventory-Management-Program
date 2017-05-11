@@ -15,23 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.obs.Member.domain.Member;
-import com.obs.Member.services.MemberService;
+import com.obs.Member.services.impl.MemberServiceImpl;
 
 @Controller
 @RequestMapping("/members")
 public class MemberController {
-private MemberService memberService;
+private MemberServiceImpl memberServiceImpl;
 	
 	@Autowired
-	public MemberController(MemberService memberService) {
+	public MemberController(MemberServiceImpl memberServiceImpl) {
 		super();
-		this.memberService = memberService;
+		this.memberServiceImpl = memberServiceImpl;
 	}
 	
 	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	@RequestMapping("/list")
 	public String list(Model model){
-		model.addAttribute("members", memberService.list());
+		model.addAttribute("members", memberServiceImpl.list());
 		return "members/list";
 	}
 	
@@ -58,7 +58,7 @@ private MemberService memberService;
 		if (!member.getPassword().equals(member.getConfirmPassword())) {
 			return "redirect:/members/createMember";
 		}
-		memberService.save(member);
+		memberServiceImpl.save(member);
 		return "redirect:/";
 	}
 	

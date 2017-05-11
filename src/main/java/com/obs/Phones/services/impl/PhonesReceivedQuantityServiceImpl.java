@@ -1,4 +1,4 @@
-package com.obs.Phones.services;
+package com.obs.Phones.services.impl;
 
 import java.util.List;
 
@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.obs.Phones.domain.PhonesReceivedQuantity;
 import com.obs.Phones.repositories.PhonesReceivedQuantityRepository;
+import com.obs.Phones.services.PhonesReceviedQuantityService;
 
 @Service
-public class PhonesReceivedQuantityService {
+public class PhonesReceivedQuantityServiceImpl implements PhonesReceviedQuantityService {
 	@Autowired
 	private PhonesReceivedQuantityRepository phonesReceivedQuantityRepository;
 	
-	public PhonesReceivedQuantityService(PhonesReceivedQuantityRepository phonesReceivedQuantityRepository) {
+	public PhonesReceivedQuantityServiceImpl(PhonesReceivedQuantityRepository phonesReceivedQuantityRepository) {
 		this.phonesReceivedQuantityRepository = phonesReceivedQuantityRepository;
 	}
 	

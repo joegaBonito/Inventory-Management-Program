@@ -15,38 +15,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.obs.Accessory.services.AccessoryInventoryService;
+import com.obs.Accessory.services.impl.AccessoryInventoryServiceImpl;
+import com.obs.General.services.impl.UpsServiceImpl;
 import com.obs.Master.services.MasterService;
-import com.obs.Phones.services.PhoneInventoryService;
+import com.obs.Phones.services.impl.PhoneInventoryServiceImpl;
 import com.obs.excel.FileUpload;
 import com.obs.excel.FileUploadValidator;
-import com.obs.excel.services.OrdersExcelImportService;
-import com.obs.General.services.UpsService;
+import com.obs.excel.services.impl.OrdersExcelImportServiceImpl;
 
 @Controller
 public class ExcelController {
 	
-	private UpsService upsService;
+	private UpsServiceImpl upsServiceImpl;
 	private FileUploadValidator fileValidator; 
-	private OrdersExcelImportService ordersExcelImportService;
-	private AccessoryInventoryService accessoryInventoryService;
-	private PhoneInventoryService phoneInventoryService;
+	private OrdersExcelImportServiceImpl ordersExcelImportServiceImpl;
+	private AccessoryInventoryServiceImpl accessoryInventoryServiceImpl;
+	private PhoneInventoryServiceImpl phoneInventoryServiceImpl;
 	private MasterService masterService;
 	
 	@Autowired
-	public ExcelController(UpsService upsService, FileUploadValidator fileValidator, OrdersExcelImportService ordersExcelImportService, 
-			AccessoryInventoryService accessoryInventoryService, PhoneInventoryService phoneInventoryService, MasterService masterService) {
-		this.upsService = upsService;
+	public ExcelController(UpsServiceImpl upsServiceImpl, FileUploadValidator fileValidator, OrdersExcelImportServiceImpl ordersExcelImportServiceImpl, 
+			AccessoryInventoryServiceImpl accessoryInventoryServiceImpl, PhoneInventoryServiceImpl phoneInventoryServiceImpl, MasterService masterService) {
+		this.upsServiceImpl = upsServiceImpl;
 		this.fileValidator = fileValidator;
-		this.ordersExcelImportService = ordersExcelImportService;
-		this.accessoryInventoryService = accessoryInventoryService;
-		this.phoneInventoryService = phoneInventoryService;
+		this.ordersExcelImportServiceImpl = ordersExcelImportServiceImpl;
+		this.accessoryInventoryServiceImpl = accessoryInventoryServiceImpl;
+		this.phoneInventoryServiceImpl = phoneInventoryServiceImpl;
 		this.masterService = masterService;
 	}
 	
 	@RequestMapping(value= "/downloadOrderExcel",method=RequestMethod.GET)
 	public ModelAndView excelOrderDownload() {
-		return new ModelAndView("ordersExcelExport","upsOrders",upsService.list());
+		return new ModelAndView("ordersExcelExport","upsOrders",upsServiceImpl.list());
 	}
 	
 	@RequestMapping(value="/downloadInventoryExcel",method=RequestMethod.GET)
@@ -94,11 +94,11 @@ public class ExcelController {
 	 }  
 	 @RequestMapping("/uploadExcel")  
 	 public String getUploadForm() throws IOException {  
-		 ordersExcelImportService.excelImport();
-		 accessoryInventoryService.setSalesQuantity();
-		 accessoryInventoryService.setSalesAmount();
-		 phoneInventoryService.setSalesQuantity();
-		 phoneInventoryService.setSalesAmount();
+		 ordersExcelImportServiceImpl.excelImport();
+		 accessoryInventoryServiceImpl.setSalesQuantity();
+		 accessoryInventoryServiceImpl.setSalesAmount();
+		 phoneInventoryServiceImpl.setSalesQuantity();
+		 phoneInventoryServiceImpl.setSalesAmount();
 		 return "redirect:/ups/list";  
 	 }  
 }

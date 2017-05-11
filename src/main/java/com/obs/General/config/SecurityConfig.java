@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.obs.Member.repositories.MemberRepository;
-import com.obs.Member.services.MemberService;
+import com.obs.Member.services.impl.MemberServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// memberUserService.
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(new MemberService(memberRepository))
+		auth.userDetailsService(new MemberServiceImpl(memberRepository))
 		.passwordEncoder(new BCryptPasswordEncoder());
 	}
 }

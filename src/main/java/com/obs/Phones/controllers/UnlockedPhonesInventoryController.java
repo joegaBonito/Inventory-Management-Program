@@ -14,30 +14,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.obs.General.services.impl.CalendarServiceImpl;
 import com.obs.Phones.domain.ItemUnlockedPhone;
-import com.obs.Phones.services.ItemUnlockedPhonesService;
-import com.obs.Phones.services.PhoneInventoryService;
-import com.obs.Phones.services.PhonesReceivedQuantityService;
-import com.obs.General.services.CalendarService;
+import com.obs.Phones.services.impl.ItemUnlockedPhonesServiceImpl;
+import com.obs.Phones.services.impl.PhoneInventoryServiceImpl;
+import com.obs.Phones.services.impl.PhonesReceivedQuantityServiceImpl;
 
 @Controller
 public class UnlockedPhonesInventoryController {
 	
 	
-	private PhoneInventoryService phoneInventoryService;
-	private ItemUnlockedPhonesService itemUnlockedPhonesService;
-	private CalendarService calendarService;
-	private PhonesReceivedQuantityService phonesReceivedQuantityService;
+	private PhoneInventoryServiceImpl phoneInventoryServiceImpl;
+	private ItemUnlockedPhonesServiceImpl itemUnlockedPhonesServiceImpl;
+	private CalendarServiceImpl calendarServiceImpl;
+	private PhonesReceivedQuantityServiceImpl phonesReceivedQuantityServiceImpl;
 	
 	@Autowired
-	public UnlockedPhonesInventoryController(PhoneInventoryService phoneInventoryService, 
-											 ItemUnlockedPhonesService itemUnlockedPhonesService,
-											 CalendarService calendarService,
-											 PhonesReceivedQuantityService phonesReceivedQuantityService) {
-		this.phoneInventoryService = phoneInventoryService;
-		this.itemUnlockedPhonesService = itemUnlockedPhonesService;
-		this.calendarService = calendarService;
-		this.phonesReceivedQuantityService = phonesReceivedQuantityService;
+	public UnlockedPhonesInventoryController(PhoneInventoryServiceImpl phoneInventoryServiceImpl, 
+											 ItemUnlockedPhonesServiceImpl itemUnlockedPhonesServiceImpl,
+											 CalendarServiceImpl calendarServiceImpl,
+											 PhonesReceivedQuantityServiceImpl phonesReceivedQuantityServiceImpl) {
+		this.phoneInventoryServiceImpl = phoneInventoryServiceImpl;
+		this.itemUnlockedPhonesServiceImpl = itemUnlockedPhonesServiceImpl;
+		this.calendarServiceImpl = calendarServiceImpl;
+		this.phonesReceivedQuantityServiceImpl = phonesReceivedQuantityServiceImpl;
 	}
 	
 	/*
@@ -57,45 +57,45 @@ public class UnlockedPhonesInventoryController {
 		/*
 		 * By changing List<?> to Page<?>, the upsOrders variable now has the pagination ability.
 		 */
-		List<Date> days = calendarService.getAllDays();
+		List<Date> days = calendarServiceImpl.getAllDays();
 		model.addAttribute("days",days);
-		model.addAttribute("phonesReceivedQuantities",phonesReceivedQuantityService.list());
-		Page<ItemUnlockedPhone> itemUnlockedPhones = itemUnlockedPhonesService.findByDeleteYNPageable(pageable);
+		model.addAttribute("phonesReceivedQuantities",phonesReceivedQuantityServiceImpl.list());
+		Page<ItemUnlockedPhone> itemUnlockedPhones = itemUnlockedPhonesServiceImpl.findByDeleteYNPageable(pageable);
 		model.addAttribute("itemUnlockedPhones", itemUnlockedPhones);
 		return "/unlockedPhonesInventory/list";
 	}
 	
 	@RequestMapping("/unlockedPhonesInventory/inputReceivedItem/save/{itemUnlockedPhoneId}")
 	public String inputReceivedItem(@PathVariable(value="itemUnlockedPhoneId") Long itemUnlockedPhoneId, Model model) {
-		model.addAttribute("itemUnlockedPhone", itemUnlockedPhonesService.get(itemUnlockedPhoneId));
+		model.addAttribute("itemUnlockedPhone", itemUnlockedPhonesServiceImpl.get(itemUnlockedPhoneId));
 		return "/unlockedPhonesInventory/inputReceivedItem";
 	}
 	
 	@RequestMapping("/unlockedPhonesInventory/inputReturnedItem/save/{itemUnlockedPhoneId}")
 	public String inputReturnedItem(@PathVariable(value="itemUnlockedPhoneId") Long itemUnlockedPhoneId, Model model) {
-		model.addAttribute("itemUnlockedPhone", itemUnlockedPhonesService.get(itemUnlockedPhoneId));
+		model.addAttribute("itemUnlockedPhone", itemUnlockedPhonesServiceImpl.get(itemUnlockedPhoneId));
 		return "/unlockedPhonesInventory/inputReturnedItem";
 	}
 	
 	@RequestMapping(value="/unlockedPhonesInventory/save", method = RequestMethod.POST)
 	public String inventorySave(@ModelAttribute("itemUnlockedPhone") ItemUnlockedPhone itemUnlockedPhone, Model model) {
-		phoneInventoryService.setPurchasedQuantity(itemUnlockedPhone);
-		phoneInventoryService.setPurchasedAmount(itemUnlockedPhone);
-		phoneInventoryService.setTotalPurchasedQuantity(itemUnlockedPhone);
-		phoneInventoryService.setTotalPurchasedAmount(itemUnlockedPhone);
-		phoneInventoryService.setCurrentInventoryAmount(itemUnlockedPhone);
-		phoneInventoryService.setCurrentInventory(itemUnlockedPhone);
-		phoneInventoryService.setSalesQuantity();
-		phoneInventoryService.setSalesAmount();
-		model.addAttribute("itemUnlockedPhones", itemUnlockedPhonesService.list());
+		phoneInventoryServiceImpl.setPurchasedQuantity(itemUnlockedPhone);
+		phoneInventoryServiceImpl.setPurchasedAmount(itemUnlockedPhone);
+		phoneInventoryServiceImpl.setTotalPurchasedQuantity(itemUnlockedPhone);
+		phoneInventoryServiceImpl.setTotalPurchasedAmount(itemUnlockedPhone);
+		phoneInventoryServiceImpl.setCurrentInventoryAmount(itemUnlockedPhone);
+		phoneInventoryServiceImpl.setCurrentInventory(itemUnlockedPhone);
+		phoneInventoryServiceImpl.setSalesQuantity();
+		phoneInventoryServiceImpl.setSalesAmount();
+		model.addAttribute("itemUnlockedPhones", itemUnlockedPhonesServiceImpl.list());
 		return "redirect:/unlockedPhonesInventory/list";
 	}
 	
 	@RequestMapping(value="/unlockedPhonesInventory/saveReturns", method=RequestMethod.POST)
 	public String saveReturns(@ModelAttribute("itemUnlockedPhone") ItemUnlockedPhone itemUnlockedPhone, Model model) {
-		phoneInventoryService.setReturnedInventory(itemUnlockedPhone);
-		phoneInventoryService.setSalesAmountAfterReturn(itemUnlockedPhone);
-		phoneInventoryService.setSalesQuantityAfterReturn(itemUnlockedPhone);
+		phoneInventoryServiceImpl.setReturnedInventory(itemUnlockedPhone);
+		phoneInventoryServiceImpl.setSalesAmountAfterReturn(itemUnlockedPhone);
+		phoneInventoryServiceImpl.setSalesQuantityAfterReturn(itemUnlockedPhone);
 		return "redirect:/unlockedPhonesInventory/list";
 	}
 }
