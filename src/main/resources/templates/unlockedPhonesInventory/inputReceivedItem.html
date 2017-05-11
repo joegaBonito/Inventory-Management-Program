@@ -12,9 +12,10 @@
 					<h2>Input Received Unlocked Phones</h2>
 					<br />
 					<form class="form-horizontal" th:object="${itemUnlockedPhone}"
-						th:action="@{/accessoryInventory/save}" method="post">
+						th:action="@{/unlockedPhonesInventory/save}" method="post">
 						<input type="hidden"
-							th:field="${itemUnlockedPhone.itemUnlockedPhoneId}" /> <input
+							th:field="${itemUnlockedPhone.itemUnlockedPhoneId}" />
+							<input type="hidden" th:field="*{deleteYN}" th:value="N" /> <input
 							type="hidden" th:field="${itemUnlockedPhone.productId}" /> <input
 							type="hidden" th:field="${itemUnlockedPhone.productName}" /> <input
 							type="hidden" th:field="${itemUnlockedPhone.purchasePrice}" /> <input
@@ -62,9 +63,7 @@
 								class="required">*</span></label>
 							<div class="col-md-10">
 								<input type="text" class="form-control"
-									th:value="${#dates.format(#dates.createNow(),'dd-MMM-yyyy')}"
-									th:id="*{unlockedPhonesInventory.receivedDate}"
-									th:name="*{unlockedPhonesInventory.receivedDate}" /> <span
+									th:field="*{unlockedPhonesInventory.receivedDate}" th:placeholder="${#dates.format(#dates.createNow(),'dd-MMM-yyyy')}"/> <span
 									th:if="${#fields.hasErrors('unlockedPhonesInventory.receivedDate')}"
 									th:errors="*{unlockedPhonesInventory.receivedDate}"
 									th:class="help-block">Received Date Errors</span>

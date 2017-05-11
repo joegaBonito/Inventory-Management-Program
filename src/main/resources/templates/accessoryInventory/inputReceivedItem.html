@@ -13,7 +13,8 @@
 					<br />
 					<form class="form-horizontal" th:object="${itemAccessory}"
 						th:action="@{/accessoryInventory/save/}" method="post">
-						<input type="hidden" th:field="*{itemAccessoryId}" /> <input
+						<input type="hidden" th:field="*{itemAccessoryId}" /> 
+						<input type="hidden" th:field="*{deleteYN}" th:value="N" /><input
 							type="hidden" th:field="*{productId}" /> <input type="hidden"
 							th:field="*{productName}" /> <input type="hidden"
 							th:field="*{purchasePrice}" /> <input type="hidden"
@@ -54,9 +55,8 @@
 								class="required">*</span></label>
 							<div class="col-md-10">
 								<input type="text" class="form-control"
-									th:id="*{accessoryInventory.receivedDate}"
-									th:name="*{accessoryInventory.receivedDate}"
-									th:value="${#dates.format(#dates.createNow(),'dd-MMM-yyyy')}" />
+									th:field="*{accessoryInventory.receivedDate}"
+									th:placeholder="${#dates.format(#dates.createNow(),'dd-MMM-yyyy')}" />
 								<span
 									th:if="${#fields.hasErrors('accessoryInventory.receivedDate')}"
 									th:errors="*{accessoryInventory.receivedDate}"
