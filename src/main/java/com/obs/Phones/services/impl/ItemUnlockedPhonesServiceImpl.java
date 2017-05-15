@@ -30,7 +30,7 @@ public class ItemUnlockedPhonesServiceImpl implements ItemUnlockedPhonesService 
 	}
 
 	public List<ItemUnlockedPhone> list() {
-		return itemUnlockedPhonesRepository.findByDeleteYN();
+		return itemUnlockedPhonesRepository.findByDeleteYNOrderByProductId();
 	}
 
 	public ItemUnlockedPhone get(Long itemUnlockedPhoneId) {
@@ -75,8 +75,8 @@ public class ItemUnlockedPhonesServiceImpl implements ItemUnlockedPhonesService 
 		return itemUnlockedPhonesRepository.findByOrderByProductName();
 	}
 
-	public Page<ItemUnlockedPhone> findByDeleteYNPageable(Pageable pageable) {
-		return itemUnlockedPhonesRepository.findByDeleteYNPageable(pageable);
+	public Page<ItemUnlockedPhone> findByDeleteYNPageableOrderByProductId(Pageable pageable) {
+		return itemUnlockedPhonesRepository.findByDeleteYNPageableOrderByProductId(pageable);
 	}
 
 }

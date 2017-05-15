@@ -53,14 +53,14 @@ public class UnlockedPhonesInventoryController {
 	}*/
 	
 	@RequestMapping("/unlockedPhonesInventory/list")
-	public String inventoryPagination(Model model, @PageableDefault(value = 5) Pageable pageable) {
+	public String inventoryPagination(Model model, @PageableDefault(value = 10) Pageable pageable) {
 		/*
 		 * By changing List<?> to Page<?>, the upsOrders variable now has the pagination ability.
 		 */
 		List<Date> days = calendarServiceImpl.getAllDays();
 		model.addAttribute("days",days);
 		model.addAttribute("phonesReceivedQuantities",phonesReceivedQuantityServiceImpl.list());
-		Page<ItemUnlockedPhone> itemUnlockedPhones = itemUnlockedPhonesServiceImpl.findByDeleteYNPageable(pageable);
+		Page<ItemUnlockedPhone> itemUnlockedPhones = itemUnlockedPhonesServiceImpl.findByDeleteYNPageableOrderByProductId(pageable);
 		model.addAttribute("itemUnlockedPhones", itemUnlockedPhones);
 		return "/unlockedPhonesInventory/list";
 	}

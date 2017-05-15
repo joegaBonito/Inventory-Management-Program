@@ -3,12 +3,15 @@ package com.obs.Accessory.controllers;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,20 +55,21 @@ public class AccessoryInventoryController {
 	}*/
 	
 	@RequestMapping("/accessoryInventory/list")
-	public String inventoryPagination(Model model, @PageableDefault(value = 5) Pageable pageable) {
+	public String inventoryPagination(Model model, @PageableDefault(value = 10) Pageable pageable) {
 		/*
 		 * By changing List<?> to Page<?>, the upsOrders variable now has the pagination ability.
 		 */
 		List<Date> days = calendarServiceImpl.getAllDays();
 		model.addAttribute("days",days);
 		model.addAttribute("accessoryReceivedQuantities",accessoryReceivedQuantityServiceImpl.list());
-		Page<ItemAccessory> itemAccessories = itemAccessoryServiceImpl.findByDeleteYNPageable(pageable);
+		Page<ItemAccessory> itemAccessories = itemAccessoryServiceImpl.findByDeleteYNPageableByProductId(pageable);
 		model.addAttribute("itemAccessories", itemAccessories);
 		return "/accessoryInventory/list";
 	}
 	
 	@RequestMapping("/accessoryInventory/inputReceivedItem/save/{id}")
 	public String inputReceivedItem(@PathVariable("id") Long id, Model model) {
+		
 		model.addAttribute("itemAccessory",itemAccessoryServiceImpl.get(id));
 		return "/accessoryInventory/inputReceivedItem";
 		
@@ -78,7 +82,11 @@ public class AccessoryInventoryController {
 	}
 	
 	@RequestMapping(value="/accessoryInventory/save", method=RequestMethod.POST)
-	public String inventorySave(@ModelAttribute("itemAccessory") ItemAccessory itemAccessory, Model model) {
+	public String inventorySave(@Valid @ModelAttribute("itemAccessory") ItemAccessory itemAccessory, Model model, BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			return "/accessoryInventory/inputReceivedItem";
+		}
 		accessoryInventoryServiceImpl.setPurchasedQuantity(itemAccessory);
 		accessoryInventoryServiceImpl.setPurchasedAmount(itemAccessory);
 		accessoryInventoryServiceImpl.setTotalPurchasedQuantity(itemAccessory);

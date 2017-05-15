@@ -14,9 +14,13 @@ import com.obs.Phones.domain.ItemUnlockedPhone;
 public interface ItemUnlockedPhonesRepository extends CrudRepository<ItemUnlockedPhone, Long>  {
 	@Query("SELECT ip FROM ItemUnlockedPhone ip where ip.deleteYN = 'N'")
 	List<ItemUnlockedPhone> findByDeleteYN();
+	
+	@Query("SELECT ip FROM ItemUnlockedPhone ip where ip.deleteYN = 'N' ORDER BY ip.productId")
+	List<ItemUnlockedPhone> findByDeleteYNOrderByProductId();
+	
 	List<ItemUnlockedPhone> findByOrderByProductId();
 	List<ItemUnlockedPhone> findByOrderByProductName();
 	List<ItemUnlockedPhone> findByOrderByItemUnlockedPhoneId();
-	@Query("SELECT ip FROM ItemUnlockedPhone ip where ip.deleteYN = 'N'")
-	Page<ItemUnlockedPhone> findByDeleteYNPageable(Pageable pageable);
+	@Query("SELECT ip FROM ItemUnlockedPhone ip where ip.deleteYN = 'N' ORDER BY ip.productId")
+	Page<ItemUnlockedPhone> findByDeleteYNPageableOrderByProductId(Pageable pageable);
 }

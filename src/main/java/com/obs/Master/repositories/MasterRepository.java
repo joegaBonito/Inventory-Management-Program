@@ -13,6 +13,8 @@ import com.obs.Master.domain.Master;
 public interface MasterRepository extends CrudRepository<Master,Long> {
 	@Query("SELECT m FROM Master m where m.deleteYN = 'N'")
 	List<Master> findByDeleteYN();
+	@Query("SELECT m FROM Master m where m.deleteYN = 'N' ORDER BY productId")
+	List<Master> findByDeleteYNOrderByProductId();
 	List<Master> findByOrderById();
 	Master findByProductId(String productId);
 	void save(ItemAccessory itemAccessory);

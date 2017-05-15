@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,6 +25,7 @@ public class AccessoryReceivedQuantity implements Serializable {
 	@Column(name="received_quantity_id")
 	private Long receivedQuantityId;
 	
+	@NotNull(message="Date is required")
 	@Column(name="received_date")
 	@DateTimeFormat(pattern="dd-MMM-yyyy")
 	private Date receivedDate;

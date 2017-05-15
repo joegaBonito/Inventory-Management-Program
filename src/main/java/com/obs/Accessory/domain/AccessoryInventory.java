@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -61,6 +62,7 @@ public class AccessoryInventory {
 	@Column(name="returned_quantity")
 	private Integer returnedQuantity;
 	
+	@NotNull(message="Date is required")
 	@Column(name="returned_date")
 	@DateTimeFormat(pattern="dd-MMM-yyyy")
 	private Date returnedDate = new Date();

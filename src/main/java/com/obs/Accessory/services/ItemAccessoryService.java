@@ -19,5 +19,5 @@ public interface ItemAccessoryService {
 	public double getHeight(Long itemAccessoryId);
 	public double getWidth(Long itemAccessoryId);
 	public double getWeight(Long itemAccessoryId);
-	public Page<ItemAccessory> findByDeleteYNPageable(Pageable pageable);
+	public Page<ItemAccessory> findByDeleteYNPageableByProductId(Pageable pageable);
 }

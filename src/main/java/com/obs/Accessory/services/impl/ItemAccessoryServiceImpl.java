@@ -24,7 +24,7 @@ public class ItemAccessoryServiceImpl implements ItemAccessoryService {
 	}
 	
 	public List<ItemAccessory> list(){ 
-		return itemAccessoryRepository.findByDeleteYN();
+		return itemAccessoryRepository.findByDeleteYNOrderByProductId();
 	}
 	
 	public List<ItemAccessory> productNameList() {
@@ -69,7 +69,7 @@ public class ItemAccessoryServiceImpl implements ItemAccessoryService {
 		ItemAccessory item = itemAccessoryRepository.findOne(itemAccessoryId);
 		return item.getAccWeight();
 	}
-	public Page<ItemAccessory> findByDeleteYNPageable(Pageable pageable) {
-		return itemAccessoryRepository.findByDeleteYNPageable(pageable);
+	public Page<ItemAccessory> findByDeleteYNPageableByProductId(Pageable pageable) {
+		return itemAccessoryRepository.findByDeleteYNPageableByProductId(pageable);
 	}
 }

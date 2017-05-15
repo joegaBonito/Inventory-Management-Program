@@ -19,5 +19,4 @@ public interface MasterService {
 	public Master getMasterById(long id);
 	public void saveItemAccessory(ItemAccessory itemAccessory);
 	public void saveItemUnlockedPhone(ItemUnlockedPhone itemUnlockedPhone);
-	
 }

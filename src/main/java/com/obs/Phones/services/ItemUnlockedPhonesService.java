@@ -20,5 +20,5 @@ public interface ItemUnlockedPhonesService {
 	public double getWidth(Long itemUnlockedPhoneId);
 	public double getWeight(Long itemUnlockedPhoneId);
 	public List<ItemUnlockedPhone> productNameList();
-	public Page<ItemUnlockedPhone> findByDeleteYNPageable(Pageable pageable);
+	public Page<ItemUnlockedPhone> findByDeleteYNPageableOrderByProductId(Pageable pageable);
 }

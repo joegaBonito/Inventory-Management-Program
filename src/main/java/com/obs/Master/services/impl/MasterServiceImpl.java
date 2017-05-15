@@ -34,7 +34,7 @@ public class MasterServiceImpl implements MasterService {
 	}
 	
 	public List<Master> list () {
-		return masterRepository.findByDeleteYN();
+		return masterRepository.findByDeleteYNOrderByProductId();
 	}
 	
 	
@@ -122,6 +122,8 @@ public class MasterServiceImpl implements MasterService {
 		master.setCurrentInventoryAmount(itemAccessory.getAccessoryInventory().getCurrentInventoryAmount());
 		master.setCurrentInventory(itemAccessory.getAccessoryInventory().getCurrentInventory());
 		master.setDeleteYN(itemAccessory.getDeleteYN());
+		master.setPurchasedQuantity(itemAccessory.getAccessoryInventory().getPurchasedQuantity());
+		master.setPurchasedAmount(itemAccessory.getAccessoryInventory().getPurchasedAmount());
 		masterRepository.save(master);
 	}
 
@@ -138,6 +140,8 @@ public class MasterServiceImpl implements MasterService {
 		master.setCurrentInventoryAmount(itemUnlockedPhone.getUnlockedPhonesInventory().getCurrentInventoryAmount());
 		master.setCurrentInventory(itemUnlockedPhone.getUnlockedPhonesInventory().getCurrentInventory());
 		master.setDeleteYN(itemUnlockedPhone.getDeleteYN());
+		master.setPurchasedQuantity(itemUnlockedPhone.getUnlockedPhonesInventory().getPurchasedQuantity());
+		master.setPurchasedAmount(itemUnlockedPhone.getUnlockedPhonesInventory().getPurchasedAmount());
 		masterRepository.save(master);
 	}
 }

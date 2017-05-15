@@ -16,10 +16,13 @@ public interface ItemAccessoryRepository extends CrudRepository<ItemAccessory,Lo
 	@Query("SELECT ia FROM ItemAccessory ia where ia.deleteYN = 'N'")
 	List<ItemAccessory> findByDeleteYN();
 	
+	@Query("SELECT ia FROM ItemAccessory ia where ia.deleteYN = 'N' ORDER BY ia.productId")
+	List<ItemAccessory> findByDeleteYNOrderByProductId();
+	
 	List<ItemAccessory> findByOrderByProductId();
 
 	List<ItemAccessory> findByOrderByProductName();
 
-	@Query("SELECT ia FROM ItemAccessory ia where ia.deleteYN = 'N'")
-	Page<ItemAccessory> findByDeleteYNPageable(Pageable pageable);
+	@Query("SELECT ia FROM ItemAccessory ia where ia.deleteYN = 'N' ORDER BY ia.productId")
+	Page<ItemAccessory> findByDeleteYNPageableByProductId(Pageable pageable);
 }
