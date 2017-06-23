@@ -13,9 +13,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.hateoas.ResourceSupport;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name="ItemAccessory")
-public class ItemAccessory implements Serializable {
+public class ItemAccessory extends ResourceSupport implements Serializable  {
 	/**
 	 * 
 	 */
@@ -50,10 +56,12 @@ public class ItemAccessory implements Serializable {
 	@Column(name="acc_weight")
 	private double accWeight;
 	
+	@JsonIgnore
 	@OneToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="accessory_inventory_id")
 	private AccessoryInventory accessoryInventory;
 	
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="itemAccessory")
 	private Set<AccessoryReceivedQuantity> accessoryReceivedQuantity;
 	
@@ -61,9 +69,9 @@ public class ItemAccessory implements Serializable {
 	private char deleteYN;
 	
 	public ItemAccessory() {}
-
-	public ItemAccessory(Long itemAccessoryId, String productId, String productName, double purchasePrice,
-			double salesPrice, double accLength, double accHeight, double accWidth, double accWeight,
+	@JsonCreator
+	public ItemAccessory(@JsonProperty("itemAccessoryId") Long itemAccessoryId, @JsonProperty("productId") String productId, @JsonProperty("productName") String productName, @JsonProperty("purchasePrice") double purchasePrice,
+			@JsonProperty("salesPrice") double salesPrice, @JsonProperty("accLength") double accLength, @JsonProperty("accHeight") double accHeight, @JsonProperty("accWidth") double accWidth, @JsonProperty("accWeight") double accWeight,
 			AccessoryInventory accessoryInventory, Set<AccessoryReceivedQuantity> accessoryReceivedQuantity, char deleteYN) {
 		super();
 		this.itemAccessoryId = itemAccessoryId;
